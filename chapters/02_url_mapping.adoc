@@ -96,7 +96,7 @@ with whatever features are enabled by the IndexOptions directive.
 
 Typically, a directory will look like the example shown below.
 
-image:autoindex1.png[AutoIndex]
+image:../images/autoindex1.png[AutoIndex]
 
 For further discussion of the autoindex functionality, consult the
 mod_autoindex documentation at

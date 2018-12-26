@@ -47,7 +47,7 @@ techniques.
 This book consists of 13 chapters. Depending on your level of existing
 expertise, some of them can be safely skipped.
 
-Chapter 1 - [Regular Expressions](chapters/01_regex.md)  - This chapter gives an
+Chapter 1 - [Regular Expressions](chapters/01_regex.adoc)  - This chapter gives an
 introduction to regular expressions, which are the language of
 `mod_rewrite`. 
 

@@ -241,7 +241,7 @@ being after this process, which is `index.php`.
 
 This kind of detailed log trail tells you very specifically what's going
 on, and what happened at each step.footnote:[Future editions of this
-bill will contain an appendix in which several log traces are explained
+book will contain an appendix in which several log traces are explained
 in exhaustive detail. I can hardly wait.]
 
 [[rewriterules-in-.htaccess-files---an-example]]
