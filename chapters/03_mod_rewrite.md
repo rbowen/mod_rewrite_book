@@ -1,5 +1,5 @@
 [[Chapter_mod_rewrite]]
-== Introduction to mod_rewrite
+## Introduction to mod_rewrite
 
 mod_rewrite is the power tool of Apache httpd URL mapping. Of course,
 sometimes you just need a screwdriver, but when you need the power tool,
@@ -16,7 +16,7 @@ next chapter we'll give a variety of examples of using mod_rewrite in
 common scenarios.
 
 [[loading-mod_rewrite]]
-=== Loading mod_rewrite
+### Loading mod_rewrite
 
 To use mod_rewrite in any context, you need to have the module loaded.
 If you're the server administrator, this means having the following line
@@ -86,7 +86,7 @@ However, this is fairly unlikely, since mod_rewrite is a fairly standard
 part of any Apache http server's bag of tricks.
 
 [[rewriteengine]]
-=== RewriteEngine
+### RewriteEngine
 
 In the section above, we used the `RewriteEngine` directive without
 defining what it does.
@@ -105,14 +105,14 @@ should be assumed, from this point forward, that every use of
 mod_rewrite occurs in a scope where `RewriteEngine` has been turned on.
 
 [[mod_rewrite-in-.htaccess-files]]
-=== mod_rewrite in .htaccess files
+### mod_rewrite in .htaccess files
 
 Before we go any further, it's critical to note that things are
 different, in several important ways, if you have to use .htaccess files
 for configuration.
 
 [[what-are-.htaccess-files]]
-==== What are .htaccess files?
+#### What are .htaccess files?
 
 `.htaccess` files are per-directory configuration files, for use by people
 who don't have access to the main server configuration file. For the
@@ -170,7 +170,7 @@ reasons of security, it is necessary to enable symlinks in order to use
 mod_rewrite.
 
 [[ok-so-whats-the-deal-with-mod_rewrite-in-.htaccess-files]]
-==== Ok, so, what's the deal with mod_rewrite in .htaccess files?
+#### Ok, so, what's the deal with mod_rewrite in .htaccess files?
 
 There are two major differences that you must be aware of before we
 proceed any further. The exact implications of these differences will
@@ -227,7 +227,7 @@ Don't worry too much if this isn't crystal clear at this point. It will
 become more clear as we proceed and you see more examples.
 
 [[so-what-do-i-do]]
-==== So, what do I do?
+#### So, what do I do?
 
 If you don't have access to the main server configuration file, as it
 the case for many of the readers of this book, don't despair.
@@ -238,12 +238,12 @@ limitations, and adjust accordingly when presented with an example rule.
 We aim to help you do that at each step along this journey.
 
 [[rewriteoptions]]
-=== RewriteOptions
+### RewriteOptions
 
 RewriteOptions TODO
 
 [[rewritebase]]
-=== RewriteBase
+### RewriteBase
 
 TODO
 
