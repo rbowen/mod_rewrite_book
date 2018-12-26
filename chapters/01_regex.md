@@ -1,5 +1,5 @@
-[[Chapter_regular_expressions]]
 ## Regular Expressions
+
 indexterm:[Regular expressions]
 indexterm:[Introduction to regular expressions]
 indexterm:[Regex]

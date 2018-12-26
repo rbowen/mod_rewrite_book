@@ -1,11 +1,11 @@
 [appendix]
-== TODO
+## TODO
 
 This book is a work in progress, and I expect it to remain such for years to come. This is the place to check to see if you've purchased the latest version, and what changed from one version to another.
 
 While the version number starts with 0.something, you can expect that there's quite a bit of work yet to do. Once it is 1.something, you can expect that changes will be fairly minor. I think. We'll see.
 
-=== TODO
+### TODO
 
 * Standardize how we display example
 * Write mod_rewrite chapter(s)
@@ -21,7 +21,7 @@ While the version number starts with 0.something, you can expect that there's qu
   this, or I need to remove all footnotes.
 
 
-=== REVISION HISTORY
+### REVISION HISTORY
 
 
 * 0.00 Started March 7, 2013. Started TOC and a little of the initial text. Published HTML version to website at <http://rewrite.rcbowen.com/>
@@ -35,3 +35,7 @@ While the version number starts with 0.something, you can expect that there's qu
 
 * 0.30 - Christmas 2017. Yet another conversion, this time, to ASCIIdoc. Borrowed tools and templates from <https://github.com/akosma/eBook-Template> to get started. Website has been moved to <http://mod-rewrite.org>. We'll start publising it there again once we have a shippable version.
 
+* 0.31 - Will the format changing never end? Converted to MarkDown and
+  GitBook. https://toolchain.gitbook.com/ But I'm starting to remember
+  that I rejected GitBook because it doesn't seem like there's a way to
+  generate an index easily.
