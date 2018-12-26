@@ -48,11 +48,11 @@ indexterm:[Regular expression vocabulary]
 |=====================
 | Character | Meaning
 |`.`  |        Any character
-|`\\` |        Escapes a character that has a special meaning. Thus, `\.`  means a literal . character. You can match a literal `\` character by using `\\`. Additionally, placing `\` in front of a regular character can add a special meaning to that character. For example, `\t` means a tab character. See <<Escaping_characters>> for more detail on that.
+|`\` |        Escapes a character that has a special meaning. Thus, `\.`  means a literal . character. You can match a literal `\` character by using `\\`. Additionally, placing `\` in front of a regular character can add a special meaning to that character. For example, `\t` means a tab character. See <<Escaping_characters>> for more detail on that.
 |`^`  |        An anchor which insists that the pattern start at the beginning of the string. `^A` means that the string must start with A.
 |`$`  |        An anchor which insists that the string ends with the specified pattern. `X$` means that the string must end with X.
-|`\+` |        Match the previous thing one or more times. So `a+` means one or more a's.
-|`\*` |        Match the previous thing zero or more times. This is the same as +, except that it's also acceptable if the thing wasn't there at all.
+|`+` |        Match the previous thing one or more times. So `a+` means one or more a's.
+|`*` |        Match the previous thing zero or more times. This is the same as +, except that it's also acceptable if the thing wasn't there at all.
 |`?`  |        Match the previous thing zero or one times. In other words, it makes it optional. It also makes the `*` and `+` characters non-greedy. See <<Greedy>>.
 |`{n,m}`  |    Indicates that the previous thing should match at least n, and not more than m times. For example, `a{2,7}` matches at least 2, and not more than 7, occurrences of the letter a
 |`( )`    |    Provides grouping and capturing functions. Grouping means treating more than one character as though they were a single unit. You can apply repetition characters to a group created in this way.
