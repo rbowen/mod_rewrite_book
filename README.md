@@ -1,3 +1,5 @@
+# mod_rewrite And Friends
+
 `mod_rewrite` is one of the most powerful, and least understood, of the
 modules that are provided with the Apache HTTP Server. It is frequently
 misused to do things that can be done so much better other ways.
@@ -14,8 +16,8 @@ what to use instead.
 
 ## About This Book
 
-The first incarnation of this book, 
-*The Definitive Guide to Apache mod_rewrite* - <http://drbacchus.com/book/rewrite>,
+The first incarnation of this book,
+[The Definitive Guide to Apache mod_rewrite](http://drbacchus.com/book/rewrite/),
 was published in 2006.  
 Since then, so much has changed that while that book is still useful,
 it's far from complete.
@@ -51,48 +53,50 @@ Chapter 1 - [Regular Expressions](chapters/01_regex.adoc)  - This chapter gives 
 introduction to regular expressions, which are the language of
 `mod_rewrite`. 
 
-Chapter 2 - URL Mapping - URL rewriting is a portion of a
+Chapter 2 - [URL Mapping](chapters/02_url_mapping.adoc) - URL rewriting is a portion of a
 larger topic called URL mapping - the process by which Apache httpd
 translates a requested URL into an actual resource that it will serve.
 
-Chapter 3 - mod_rewrite - An introduction to `mod_rewrite`,
+Chapter 3 - [An introduction to
+`mod_rewrite`](chapters/03_mod_rewrite.adoc) - 
 covering some of the configuration directives that need to be set up
 before you start rewriting.
 
-Chapter 4 - RewriteRule - The `RewriteRule` directive is the
+Chapter 4 - [RewriteRule](chapters/04_rewriterule.adoc) - The `RewriteRule` directive is the
 one you'll be using most often. This chapter covers its syntax and
 usage.
 
-Chapter 5 - Rewrite Logging - The rewrite log is a great
+Chapter 5 - [Rewrite Logging](chapters/05_rewrite_logging.adoc) - The rewrite log is a great
 debugging tool, and also a good way to learn about how `mod_rewrite`
 thinks about things.
 
-Chapter 6 - RewriteRule flags - Flags modify the behavior of
+Chapter 6 - [RewriteRule flags](chapters/06_rewrite_flags.adoc) - Flags modify the behavior of
 `RewriteRule`. They've been introduced in the previous chapter, but this
 chapter covers each flag in detail, with examples.
 
-Chapter 7 - RewriteCond - `RewriteCond` allows you to put
+Chapter 7 - [RewriteCond](chapters/07_rewritecond.adoc) - `RewriteCond` allows you to put
 conditions on the running of a particular `RewriteRule`.
 
-Chapter 8 - RewriteMap - The `RewriteMap` directive allows
+Chapter 8 - [RewriteMap](chapters/08_rewitemap.adoc) - The `RewriteMap` directive allows
 you to craft your own `RewriteRule` logic and lookup tables.
 
-Chapter 9 - Proxying with mod_rewrite - `RewriteRule`'s `[P]` flag lets you pass
+Chapter 9 - [Proxying with mod_rewrite](chapters/09_proxy.adoc) - `RewriteRule`'s `[P]` flag lets you pass
 a request through a proxy. This chapter digs into that in greater
 detail.
 
-Chapter 10 - Virtual hosts with mod_rewrite - Using `RewriteRule` to manage virtual
+Chapter 10 - [Virtual hosts with mod_rewrite](chapters/10_vhosts.adoc) - Using `RewriteRule` to manage virtual
 hosts.
 
-Chapter 11 - Access control with mod_rewrite - Using `RewriteRule` to control or
+Chapter 11 - [Access control with mod_rewrite](chapters/11_access.adoc) - Using `RewriteRule` to control or
 restrict access to resources.
 
-Chapter 12 - Configurable Configuration - New in version 2.4
+Chapter 12 - [Configurable
+Configuration](chapters/12_configurable_configuration.adoc) - New in version 2.4
 of the web server is a class of directives that let you add intelligence
 and request-time decisions to the configuration. These techniques
 replace many of the things that people used to use `mod_rewrite` for.
 
-Chapter 13 - Content Modification Modules - In this chapter, we
+Chapter 13 - [Content Modification Modules](13_content_munging.adoc) - In this chapter, we
 discuss rewriting content sent to the client, which is not something
 that `mod_rewrite` does.
 
@@ -119,13 +123,8 @@ several years old, it is still the best book on the topic.
 
 ### Technical details
 
-This book was written in vim
-
-<https://www.vim.org/>
-
-and built using gitbook.
-
-<https://toolchain.gitbook.com/>
+This book was written in Markdown, using vim -- <https://www.vim.org/> --
+and built using gitbook -- <https://toolchain.gitbook.com/>.
 
 Previous incarnations were written in LaTeX,
 ReStructuredText, AsciiDoc, and who knows what else. There always seems

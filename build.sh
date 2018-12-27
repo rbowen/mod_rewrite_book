@@ -1,5 +1,7 @@
 #!/bin/sh
-gitbook pdf
-gitbook epub
-gitbook mobi
+
+gitbook build
+# gitbook pdf
+# gitbook epub
+# gitbook mobi
 
