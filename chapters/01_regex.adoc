@@ -3,7 +3,13 @@
 :toclevels: 3
 :toc: 
 
-== Regular Expressions
+
+== Chapter 1: Regular Expressions
+
+> In the high and far-off times the Elephant, O Best Beloved, had no trunk.
+> -- Rudyard Kipling, The Elephant's Child
+
+---
 
 indexterm:[Regular expressions]
 indexterm:[Introduction to regular expressions]

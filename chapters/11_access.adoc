@@ -4,6 +4,6 @@
 :toc: 
 
 [[Chapter_access]]
-== Access control with mod_rewrite
+== Chapter 11: Access control with mod_rewrite
 
 

@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_mod_rewrite]]
-== Introduction to mod_rewrite
+== Chapter 3: Introduction to mod_rewrite
 
 mod_rewrite is the power tool of Apache httpd URL mapping. Of course,
 sometimes you just need a screwdriver, but when you need the power tool,

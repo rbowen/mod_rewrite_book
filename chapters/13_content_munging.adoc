@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_content_munging]]
-== Content Munging
+== Chapter 13: Content Munging
 
 While mod_rewrite modifies aspects of the HTTP request - most commonly
 the REQUEST_URI, sometimes you want to modify the content which is

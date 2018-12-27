@@ -4,7 +4,7 @@
 :toc: 
 
 [[conditional-configuration]]
-== Conditional Configuration
+== Chapter 12: Conditional Configuration
 
 [[introduction]]
 === Introduction

@@ -4,5 +4,5 @@
 :toc: 
 
 [[Chapter_vhosts]]
-== Virtual hosts and mod_rewrite
+== Chapter 10: Virtual hosts and mod_rewrite
 

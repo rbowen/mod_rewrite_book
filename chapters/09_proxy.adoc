@@ -4,5 +4,5 @@
 :toc: 
 
 [[Chapter_proxy]]
-== Proxies and mod_rewrite
+== Chapter 9: Proxies and mod_rewrite
 

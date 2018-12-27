@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_rewriterule_flags]]
-== RewriteRule Flags
+== Chapter 6: RewriteRule Flags
 
 Flags modify the behavior of the rule. You may have zero or more flags,
 and the effect is cumulative. Flags may be repeated where appropriate.

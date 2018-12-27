@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_rewritemap]]
-== RewriteMap
+== Chapter 8: RewriteMap
 
 The `RewriteMap` directive gives you a way to call external mapping
 routines to simplify a `RewriteRule`. This external mapping can be a

@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_rewrite_logging]]
-== Rewrite Logging
+== Chapter 5: Rewrite Logging
 
 Exactly how you turn on logging for mod_rewrite will depend on what
 version of the Apache http server you are running. Logging got some

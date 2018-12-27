@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_rewriterule]]
-== RewriteRule
+== Chapter 4: RewriteRule
 
 We'll start the main technical discussion of mod_rewrite with the
 RewriteRule directive, as it is the workhorse of mod_rewrite, and the

@@ -4,7 +4,7 @@
 :toc: 
 
 [[Chapter_rewritecond]]
-== RewriteCond
+== Chapter 7: RewriteCond
 
 The `RewriteCond` directive attaches additional conditions on a
 `RewriteRule`, and may also set backreferences that may be used in the
