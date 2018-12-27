@@ -15,5 +15,5 @@ A comprehensive guide to URL mapping with the Apache HTTP Server.
 * [Access Control with mod_rewrite](chapters/11_access.adoc)
 * [If, and other Configuration Configuration](chapters/12_configurable_configuration.adoc)
 * [Content Munging Modules](chapters/13_content_munging.adoc)
-* [Appendix](chapters/appendix.adoc)
-* [INDEX](chapters/index.adoc)
+* [Recipes](chapters/14_recipes.adoc)
+* [Appendix](chapters/appendix.md)

@@ -804,7 +804,7 @@ Other recommended reference sources include the Perl regular expression
 documentation, which you can find online at 
 <http://www.perldoc.com/perl5.8.0/pod/perlre.html> or by typing 
 `perldoc perlre` at your command line, and the PCRE documentation, which 
-you can find online at <http://pcre.org/pcre.txt>. 
-
-
+you can find online at <http://pcre.org/pcre.txt>. This is useful even
+if you're using regex in other implementations (like `mod_rewrite`, for
+example), since the syntax is largely the same across implementations.
 

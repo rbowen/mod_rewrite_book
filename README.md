@@ -151,10 +151,10 @@ and I'll send you an updated version.
 
 ### About the Author
 
-Rich Bowen has been involved on the Apache http server documentation
+Rich Bowen has been involved on the [Apache http server documentation](http://httpd.apache.org/docs-project/)
 since about 1998. He is also the author of *Apache Cookbook*, and *The
 Definitive Guide to Apache mod_rewrite*. You can frequently find him in
-\#httpd, on `irc.freenode.net`. under the name of DrBacchus or rbowen.
+\#httpd, on `irc.freenode.net`. under the name of `DrBacchus` or `rbowen`.
 
 Rich works at Red Hat, in the OSAS (Open Source and Standards) group,
 where he is an Open Source Community Manager. See
@@ -170,7 +170,8 @@ the channel put together. And the folks on #ahd who keep me sane. Or insane.
 Depending on how you measure. A warm hog to each of you.
 
 None of this would be possible without `mod_rewrite`
-itself, so a big thank you to Ralf Engelschall for creating it, and
+itself, so a big thank you to [Ralf
+Engelschall](https://engelschall.com/) for creating it, and
 all the many people who have worked on the code and documentation since
 then.
 

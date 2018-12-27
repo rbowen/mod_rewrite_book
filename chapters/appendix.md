@@ -1,4 +1,3 @@
-[appendix]
 ## TODO
 
 This book is a work in progress, and I expect it to remain such for years to come. This is the place to check to see if you've purchased the latest version, and what changed from one version to another.
@@ -19,6 +18,8 @@ While the version number starts with 0.something, you can expect that there's qu
 * Automated publishing tools
 * Asciidoctor-pdf doesn't do footnotes right. Either they need to fix
   this, or I need to remove all footnotes.
+* Update/Replace the second on regex testing tools, since these appear
+  and vanish pretty quickly.
 
 
 ### REVISION HISTORY
@@ -35,7 +36,11 @@ While the version number starts with 0.something, you can expect that there's qu
 
 * 0.30 - Christmas 2017. Yet another conversion, this time, to ASCIIdoc. Borrowed tools and templates from <https://github.com/akosma/eBook-Template> to get started. Website has been moved to <http://mod-rewrite.org>. We'll start publising it there again once we have a shippable version.
 
-* 0.31 - Will the format changing never end? Converted to MarkDown and
+* 0.31 - Christmas 2018. Will the format changing never end? Converted to MarkDown and
   GitBook. https://toolchain.gitbook.com/ But I'm starting to remember
   that I rejected GitBook because it doesn't seem like there's a way to
   generate an index easily.
+
+* 0.32 - The brief experiement with going back to Markdown abandoned,
+  since Gitbook supports asciidoc. I'm going to focus on writing, and
+  figure out indexing at some later date.
