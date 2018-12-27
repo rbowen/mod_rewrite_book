@@ -1,3 +1,8 @@
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
 [[conditional-configuration]]
 == Conditional Configuration
 

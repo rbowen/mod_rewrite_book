@@ -1,5 +1,10 @@
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
 [[Chapter_url_mapping]]
-## URL Mapping
+== URL Mapping
 
 In this chapter, we'll discuss the various ways that the Apache http
 server handles URL Mapping.
@@ -268,7 +273,7 @@ them only from browsers at example.com, you might use:
 ----
 
 [[virtual-hosts]]
-### Virtual Hosts
+=== Virtual Hosts
 
 Rather than running a separate physical server, or separate instance of
 httpd, for each website, it is common practice run sites via virtual
@@ -282,27 +287,27 @@ IP addresses and preference. Name-based virtual hosting is more common,
 but there are scenarios in which IP-based hosting may be preferred.
 
 [[proxying]]
-### Proxying
+=== Proxying
 
 TODO
 
 [[mod_actions]]
-### mod_actions
+=== mod_actions
 
 TODO
 
 [[mod_imagemap]]
-### mod_imagemap
+=== mod_imagemap
 
 TODO
 
 [[mod_negotiation]]
-### mod_negotiation
+=== mod_negotiation
 
 TODO
 
 [[file-not-found]]
-### File not found
+=== File not found
 
 In the event that a requested resource is not available, after all of
 the above mentioned methods are attempted to find it ...

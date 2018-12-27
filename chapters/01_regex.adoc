@@ -1,4 +1,9 @@
-## Regular Expressions
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
+== Regular Expressions
 
 indexterm:[Regular expressions]
 indexterm:[Introduction to regular expressions]
@@ -26,7 +31,7 @@ regular expressions, as well as reading those that others have bequeathed
 to you.  If you are already reasonably familiar with regex syntax, you 
 can safely skip this chapter.
 
-### The Building Blocks
+=== The Building Blocks
 
 Regular expressions are a means to describe a text pattern (technically,
 it's any data, but in the context of Apache httpd, we're primarily 
@@ -72,7 +77,7 @@ What follows is a more detailed explanation of each of the items in the table ab
 examples.
 
 [[Wildcard_character]]
-### Matching anything
+=== Matching anything
 indexterm:[Wildcard]
 indexterm:[.]
 
@@ -112,7 +117,7 @@ easier to maintain, because they match only what you're interested in,
 and nothing more.
 
 [[Escaping_characters]]
-### Escaping characters
+=== Escaping characters
 indexterm:[Escape]
 indexterm:[Metacharacters]
 indexterm:[Backslash]
@@ -152,7 +157,7 @@ indexterm:[Metacharacter table]
 The term "metacharacter" is often also applied to characters such as `.` and `$`
 which have special meanings within regular expressions.
 
-### Anchoring text
+=== Anchoring text
 indexterm:[Anchors]
 indexterm:[^]
 indexterm:[$]
@@ -182,7 +187,7 @@ to be more specific as to what you wanted to match. The `\b`
 metacharacter, introduced above, can also be useful in some contexts,
 but perhaps less so when you're dealing with URLs.
 
-### Matching one or more characters
+=== Matching one or more characters
 indexterm:[+]
 indexterm:[Matching one or more characters]
 
@@ -197,7 +202,7 @@ This pattern will allow one or more f's, as well as one or more e's. So it match
 
 Be sure to use `+` rather than `*` when you want to ensure non-empty matches.
 
-### Matching zero or more characters
+=== Matching zero or more characters
 indexterm:[*]
 indexterm:[Matching zero or more characters]
 
@@ -235,7 +240,7 @@ optional:
 This pattern, then, matches a string that might (but doesn't have to) begin with 
 whitespace, followed by a `#`. This ensures that the first non-space character of the line is a `#`.
 
-### Repetition quantifiers
+=== Repetition quantifiers
 indexterm:["{n,m}"]
 indexterm:[Repetition]
 
@@ -269,7 +274,7 @@ will match 1, 2, or 3 digits.
 Will match anywhere from 2 to 5 instances of a, b, or c.
 
 [[Greedy]]
-### Greedy Matching
+=== Greedy Matching
 indexterm:[Greedy matching]
 
 In the case of all of the repetition characters above, matching is greedy. That is, the regular 
@@ -302,7 +307,7 @@ indexterm:[Greedy matching,examples]
 The first regex is greedy, and matches as much as it possibly can, going
 out to the last slash. The second is non-greedy, and so stops as early as it can, when it encounters the second slash.
 
-### Making a match optional
+=== Making a match optional
 indexterm:[Optional matching]
 indexterm:["?"]
 
@@ -332,7 +337,7 @@ Further examples of the greedy vs. non-greed behavior will follow once we have l
 about backreferences.
 
 
-### Grouping and capturing
+=== Grouping and capturing
 indexterm:[Grouping]
 indexterm:[Capturing]
 indexterm:[( )]
@@ -347,7 +352,7 @@ pattern matching. Think of it as combining several atoms into a single molecule.
 
 This will look for the sequence "abc" appearing one or more times, and so would match the string "abc" and the string "abcabc".
 
-### Backreferences
+=== Backreferences
 indexterm:[Backreferences]
 indexterm:[$1]
 indexterm:[%1]
@@ -391,7 +396,7 @@ It is instructive to acquire a tool such as Regex Coach, or Rebug, mentioned in 
 of the string. *Mastering Regular Expressions* also has a very complete treatment of 
 backreferences, greedy matching, and what actually happens during the matching phase.
 
-### Character Classes
+=== Character Classes
 indexterm:[[ \]]
 indexterm:[Character classes]
 
@@ -437,7 +442,7 @@ one-character usernames are typically not permitted. Now, `$1` will contain the 
 whereas, before, it could possibly have contained other directory path components after the 
 username.
 
-### Negation
+=== Negation
 
 .. index:: Negation
 .. index:: !
@@ -455,7 +460,7 @@ directory, but then negate the match, thus:
 
 This matches any path not starting with `/images`. We'll see more of this kind of pattern match especially in the chapter :ref:`Proxying with mod_rewrite`.
 
-### Regex examples
+=== Regex examples
 
 .. index:: Examples
 .. index:: Regex examples
@@ -464,7 +469,7 @@ A few examples may be instructive in your understanding of how regular expressio
 work. We'll start with a few of the cases that you may frequently encounter, and suggest a 
 few alternate solutions to each.
 
-#### Email address
+==== Email address
 
 .. index:: Email address
 
@@ -519,7 +524,7 @@ addresses, simply search for `email regex` in your favorite search
 engine, and you'll find many, many articles about how and why it is
 impossible. 
 
-#### Phone number
+==== Phone number
 
 .. index:: Phone number
 
@@ -581,7 +586,7 @@ and that's at least some indication of how much time it would take you to deciph
 when you come back to it in a few months and have forgotten what it is supposed to be 
 doing.
 
-#### Matching URIs
+==== Matching URIs
 
 Finally, since this is, after all, a book about mod_rewrite, it seems reasonable to give 
 some examples of matching URIs, as that is what you will primarily be doing for the rest of 
@@ -595,7 +600,7 @@ web address.
 
 I'll give several common examples of things that you might want to match.
 
-#### Matching the homepage
+==== Matching the homepage
 
 Very frequently, people will want to match the home page of the website. Typically, that 
 means that the requested URI is either nothing at all, or is /, or is some index page such as 
@@ -641,7 +646,7 @@ ignore that particular technicality. Note, however, that there are lots
 of people who spend a lot of time trying to figure out how to exploit
 technicalities like this, so be careful.
 
-#### Matching a directory
+==== Matching a directory
 
 .. index:: Directory
 
@@ -659,7 +664,7 @@ lot, meaning "starts with a slash." Following that, we have the character class 
 match any "not slash" character. This is followed by a + indicating that we want one or more 
 of them, and enclosed in parentheses so that we can have the value for later observation, in `$1`.
 
-#### Matching a filetype
+==== Matching a filetype
 
 For the third example, we'll try to match everything that has a particular file extension. 
 This, too, is a very common need. For example, we want to match everything that is an image 
@@ -673,7 +678,7 @@ Later on, you'll see how to make this case insensitive, so that files with upper
 extensions are also matched.
 
 [[Regex_Tools]]
-### Regex tools
+=== Regex tools
 indexterm:[Regular expression tools]
 indexterm:[Tools,regular expressions]
 
@@ -686,7 +691,7 @@ most of the really good tools for regular expression development come out of the
 community, where regular expressions are particularly popular, and tend to get used in 
 almost every program.
 
-#### Regex Coach
+==== Regex Coach
 indexterm:[Regex coach]
 
 Regex Coach is available for Windows and Linux, 
@@ -699,7 +704,7 @@ TODO:: SCREENSHOT
 
 Regex Coach is free, but it is not Open Source.
 
-#### Reggy
+==== Reggy
 indexterm:[Reggy]
 
 Reggy is a Mac OS X application that provides a simple interface for
@@ -711,7 +716,7 @@ licensed under the GPL.
 
 TODO:: SCREENSHOT
 
-#### pcretest
+==== pcretest
 indexterm:[pcretest]
 
 pcretest is a command-line regular expression tester that is available
@@ -727,7 +732,7 @@ will be set to once the regular expression has been evaluated.
 
 TODO: Screen shot
 
-#### Visual Regexp
+==== Visual Regexp
 indexterm:[Visual Regexp]
 
 Visual Regexp, available at <http://laurent.riesterer.free.fr/regexp/>, has more features
@@ -741,7 +746,7 @@ script.
 
 TODO:: SCREENSHOT
 
-#### Regular Expression Tester
+==== Regular Expression Tester
 indexterm:[Regular Expression Tester]
 
 Rather than being a stand-alone application like the others listed
@@ -749,7 +754,7 @@ above, this is a Firefox plugin. It's available at
 <https://addons.mozilla.org/en-US/firefox/addon/2077>, and, of
 course, requires Firefox to work.
 
-#### Online tools
+==== Online tools
 
 .. index:: Online regex testers
 
@@ -761,7 +766,7 @@ on a weekly basis, and so I can't promise that these sites will still
 be available at the time that you read this, but here are some that are
 worth mentioning at the time of writing:
 
-##### RegExr
+===== RegExr
 
 .. index:: RegExr
 
@@ -769,7 +774,7 @@ worth mentioning at the time of writing:
 character classes, and the ability to save your regular expressions for
 later reference. Requires Javascript to use.
 
-##### Regex Pal
+===== Regex Pal
 
 .. index:: Regex Pal
 
@@ -780,7 +785,7 @@ sufficient for the purpose of crafting and testing regular expressions
 for the purpose of mod_rewrite, which doesn't require replace
 functionality or multi-line matches.
 
-### RewriteRule generators
+=== RewriteRule generators
 
 You may find various websites that purport to be RewriteRule generators.
 I strongly encourage you to avoid these, and instead to learn how to
@@ -788,7 +793,7 @@ craft your own rules. I've evaluated several of these sites, and every
 one has resulted in RewriteRule directives that were either enormously
 inefficient, or completely wrong.
 
-### Summary
+=== Summary
 
 Having a good grasp of Regular Expressions is a necessary prerequisite 
 to working with mod_rewrite. All too often, people try to build regular 

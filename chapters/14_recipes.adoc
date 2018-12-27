@@ -1,4 +1,9 @@
-[Chapter_recipes]
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
+[[Chapter_recipes]]
 ## Recipes
 
 In this chapter, we'll present various common problems, and a variety of

@@ -1,5 +1,10 @@
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
 [[Chapter_rewriterule]]
-## RewriteRule
+== RewriteRule
 
 We'll start the main technical discussion of mod_rewrite with the
 RewriteRule directive, as it is the workhorse of mod_rewrite, and the
@@ -18,7 +23,7 @@ of this all.
 
 
 [[syntax]]
-### Syntax
+=== Syntax
 
 A RewriteRule directive has two required directives and optional flags.
 It looks like:
@@ -38,7 +43,7 @@ FLAGS::
   Optional flags that modify the behavior of the rule.
 
 [[pattern]]
-### Pattern
+=== Pattern
 
 The `PATTERN` argument of the `RewriteRule` is a regular expression that
 is applied to the URL path, or file path, depending on the context.
@@ -62,12 +67,12 @@ Introduction to Regular Expressions, and/or are familiar with what a
 regular expression is, and how to craft one.
 
 [[target]]
-### Target
+=== Target
 
 The target of a `RewriteRule` can be one of the following:
 
 [[a-file-system-path]]
-#### A file-system path
+==== A file-system path
 
 Designates the location on the file-system of the resource to be
 delivered to the client. Substitutions are only treated as a file-system
@@ -76,7 +81,7 @@ first component of the path in the substitution exists in the
 file-system
 
 [[url-path]]
-#### URL-path
+==== URL-path
 
 A DocumentRoot-relative path to the resource to be served. Note that
 mod_rewrite tries to guess whether you have specified a file-system path
@@ -91,7 +96,7 @@ Alias) to be applied to the resulting URL-path, use the `[PT]` flag as
 described below.
 
 [[absolute-url]]
-#### Absolute URL
+==== Absolute URL
 
 If an absolute URL is specified, mod_rewrite checks to see whether the
 hostname matches the current host. If it does, the scheme and hostname
@@ -100,7 +105,7 @@ Otherwise, an external redirect is performed for the given URL. To force
 an external redirect back to the current host, see the `[R]` flag below.
 
 [[dash]]
-#### - (dash)
+==== - (dash)
 
 A dash indicates that no substitution should be performed (the existing
 path is passed through untouched). This is used when a flag (see below)

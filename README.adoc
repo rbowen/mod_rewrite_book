@@ -1,4 +1,9 @@
-# mod_rewrite And Friends
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
+== mod_rewrite And Friends
 
 `mod_rewrite` is one of the most powerful, and least understood, of the
 modules that are provided with the Apache HTTP Server. It is frequently
@@ -14,7 +19,7 @@ This book is intended to help you understand `mod_rewrite` deeply, so
 that you know when and how to use it, as well as when not to use it, and
 what to use instead.
 
-## About This Book
+== About This Book
 
 The first incarnation of this book,
 [The Definitive Guide to Apache mod_rewrite](http://drbacchus.com/book/rewrite/),
@@ -44,7 +49,7 @@ way, we'll also discuss the various parts of URL mapping, the
 understanding of which allows you to avoid using these more complicated
 techniques.
 
-### How this book is organized
+=== How this book is organized
 
 This book consists of 13 chapters. Depending on your level of existing
 expertise, some of them can be safely skipped.
@@ -100,7 +105,7 @@ Chapter 13 - [Content Modification Modules](13_content_munging.adoc) - In this c
 discuss rewriting content sent to the client, which is not something
 that `mod_rewrite` does.
 
-### Other Sources of Wisdom
+=== Other Sources of Wisdom
 
 A brief word about the documentation. The official docs, at <http://httpd.apache.org/docs/current>,
 are great, and are the work of many dedicated people. I'm one of many. This book is 
@@ -121,7 +126,7 @@ You should also acquire a copy of Jeffrey Friedl's excellent book,
 <http://shop.oreilly.com/product/9780596528126.do>  While the book is
 several years old, it is still the best book on the topic.
 
-### Technical details
+=== Technical details
 
 This book was written in Markdown, using vim -- <https://www.vim.org/> --
 and built using gitbook -- <https://toolchain.gitbook.com/>.
@@ -135,7 +140,7 @@ the book at <http://mod-rewrite.org/>, and you'll usually be able to buy a
 fairly recent version in the Amazon Kindle store. Some day, there will 
 hopefully be a printed version, too.
 
-### Contact information, and errata reporting
+=== Contact information, and errata reporting
 
 If you'd like to get involved in the creation of this book, or if you'd like to 
 tell me about something that needs fixed, Go to GitHub -
@@ -149,7 +154,7 @@ form, you should be eligible to receive updates from wherever you bought
 it. If you're not, send me your email receipt <rbowen@rcbowen.com>, 
 and I'll send you an updated version.
 
-### About the Author
+=== About the Author
 
 Rich Bowen has been involved on the [Apache http server documentation](http://httpd.apache.org/docs-project/)
 since about 1998. He is also the author of *Apache Cookbook*, and *The
@@ -162,7 +167,7 @@ where he is an Open Source Community Manager. See
 
 He lives in Lexington, Kentucky, with his wife and kids. 
 
-### Acknowledgements
+=== Acknowledgements
 
 Thanks to `fajita`, and the other regulars on #httpd (on the `irc.freenode.net` 
 network). `fajita` is my research assistant, and knows more than everyone else on

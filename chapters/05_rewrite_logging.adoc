@@ -1,3 +1,8 @@
+[book]
+:doctype: book
+:toclevels: 3
+:toc: 
+
 [[Chapter_rewrite_logging]]
 == Rewrite Logging
 
