@@ -16,8 +16,8 @@ indexterm:[Introduction to regular expressions]
 indexterm:[Regex]
 
 Much of the content in this book requires that you have some mastery
-of regular expressions. Indeed, in my years of teaching mod_rewrite,
-it has been my observation that most people don't find mod_rewrite hard at
+of regular expressions. Indeed, in my years of teaching `mod_rewrite`,
+it has been my observation that most people don't find `mod_rewrite` hard at
 all: they're just intimidated by regular expressions.
 
 indexterm:[Mastering Regular Expressions by Jeffrey Friedl]
@@ -25,7 +25,7 @@ indexterm:["Friedl, Jeffrey"]
 
 There is one excellent book about regular expressions, and if you want
 to become a regular expression (or "regex") guru, you should get it. That
-book is *Mastering Regular Expressions* <http://regex.info/book.html> by
+book is *Mastering Regular Expressions* -- <http://regex.info/book.html> -- by
 Jeffrey Friedl.
 
 If you just want to know enough about regex to master mod_rewrite, read
@@ -39,9 +39,9 @@ can safely skip this chapter.
 
 === The Building Blocks
 
-Regular expressions are a means to describe a text pattern (technically,
+Regular expressions are a means to describe a text pattern,footnote:[technically,
 it's any data, but in the context of Apache httpd, we're primarily 
-interested in text as it appears in URLs), so that you can look for 
+interested in text as it appears in URLs] so that you can look for 
 that pattern in a block of data. The best way to read any regular
 expression is one character at a time, so you need to know what 
 each character represents.
@@ -256,7 +256,7 @@ The possibilities of how you can specify this are shown in the table
 below.
 
 [options="header"]
-.Repition quantifiers
+.Repetition quantifiers
 |==============================
 |Pattern |Meaning
 |{n}     |Match exactly n times
@@ -264,7 +264,7 @@ below.
 |{n,m}   |Match at least n times, but not more than m times
 |==============================
 
-These repitition quantifiers may be applied to a single character, or to
+These repetition quantifiers may be applied to a single character, or to
 a grouping. For example:
 
 ----
@@ -567,7 +567,7 @@ common, for the simple reason that it's less to type. The `{3}` following the `\
 we want to match the character exactly three times. That is, we require three digits in this 
 portion of the match, or it will return failure.
 
-See the section `Repetition quantifiers`_ for the various syntaxes you
+See the section _Repetition quantifiers_ for the various syntaxes you
 can use to indicate the number of repetitions you want.
 
 `\)?` - Like the opening parenthesis we started with, this is an optional closing parenthesis.
@@ -575,8 +575,9 @@ can use to indicate the number of repetitions you want.
 `[-. ]?` - Another optional character, this allows, but does not require, a dash, a dot, or a 
 space, to appear between the first three numbers and the next three numbers.
 
-If you discover that your users are separating blocks with, say, an
-underscore, you could modify this part of the pattern to be `[-._ ]`
+If you discover that your users are separating blocks with some other
+character, you can add that to the character class. So, for example, if
+they are using an underscore, you would modify this part of the pattern to be `[-._ ]`
 instead, to include this new character.
 
 The rest of the expression is exactly the same as what we have already done, except that the last block of numbers contains 4 numbers, rather than three.
