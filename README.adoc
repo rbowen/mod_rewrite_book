@@ -116,11 +116,7 @@ I participated in writing those docs, and the edits flowed both directions -- th
 is, sometimes it was the docs that shamelessly copied from the book.
 
 This book does *not* attempt to be a comprehensive book about the
-Apache web server. For that, I encourage you to look the documentation
-and also at my other book,
-*Apache Cookbook, Third Edition*, by Rich Bowen and Ken Coar,
-which should be available around the
-same time that this book is published.
+Apache web server.
 
 You should also acquire a copy of Jeffrey Friedl's excellent book,
 *Mastering Regular Expressions* -

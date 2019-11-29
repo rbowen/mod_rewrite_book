@@ -25,8 +25,8 @@ indexterm:["Friedl, Jeffrey"]
 
 There is one excellent book about regular expressions, and if you want
 to become a regular expression (or "regex") guru, you should get it. That
-book is *Mastering Regular Expressions* -- <http://regex.info/book.html> -- by
-Jeffrey Friedl.
+book is link:http://regex.info/book.html[*Mastering Regular Expressions*]
+by Jeffrey Friedl.
 
 If you just want to know enough about regex to master mod_rewrite, read
 this chapter a few times, and that should be sufficient.
@@ -655,15 +655,15 @@ technicalities like this, so be careful.
 
 ==== Matching a directory
 
-.. index:: Directory
+indexterm:[Directory]
 
 If you wanted to find out what directory a particular requested URI was in, or, perhaps, 
 what keyword it started with, you need to match everything up to the first slash. This will 
 look something like the following: 
 
-::
-
-    ^/([^/]+)
+----
+^/([^/]+)
+----
 
 
 This regex has a number of components. First, there's the standard `^/` which we'll see a 
