@@ -4,9 +4,9 @@
 .. index:: RewriteRule flags
 .. index:: pair: RewriteRule; flags
 
-============================
-Chapter 6: RewriteRule Flags
-============================
+=================
+RewriteRule Flags
+=================
 
 .. epigraph::
 
@@ -82,6 +82,107 @@ in URLs, and returns a 404 if it sees one.
 
 This escaping is particularly necessary in a proxy situation, when the
 backend may break if presented with an unescaped URL.
+
+
+.. note::
+
+   Starting in version 2.4.26, you can limit which characters are
+   escaped by the ``[B]`` flag by providing a list of characters as an
+   argument. For example::
+
+      [B=#?;]
+
+   This limits escaping to only the ``#``, ``?``, and ``;`` characters.
+   If you need to include a space in the list of characters to escape,
+   you must quote the entire third argument of the ``RewriteRule``::
+
+      RewriteRule "^search/(.*)$" "/search.php?term=$1" "[B= #?;]"
+
+.. _bnp---backrefnoplus:
+
+
+.. index:: pair: RewriteRule flags; BNP flag
+.. index:: pair: RewriteRule flags; backrefnoplus
+.. index:: BNP flag
+
+BNP - backrefnoplus
+-------------------
+
+
+The ``[BNP]`` flag, short for "backrefnoplus," modifies the behavior of
+the ``[B]`` flag so that spaces in backreferences are escaped to ``%20``
+rather than ``+``. This is important when the backreference is used in
+the path component of the URL rather than in the query string, since
+``+`` is only interpreted as a space in query strings, not in paths.
+
+Use this flag in conjunction with the ``[B]`` flag when the substitution
+places the backreference in the path portion of the URL.
+
+.. code-block:: none
+
+   RewriteRule "^search/(.*)$" "/search.php/$1" "[B,BNP]"
+
+In this example, a search term containing spaces will be escaped as
+``%20`` in the resulting path, rather than being converted to ``+``
+signs.
+
+:version:`2.4.26` This flag is available in httpd 2.4.26 and later.
+
+.. _bctls:
+
+
+.. index:: pair: RewriteRule flags; BCTLS flag
+.. index:: BCTLS flag
+
+BCTLS
+-----
+
+
+The ``[BCTLS]`` flag works like the ``[B]`` flag, but only escapes
+control characters (bytes 0x00 through 0x1F and 0x7F) and the space
+character (0x20). This is the same set of characters that would be
+rejected if they were copied unencoded into a query string.
+
+Use this flag when you need a lighter-weight escaping than the full
+``[B]`` flag provides — for example, when your backreferences may
+contain spaces or control characters but you want to preserve other
+special characters as-is.
+
+.. code-block:: none
+
+   RewriteRule "^search/(.*)$" "/search.php/$1" "[BCTLS]"
+
+:version:`trunk` This flag is only available in httpd trunk (future 2.5.x) and is not yet in any stable release.
+
+.. _bne:
+
+
+.. index:: pair: RewriteRule flags; BNE flag
+.. index:: BNE flag
+
+BNE
+---
+
+
+The ``[BNE]`` flag provides an exclusion list for the ``[B]`` or
+``[BCTLS]`` flags. Characters listed in the ``[BNE]`` argument will
+*not* be escaped by the backreference escaping process. This is useful
+when certain characters in backreferences are meaningful and should be
+preserved as-is.
+
+The syntax is ``[BNE=<characters>]``, where ``<characters>`` is the set
+of characters to exclude from escaping. For example, to exclude forward
+slashes from being escaped:
+
+.. code-block:: none
+
+   RewriteRule "^search/(.*)$" "/search.php?term=$1" "[B,BNE=/]"
+
+In this example, the ``[B]`` flag will escape all non-alphanumeric
+characters in the backreference *except* the forward slash, which will
+be passed through unchanged.
+
+:version:`trunk` This flag is only available in httpd trunk (future 2.5.x) and is not yet in any stable release.
 
 .. _c---chain:
 
@@ -777,7 +878,7 @@ not, the default behavior of ``RewriteRule`` is to copy that query string
 to the target URI. Using the ``[QSD]`` flag causes the query string to be
 discarded.
 
-This flag is available in version 2.4.0 and later.
+:version:`2.4` This flag is available in httpd 2.4.0 and later.
 
 Using ``[QSD]`` and ``[QSA]`` together will result in ``[QSD]`` taking
 precedence.
@@ -785,6 +886,38 @@ precedence.
 If the target URI has a query string, the default behavior will be
 observed - that is, the original query string will be discarded and
 replaced with the query string in the ``RewriteRule`` target URI.
+
+.. _qsl---qslast:
+
+
+.. index:: pair: RewriteRule flags; QSL flag
+.. index:: pair: RewriteRule flags; qslast
+.. index:: QSL flag
+
+QSL - qslast
+------------
+
+
+By default, the first ``?`` character in the substitution string
+separates the path from the query string. The ``[QSL]`` flag (short for
+"query string last") changes this behavior so that the *last* ``?``
+character is used as the separator instead.
+
+This is useful when you need to map requests to files that contain
+literal question marks in their filenames. Without this flag, a
+substitution containing multiple ``?`` characters would incorrectly
+split the path and query string at the first ``?``.
+
+.. code-block:: none
+
+   # Map to a file with a literal '?' in its name
+   RewriteRule "^test$" "/apath/file?name?qs=1" [QSL]
+
+In this example, the substitution is split at the *last* ``?``, so
+the path becomes ``/apath/file?name`` and the query string becomes
+``qs=1``.
+
+:version:`2.4.19` This flag is available in httpd 2.4.19 and later.
 
 .. _r---redirect:
 
@@ -937,4 +1070,104 @@ set with this flag is lost due to an internal re-processing (including
 subsequent rounds of mod_rewrite processing). The L flag can be useful
 in this context to end the current round of mod_rewrite processing.
 
+.. _unsafeallow3f:
+
+
+.. index:: pair: RewriteRule flags; UnsafeAllow3F flag
+.. index:: UnsafeAllow3F flag
+.. index:: pair: mod_rewrite; security considerations
+
+UnsafeAllow3F
+-------------
+
+
+By default, if the request URI contains an encoded question mark
+(``%3f``) and the substitution string contains a literal ``?``
+(separating path from query string), mod_rewrite will halt the rewrite
+and return a 403 Forbidden response. This safeguard protects against
+scenarios where an attacker could manipulate captured encoded question
+marks to inject unexpected query string parameters.
+
+The ``[UnsafeAllow3F]`` flag disables this protection and allows the
+rewrite to proceed even when the request URI contains ``%3f`` and the
+substitution contains a ``?``.
+
+.. warning::
+
+   This is a security flag. Use it with caution and only when you fully
+   understand the implications. Enabling this flag may allow malicious
+   clients to manipulate the boundary between the path and query string
+   components of the rewritten URL.
+
+.. code-block:: none
+
+   RewriteRule "^(.*)$" "/page.php?uri=$1" [UnsafeAllow3F]
+
+.. _unsafeprefixstat:
+
+
+.. index:: pair: RewriteRule flags; UnsafePrefixStat flag
+.. index:: UnsafePrefixStat flag
+.. index:: pair: mod_rewrite; security considerations
+
+UnsafePrefixStat
+----------------
+
+
+When a ``RewriteRule`` is used in server (virtualhost) context and the
+substitution string begins with a variable or backreference that
+resolves to a filesystem path, mod_rewrite will automatically prefix
+the substitution with the document root. This prevents the substitution
+from inadvertently mapping to a path outside the intended document tree.
+
+The ``[UnsafePrefixStat]`` flag disables this automatic prefixing,
+allowing the substitution to resolve to an absolute filesystem path
+derived from variables or backreferences.
+
+.. warning::
+
+   This is a security flag. Without the automatic document root prefix,
+   a rewrite rule could potentially map to files outside the document
+   root. Use this flag only when you have verified that the substitution
+   cannot be manipulated to access unintended filesystem locations.
+
+.. code-block:: none
+
+   RewriteCond "%{DOCUMENT_ROOT}" "(.+)"
+   RewriteRule "^(.*)$" "%1/sub/$1" [UnsafePrefixStat]
+
+Without the ``[UnsafePrefixStat]`` flag, the ``%1`` backreference at the
+start of the substitution would cause mod_rewrite to prefix the result
+with the document root, potentially producing an incorrect double-rooted
+path.
+
+:version:`trunk` This flag is only available in httpd trunk (future 2.5.x) and is not yet in any stable release.
+
+.. _unc:
+
+
+.. index:: pair: RewriteRule flags; UNC flag
+.. index:: UNC flag
+.. index:: UNC paths
+
+UNC
+---
+
+
+The ``[UNC]`` flag prevents mod_rewrite from merging multiple leading
+slashes in the substitution result into a single slash. This is
+necessary on Windows systems when the substitution resolves to a UNC
+(Universal Naming Convention) path such as ``\\server\share``, which
+requires the double leading slashes to be preserved.
+
+Note that this flag is only needed when the multiple leading slashes
+come from a variable or backreference expansion. If the substitution
+starts with multiple literal slashes, they are preserved automatically.
+
+.. code-block:: none
+
+   RewriteCond "%{REQUEST_URI}" "^/share/(.*)"
+   RewriteRule "^(.*)$" "//fileserver/%1" [UNC]
+
+:version:`trunk` This flag is only available in httpd trunk (future 2.5.x) and is not yet in any stable release.
 

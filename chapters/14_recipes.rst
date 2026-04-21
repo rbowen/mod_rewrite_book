@@ -1,9 +1,9 @@
 .. _Chapter_recipes:
 
 
-===================
-Chapter 14: Recipes
-===================
+=======
+Recipes
+=======
 
 .. epigraph::
 
@@ -93,7 +93,7 @@ with other rewrite rules.
 .. index:: pair: recipes; DirectorySlash
 
 Adding or Removing Trailing Slashes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You want consistent URLs---either always with a trailing
 slash or always without. ``mod_dir``'s ``DirectorySlash`` directive
@@ -215,7 +215,7 @@ control.
 .. index:: pair: recipes; front controller
 
 Front Controller Pattern (CMS/Framework Routing)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** Your application framework (WordPress, Laravel, Symfony,
 etc.) uses a front controller pattern where all requests that don't match
@@ -249,7 +249,7 @@ rewrite to loop infinitely.
 .. index:: pair: recipes; path to query string
 
 Mapping Clean URL Paths to Query Parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You want ``/products/widget-42`` to internally map to
 ``/product.php?id=widget-42``. This is a classic ``mod_rewrite`` use case
@@ -315,7 +315,7 @@ preferred)
 .. index:: pair: recipes; authentication redirect
 
 Cookie-Based Redirect to Login Page
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You want to redirect users to a login page if a specific
 authentication cookie is not present. A thread on "redirects on Apache
@@ -387,7 +387,7 @@ optimizations of ``mod_proxy``.
 .. index:: pair: recipes; X-Forwarded-Proto
 
 Redirects Behind a TLS-Terminating Proxy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** Your httpd sits behind a load balancer or CDN that terminates
 TLS. The ``%{HTTPS}`` variable is always ``off`` from httpd's perspective,
@@ -532,7 +532,7 @@ in certain usernames interacting with the lookahead mechanism.
 .. index:: pair: recipes; per-directory rewrite
 
 .htaccess vs. Server Config Context Differences
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** Your rewrite rules work in ``httpd.conf`` but not in
 ``.htaccess`` (or vice versa). This is one of the most frequent sources
@@ -561,7 +561,7 @@ The key differences:
 .. index:: pair: recipes; rule order
 
 Rule Ordering and the [L] Flag
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** Your rewrite rules aren't behaving as expected because of
 ordering issues. The "rewrite in .htaccess" thread shows a user whose
@@ -581,7 +581,7 @@ include ``[L]``---the migration rules are never reached.
 .. index:: pair: recipes; debugging rewrite
 
 Debugging Rewrite Rules with the Rewrite Log
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You can't figure out why your rewrite rules aren't doing what
 you expect. The thread on "Redirects and rewrites and performance" shows
@@ -600,7 +600,7 @@ log with data from the entire site.
 .. index:: pair: recipes; file not found fallback
 
 Serving a Fallback Resource When a File Is Missing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You want to serve a default image, page, or resource when
 the requested file doesn't exist. A thread on "Show Alternate Image if
@@ -646,7 +646,7 @@ combined with ``<If>``
 .. index:: pair: recipes; URL encoding
 
 Handling Special Characters and Encoded URLs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** Rewrite rules break when URLs contain special characters
 (spaces as ``%20``, international characters, backslashes, etc.). A thread
@@ -666,7 +666,7 @@ problems with multibyte character encoding.
 .. index:: pair: recipes; thousands of redirects
 
 Performance with Large Numbers of Redirects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You have hundreds or thousands of redirects and are concerned
 about performance impact. The "Redirects and rewrites and performance"
@@ -694,7 +694,7 @@ solved with other modules.
 .. index:: pair: recipes; mod_alias
 
 Simple Redirects: Use Redirect, Not RewriteRule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You're using ``RewriteRule`` with ``[R=301]`` for simple
 page-to-page or site-to-site redirects. A mailing list thread titled
@@ -734,7 +734,7 @@ requests to a backend server.
 .. index:: pair: recipes; mod_rewrite alternatives
 
 Conditional Logic: Use <If> Expressions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You're using ``mod_rewrite`` for conditional configuration
 that doesn't involve URL rewriting---like setting headers based on
@@ -755,7 +755,7 @@ the cognitive overhead of ``RewriteCond``/``RewriteRule`` syntax.
 .. index:: pair: recipes; ErrorDocument
 
 Fallback Resources: Use FallbackResource, Not RewriteRule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You want all requests for non-existent files to be handled
 by a single script (the front controller pattern). The traditional approach
@@ -780,7 +780,7 @@ extremely common use case.
 .. index:: pair: recipes; external program map
 
 Advanced: Using RewriteMap for Dynamic Rewrites
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You need dynamic URL mapping that's too complex for static
 rules---looking up redirects in a database, calling an external program,
@@ -801,7 +801,7 @@ to Apache24?" show users struggling with the external program map type.
 .. index:: pair: recipes; IP range matching
 
 Advanced: IP Range Matching with RewriteMap
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Problem:** You need to match client IPs against CIDR ranges in rewrite
 rules. A thread on "Apache rewritemap condition that will CIDR-ipmatch

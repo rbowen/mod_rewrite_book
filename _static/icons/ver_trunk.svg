@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="16" viewBox="0 0 28 16">
+  <rect x="0.5" y="0.5" width="27" height="15" rx="3" ry="3"
+        fill="#fff3e0" stroke="#666" stroke-width="0.75" stroke-dasharray="2,1"/>
+  <text x="14" y="11.5" font-family="monospace" font-size="8" 
+        font-weight="bold" text-anchor="middle" fill="#333">trunk</text>
+</svg>

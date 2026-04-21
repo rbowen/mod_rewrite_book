@@ -5,9 +5,9 @@
 .. index:: pair: directives; RewriteCond
 .. index:: pair: RewriteCond; syntax
 
-======================
-Chapter 7: RewriteCond
-======================
+===========
+RewriteCond
+===========
 
 .. epigraph::
 
@@ -86,10 +86,18 @@ Server-Variables
 .. index:: pair: server variables; HTTP_USER_AGENT
 .. index:: pair: server variables; HTTP_COOKIE
 
-HTTP headers:
+**HTTP headers:**
 
-HTTP_USER_AGENT HTTP_REFERER HTTP_COOKIE HTTP_FORWARDED HTTP_HOST
-HTTP_PROXY_CONNECTION HTTP_ACCEPT
+.. hlist::
+   :columns: 3
+
+   * ``HTTP_USER_AGENT``
+   * ``HTTP_REFERER``
+   * ``HTTP_COOKIE``
+   * ``HTTP_FORWARDED``
+   * ``HTTP_HOST``
+   * ``HTTP_PROXY_CONNECTION``
+   * ``HTTP_ACCEPT``
 
 
 .. index:: pair: server variables; REMOTE_ADDR
@@ -97,19 +105,48 @@ HTTP_PROXY_CONNECTION HTTP_ACCEPT
 .. index:: pair: server variables; REQUEST_METHOD
 .. index:: pair: server variables; QUERY_STRING
 
-connection & request:
+**Connection & request:**
 
-REMOTE_ADDR REMOTE_HOST REMOTE_PORT REMOTE_USER REMOTE_IDENT
-REQUEST_METHOD SCRIPT_FILENAME PATH_INFO QUERY_STRING AUTH_TYPE
+.. hlist::
+   :columns: 3
 
-server internals:
+   * ``REMOTE_ADDR``
+   * ``REMOTE_HOST``
+   * ``REMOTE_PORT``
+   * ``REMOTE_USER``
+   * ``REMOTE_IDENT``
+   * ``REQUEST_METHOD``
+   * ``SCRIPT_FILENAME``
+   * ``PATH_INFO``
+   * ``QUERY_STRING``
+   * ``AUTH_TYPE``
 
-DOCUMENT_ROOT SERVER_ADMIN SERVER_NAME SERVER_ADDR SERVER_PORT
-SERVER_PROTOCOL SERVER_SOFTWARE
+**Server internals:**
 
-date and time:
+.. hlist::
+   :columns: 3
 
-TIME_YEAR TIME_MON TIME_DAY TIME_HOUR TIME_MIN TIME_SEC TIME_WDAY TIME
+   * ``DOCUMENT_ROOT``
+   * ``SERVER_ADMIN``
+   * ``SERVER_NAME``
+   * ``SERVER_ADDR``
+   * ``SERVER_PORT``
+   * ``SERVER_PROTOCOL``
+   * ``SERVER_SOFTWARE``
+
+**Date and time:**
+
+.. hlist::
+   :columns: 4
+
+   * ``TIME_YEAR``
+   * ``TIME_MON``
+   * ``TIME_DAY``
+   * ``TIME_HOUR``
+   * ``TIME_MIN``
+   * ``TIME_SEC``
+   * ``TIME_WDAY``
+   * ``TIME``
 
 
 .. index:: pair: server variables; REQUEST_URI
@@ -118,10 +155,18 @@ TIME_YEAR TIME_MON TIME_DAY TIME_HOUR TIME_MIN TIME_SEC TIME_WDAY TIME
 .. index:: pair: server variables; REQUEST_SCHEME
 .. index:: pair: server variables; THE_REQUEST
 
-specials:
+**Specials:**
 
-API_VERSION THE_REQUEST REQUEST_URI REQUEST_FILENAME IS_SUBREQ HTTPS
-REQUEST_SCHEME
+.. hlist::
+   :columns: 3
+
+   * ``API_VERSION``
+   * ``THE_REQUEST``
+   * ``REQUEST_URI``
+   * ``REQUEST_FILENAME``
+   * ``IS_SUBREQ``
+   * ``HTTPS``
+   * ``REQUEST_SCHEME``
 
 These variables all correspond to the similarly named HTTP MIME-headers,
 C variables of the Apache HTTP Server or struct tm fields of the Unix

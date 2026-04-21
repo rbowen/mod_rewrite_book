@@ -1,9 +1,9 @@
 .. _Chapter_vhosts:
 
 
-=========================================
-Chapter 10: Virtual hosts and mod_rewrite
-=========================================
+=============================
+Virtual hosts and mod_rewrite
+=============================
 
 .. epigraph::
 
@@ -82,7 +82,7 @@ Per-user virtual hosts
 
 
 Logging for dynamic vhosts
----------------------------
+--------------------------
 
 .. todo:: Using ``%{Host}i`` in the LogFormat to get per-vhost
    logging from a single log file. The ``CustomLog`` directive with

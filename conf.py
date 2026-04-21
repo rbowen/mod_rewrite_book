@@ -1,5 +1,9 @@
-# Configuration file for the Sphinx documentation builder.
-#
+
+# -- Path setup for local extensions -----------------------------------------
+
+import sys, os
+sys.path.insert(0, os.path.abspath('_ext'))
+
 # mod_rewrite And Friends
 # by Rich Bowen
 
@@ -10,7 +14,7 @@ copyright = '2013–2026, Rich Bowen. Licensed under the Apache License, Version
 author = 'Rich Bowen'
 
 # The full version, including alpha/beta/rc tags
-release = '3.1.1'
+release = '3.1.2'
 version = '3.1'
 
 # -- General configuration ---------------------------------------------------
@@ -18,6 +22,7 @@ version = '3.1'
 extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
+    'version_badge',
 ]
 
 # The master toctree document

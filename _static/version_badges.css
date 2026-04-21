@@ -1,0 +1,62 @@
+/* Version badges for mod_rewrite And Friends
+ *
+ * Designed to be distinguishable in:
+ * - Color (HTML/web)
+ * - Grayscale (ePub on e-ink readers)
+ * - Print (B&W PDF)
+ *
+ * Uses SHAPE and BORDER STYLE to differentiate, not just color.
+ */
+
+.version-badge {
+    display: inline-block;
+    padding: 0.1em 0.5em;
+    margin: 0 0.2em;
+    font-size: 0.75em;
+    font-weight: bold;
+    line-height: 1.4;
+    vertical-align: middle;
+    font-family: monospace;
+    border: 1px solid #666;
+}
+
+/* 2.4.x — rounded pill shape, light fill */
+.version-24 {
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    color: #333;
+}
+
+/* trunk / 2.5.x — dashed border, angular corners */
+.version-trunk {
+    border-radius: 3px;
+    border-style: dashed;
+    border-width: 1.5px;
+    background-color: #fff3e0;
+    color: #333;
+}
+
+/* 2.2 / legacy — square corners, dotted border */
+.version-legacy {
+    border-radius: 0;
+    border-style: dotted;
+    background-color: #f5f5f5;
+    color: #555;
+}
+
+/* Default (unrecognized version) — square with solid border */
+.version-badge:not(.version-24):not(.version-trunk):not(.version-legacy) {
+    border-radius: 4px;
+    background-color: #e3f2fd;
+    color: #333;
+}
+
+/* Print / grayscale overrides */
+@media print, (color-gamut: srgb) {
+    .version-24 {
+        background-color: #f0f0f0;
+    }
+    .version-trunk {
+        background-color: #e8e8e8;
+    }
+}

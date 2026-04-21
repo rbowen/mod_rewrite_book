@@ -5,9 +5,9 @@
 .. index:: pair: modules; mod_rewrite
 .. index:: pair: mod_rewrite; introduction
 
-======================================
-Chapter 3: Introduction to mod_rewrite
-======================================
+===========================
+Introduction to mod_rewrite
+===========================
 
 .. epigraph::
 
@@ -334,12 +334,141 @@ We aim to help you do that at each step along this journey.
 
 .. index:: RewriteOptions
 .. index:: pair: directives; RewriteOptions
+.. index:: pair: RewriteOptions; Inherit
+.. index:: pair: RewriteOptions; InheritBefore
+.. index:: pair: RewriteOptions; InheritDown
+.. index:: pair: RewriteOptions; InheritDownBefore
+.. index:: pair: RewriteOptions; IgnoreInherit
+.. index:: pair: RewriteOptions; AllowNoSlash
+.. index:: pair: RewriteOptions; AllowAnyURI
+.. index:: pair: RewriteOptions; MergeBase
+.. index:: pair: RewriteOptions; IgnoreContextInfo
+.. index:: pair: RewriteOptions; LegacyPrefixDocRoot
+.. index:: pair: RewriteOptions; LongURLOptimization
 
 RewriteOptions
 --------------
 
 
-RewriteOptions TODO
+The ``RewriteOptions`` directive controls several special behaviors of
+the rewrite engine. You can specify multiple options separated by
+spaces.
+
+
+Inherit and InheritBefore
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, rewrite rules are *not* inherited from parent contexts.
+A ``<VirtualHost>`` does not inherit rules from the main server config;
+a ``.htaccess`` file does not inherit rules from a parent directory's
+``.htaccess``.
+
+``RewriteOptions Inherit`` forces the current context to inherit the
+parent's rules, maps, and conditions. The inherited rules run *after*
+the local rules.
+
+``RewriteOptions InheritBefore`` does the same, but the inherited
+rules run *before* the local rules.
+
+
+.. code-block:: apache
+
+   # In a .htaccess or <Directory> block:
+   RewriteOptions Inherit
+
+
+InheritDown and InheritDownBefore
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These are the inverse of ``Inherit``: instead of a child saying "give
+me my parent's rules," the parent says "push my rules into all
+children." This avoids needing ``RewriteOptions Inherit`` in every
+child configuration.
+
+``InheritDown`` pushes the parent's rules to run *after* each child's
+local rules. ``InheritDownBefore`` pushes them to run *before*.
+
+:version:`2.4.8` Available in httpd 2.4.8 and later.
+
+
+IgnoreInherit
+~~~~~~~~~~~~~
+
+If a parent has ``InheritDown`` set but a particular child should *not*
+inherit, the child can use ``RewriteOptions IgnoreInherit`` to opt out.
+
+:version:`2.4.8` Available in httpd 2.4.8 and later.
+
+
+AllowNoSlash
+~~~~~~~~~~~~
+
+By default, ``mod_rewrite`` ignores URLs that map to a directory on
+disk but lack a trailing slash — it assumes ``mod_dir`` will handle the
+redirect. If you've set ``DirectorySlash Off``, enable
+``AllowNoSlash`` so that rewrite rules can match directory URLs without
+a trailing slash.
+
+:version:`2.4` Available in httpd 2.4.0 and later.
+
+
+AllowAnyURI
+~~~~~~~~~~~
+
+In server/vhost context (since httpd 2.2.22), ``mod_rewrite`` only
+processes requests whose URI is a valid URL-path. This is a security
+measure (see CVE-2011-3368 and CVE-2011-4317). ``AllowAnyURI`` lifts
+that restriction.
+
+.. warning::
+
+   Enabling this makes the server vulnerable to security issues if
+   rewrite rules are not carefully authored. Use with extreme caution.
+
+:version:`2.4.3` Available in httpd 2.4.3 and later.
+
+
+MergeBase
+~~~~~~~~~
+
+Copies the value of ``RewriteBase`` from where it's explicitly defined
+into any sub-directory or sub-location that doesn't define its own.
+This was the default behavior in httpd 2.4.0–2.4.3; the option restores
+it.
+
+:version:`2.4.4` Available in httpd 2.4.4 and later.
+
+
+IgnoreContextInfo
+~~~~~~~~~~~~~~~~~
+
+When a relative substitution is made in per-directory context and
+``RewriteBase`` has not been set, ``mod_rewrite`` uses extended URL
+and filesystem context information (provided by modules like
+``mod_userdir`` and ``mod_alias``) to resolve the substitution back
+into a URL. This option disables that behavior.
+
+:version:`2.4.16` Available in httpd 2.4.16 and later.
+
+
+LegacyPrefixDocRoot
+~~~~~~~~~~~~~~~~~~~
+
+Prior to 2.4.26, when a substitution was an absolute URL matching the
+current virtual host, the URL could be reduced to a local path and
+the document root would be prepended. This option restores that
+legacy behavior.
+
+:version:`2.4.26` Available in httpd 2.4.26 and later.
+
+
+LongURLOptimization
+~~~~~~~~~~~~~~~~~~~
+
+Reduces memory usage for long, unoptimized rule sets that repeatedly
+expand long values in ``RewriteCond`` and ``RewriteRule`` variables.
+
+:version:`trunk` Available in httpd trunk (future 2.5.x) only — not yet in any stable release.
 
 .. _rewritebase:
 
@@ -351,7 +480,63 @@ RewriteBase
 -----------
 
 
-TODO
+The ``RewriteBase`` directive sets the base URL for per-directory
+rewrites. It is only valid in per-directory context (``.htaccess`` files
+and ``<Directory>`` blocks) and is ignored in server or virtual host
+context.
+
+When ``mod_rewrite`` processes a rule in ``.htaccess``, it strips the
+local directory prefix from the URL before matching, then prepends it
+back after substitution. ``RewriteBase`` overrides what gets prepended.
+
+Consider a ``.htaccess`` file in ``/var/www/html/app/``, where the
+URL ``/app/`` maps to that directory:
+
+
+.. code-block:: apache
+
+   # /var/www/html/app/.htaccess
+   RewriteEngine On
+   RewriteBase /app/
+   RewriteRule ^page/(.*)$ index.php?page=$1 [L]
+
+
+Without ``RewriteBase /app/``, the substitution ``index.php?page=foo``
+would be interpreted relative to the filesystem path, not the URL path,
+and the result might not be what you expect.
+
+The most common value is simply:
+
+
+.. code-block:: apache
+
+   RewriteBase /
+
+
+This tells ``mod_rewrite`` that all substitutions should be treated as
+relative to the document root.
+
+**When do you need RewriteBase?**
+
+- In ``.htaccess`` files when your rewrite substitutions are relative
+  paths (not starting with ``/``).
+- When the URL path to the directory containing the ``.htaccess``
+  differs from the filesystem path (e.g., due to ``Alias``).
+- You do *not* need it in ``<VirtualHost>`` or server config — there,
+  ``RewriteRule`` operates on the full URL-path and no prefix stripping
+  occurs.
+
+**When can you omit it?**
+
+- When all your substitutions use absolute URL-paths (starting with
+  ``/``).
+- When the URL-to-filesystem mapping is straightforward
+  (``DocumentRoot`` + URL-path = filesystem path).
+
+A common source of confusion: people put ``RewriteBase`` in server
+config or ``<VirtualHost>`` blocks where it has no effect, then wonder
+why their rules behave unexpectedly. If you're not in a ``.htaccess``
+or ``<Directory>`` context, you don't need it.
 
 
 .. [#1] Or, more to the point, it prevents  malicious end-users from finding ways to look there.

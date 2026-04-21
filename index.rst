@@ -6,10 +6,14 @@ mod_rewrite And Friends
 
 .. toctree::
    :maxdepth: 3
+
+   chapters/00_preface
+
+.. toctree::
+   :maxdepth: 3
    :numbered:
    :caption: Contents
 
-   chapters/00_preface
    chapters/01_regex
    chapters/02_url_mapping
    chapters/03_mod_rewrite
@@ -24,6 +28,11 @@ mod_rewrite And Friends
    chapters/12_configurable_configuration
    chapters/13_content_munging
    chapters/14_recipes
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Back Matter
+
    chapters/appendix
    chapters/glossary
    chapters/epigraphs

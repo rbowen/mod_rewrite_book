@@ -1,36 +1,22 @@
-
-.. todo:: ``mod_substitute`` performs search-and-replace on the response
-   body using ``sed``-like syntax: ``Substitute s/pattern/replacement/[flags]``.
-   Flags: ``i`` (case-insensitive), ``n`` (treat pattern as literal string),
-   ``f`` (flatten line breaks — process as one buffer), ``q`` (quote/escape
-   the replacement). Common uses: rewriting absolute URLs in HTML served
-   from a backend, replacing hostnames after a migration, injecting
-   tracking snippets. Show the ``SubstituteMaxLineLength`` directive for
-   handling long lines. Note that this operates on the output filter
-   chain — it modifies the response, not the request.
-
-   Example: rewrite all references to the old domain in proxied content::
-
-      Substitute "s|http://old.example.com|https://new.example.com|ni"
-
+.. _Chapter_content_munging:
 
 
 .. index:: content munging
 .. index:: pair: content; modification
 .. index:: output filters
 
-===========================
-Chapter 13: Content Munging
-===========================
+===============
+Content Munging
+===============
 
 .. epigraph::
 
    | On the Coast of Coromandel
    |    Where the early pumpkins blow,
    |       In the middle of the woods
-   |    Lived the Yonghy-Bonghy-Bo.
+   |    Lived the Yonghy-Bonghy-Bò.
 
-   -- Edward Lear, *The Courtship of the Yonghy-Bonghy-Bo*
+   -- Edward Lear, *The Courtship of the Yonghy-Bonghy-Bò*
 
 
 
@@ -49,25 +35,22 @@ general.
 .. index:: pair: modules; mod_substitute
 
 mod_substitute
--------
+--------------
 
-.. todo:: Generalize the above: all three modules are implemented as
-   httpd output filters. Briefly explain the filter chain concept —
-   content passes through a pipeline of filters before reaching the
-   client. ``AddOutputFilterByType`` controls which filters apply
-   to which content types. ``FilterChain``, ``FilterDeclare``,
-   ``FilterProvider`` (from ``mod_filter``) offer a more flexible
-   way to conditionally apply filters.
+.. todo:: ``mod_substitute`` performs search-and-replace on the response
+   body using ``sed``-like syntax: ``Substitute s/pattern/replacement/[flags]``.
+   Flags: ``i`` (case-insensitive), ``n`` (treat pattern as literal string),
+   ``f`` (flatten line breaks — process as one buffer), ``q`` (quote/escape
+   the replacement). Common uses: rewriting absolute URLs in HTML served
+   from a backend, replacing hostnames after a migration, injecting
+   tracking snippets. Show the ``SubstituteMaxLineLength`` directive for
+   handling long lines. Note that this operates on the output filter
+   chain — it modifies the response, not the request.
 
-   Mention ``mod_ext_filter`` as an escape hatch: it pipes the
-   response body through an arbitrary external program. Powerful
-   but slow — use it only when no built-in module does what you need.
+   Example: rewrite all references to the old domain in proxied content::
 
-   Key point for the book's narrative: ``mod_rewrite`` transforms
-   the *request* (URL, headers, environment); the filter modules
-   discussed here transform the *response* (body content). They're
-   complementary tools, and understanding both gives you full control
-   over the request-response lifecycle.
+      Substitute "s|http://old.example.com|https://new.example.com|ni"
+
 
 .. _mod_sed:
 
@@ -127,3 +110,20 @@ mod_proxy_html
 Filters
 -------
 
+.. todo:: Generalize the above: all three modules are implemented as
+   httpd output filters. Briefly explain the filter chain concept —
+   content passes through a pipeline of filters before reaching the
+   client. ``AddOutputFilterByType`` controls which filters apply
+   to which content types. ``FilterChain``, ``FilterDeclare``,
+   ``FilterProvider`` (from ``mod_filter``) offer a more flexible
+   way to conditionally apply filters.
+
+   Mention ``mod_ext_filter`` as an escape hatch: it pipes the
+   response body through an arbitrary external program. Powerful
+   but slow — use it only when no built-in module does what you need.
+
+   Key point for the book's narrative: ``mod_rewrite`` transforms
+   the *request* (URL, headers, environment); the filter modules
+   discussed here transform the *response* (body content). They're
+   complementary tools, and understanding both gives you full control
+   over the request-response lifecycle.

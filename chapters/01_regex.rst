@@ -1,8 +1,10 @@
+.. _Chapter_regex:
 
 
-==============================
-Chapter 1: Regular Expressions
-==============================
+
+===================
+Regular Expressions
+===================
 
 
 .. epigraph::
@@ -44,6 +46,12 @@ practical, recipe-oriented companion, and the
 `Regular Expression Pocket Reference <https://www.oreilly.com/library/view/regular-expression-pocket/9780596514273/>`_
 by Tony Stubblebine (O'Reilly, 2nd edition 2007) is handy to keep nearby
 when you need a quick syntax reminder.
+
+Finally, even if you never intend to write a line of Perl, the Perl
+regular expression man page (``man perlre``) is one of the best regex
+references available on any Unix system. It's thorough, well-organized,
+and covers every feature of PCRE — which is the regex flavor that
+``mod_rewrite`` uses. It's already installed on most systems.
 
 If you just want to know enough about regex to master mod_rewrite, read
 this chapter a few times, and that should be sufficient.
@@ -447,11 +455,14 @@ patterns.
    :header-rows: 1
    :widths: auto
 
-   * - Pattern
+   * - Greedy?
+     - Pattern
      - Matches
-   * - ``/(.*)/``
+   * - Yes
+     - ``/(.*)/``
      - one/two/three
-   * - ``/(.*?)/``
+   * - No
+     - ``/(.*?)/``
      - one
 
 The first regex is greedy, and matches as much as it possibly can, going

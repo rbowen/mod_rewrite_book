@@ -5,9 +5,9 @@
 .. index:: pair: mod_rewrite; logging
 .. index:: pair: debugging; mod_rewrite
 
-==========================
-Chapter 5: Rewrite Logging
-==========================
+===============
+Rewrite Logging
+===============
 
 .. epigraph::
 
@@ -135,52 +135,52 @@ what gets logged:
 
 .. code-block:: none
 
-   [Thu Sep 12 20:22:13.363463 2013] [rewrite:trace2] [pid 11879]
+   [Thu Sep 10 20:22:13.363463 2026] [rewrite:trace2] [pid 11879]
    mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite
    engine with requested uri /example
    
-   [Thu Sep 12 20:22:13.363510 2013] [rewrite:trace3] [pid 11879]
+   [Thu Sep 10 20:22:13.363510 2026] [rewrite:trace3] [pid 11879]
    mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] applying
    pattern '.' to uri '/example'
    
-   [Thu Sep 12 20:22:13.363525 2013] [rewrite:trace4] [pid 11879]
+   [Thu Sep 10 20:22:13.363525 2026] [rewrite:trace4] [pid 11879]
    mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] RewriteCond:
    input='/example' pattern='!index.php' => matched
    
-   [Thu Sep 12 20:22:13.363533 2013] [rewrite:trace2] [pid 11879]
+   [Thu Sep 10 20:22:13.363533 2026] [rewrite:trace2] [pid 11879]
    mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] rewrite
    '/example' -> 'index.php'
    
-   [Thu Sep 12 20:22:13.363542 2013] [rewrite:trace2] [pid 11879]
+   [Thu Sep 10 20:22:13.363542 2026] [rewrite:trace2] [pid 11879]
    mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] local path
    result: index.php
    
-   [Thu Sep 12 20:22:13.575877 2013] [rewrite:trace2] [pid 11881]
+   [Thu Sep 10 20:22:13.575877 2026] [rewrite:trace2] [pid 11881]
    mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite
    engine with requested uri /favicon.ico
    
-   [Thu Sep 12 20:22:13.575920 2013] [rewrite:trace3] [pid 11881]
+   [Thu Sep 10 20:22:13.575920 2026] [rewrite:trace3] [pid 11881]
    mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] applying
    pattern '.' to uri '/favicon.ico'
    
-   [Thu Sep 12 20:22:13.575935 2013] [rewrite:trace4] [pid 11881]
+   [Thu Sep 10 20:22:13.575935 2026] [rewrite:trace4] [pid 11881]
    mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] RewriteCond:
    input='/favicon.ico' pattern='!index.php' => matched
    
-   [Thu Sep 12 20:22:13.575943 2013] [rewrite:trace2] [pid 11881]
+   [Thu Sep 10 20:22:13.575943 2026] [rewrite:trace2] [pid 11881]
    mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] rewrite
    '/favicon.ico' -> 'index.php'
    
-   [Thu Sep 12 20:22:13.575955 2013] [rewrite:trace2] [pid 11881]
+   [Thu Sep 10 20:22:13.575955 2026] [rewrite:trace2] [pid 11881]
    mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] local path
    result: index.php
@@ -201,7 +201,7 @@ Let's look at the first log entry.
 
 .. code-block:: none
 
-   [Thu Sep 12 20:22:13.363463 2013] [rewrite:trace2] [pid 11879]
+   [Thu Sep 10 20:22:13.363463 2026] [rewrite:trace2] [pid 11879]
    mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
    [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite
    engine with requested uri /example
@@ -210,7 +210,7 @@ Let's look at the first log entry.
 That's a lot to process all at once, so we'll break it down one field at
 a time.
 
-``[Thu Sep 12 20:22:13.363463 2013]``
+``[Thu Sep 10 20:22:13.363463 2026]``
    The date and time when the event occurred.
 ``[rewrite:trace2]``
    The name of the module logging, and the loglevel at which it is

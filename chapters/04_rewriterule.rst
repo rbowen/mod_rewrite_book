@@ -5,9 +5,9 @@
 .. index:: pair: directives; RewriteRule
 .. index:: pair: RewriteRule; syntax
 
-======================
-Chapter 4: RewriteRule
-======================
+===========
+RewriteRule
+===========
 
 .. epigraph::
 

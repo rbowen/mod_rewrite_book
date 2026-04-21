@@ -1,9 +1,9 @@
 .. _Chapter_access:
 
 
-===========================================
-Chapter 11: Access control with mod_rewrite
-===========================================
+===============================
+Access control with mod_rewrite
+===============================
 
 .. epigraph::
 
@@ -35,7 +35,7 @@ Forbidding image hotlinking
 
 
 Blocking specific robots/user agents
--------------------------------------
+------------------------------------
 
 .. todo:: Using ``RewriteCond %{HTTP_USER_AGENT}`` to block a
    specific bot. Show the ``[F]`` flag. Then show the ``SetEnvIfNoCase``
@@ -45,7 +45,7 @@ Blocking specific robots/user agents
 
 
 Denying by IP address or hostname
-----------------------------------
+---------------------------------
 
 .. todo:: Using a ``RewriteMap`` (txt file) as a deny list, checking
    ``%{REMOTE_ADDR}`` and ``%{REMOTE_HOST}`` against it. Show the map
@@ -54,7 +54,7 @@ Denying by IP address or hostname
 
 
 Referer-based deflection
--------------------------
+------------------------
 
 .. todo:: Redirect visitors who arrive from specific referring sites
    to a different URL. Use a RewriteMap for the referer-to-target
@@ -83,7 +83,7 @@ Requiring HTTPS
 
 
 Environment variable gating
-----------------------------
+---------------------------
 
 .. todo:: Using ``RewriteCond`` to check environment variables set
    by ``SetEnvIf`` or ``BrowserMatch``. This is a pattern for
@@ -93,7 +93,7 @@ Environment variable gating
 
 
 When not to use mod_rewrite for access control
------------------------------------------------
+----------------------------------------------
 
 .. todo:: Summary of the simpler alternatives: ``Require``,
    ``<RequireAll>``/``<RequireAny>``, ``SetEnvIf``, ``<If>`` with

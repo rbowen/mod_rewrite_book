@@ -60,8 +60,8 @@ redirects, and the occasional desperate soul staring at a ``.htaccess``
 file at 2 AM wondering why nothing works.
 
 I assume you're comfortable with a text editor and a terminal. I do
-*not* assume you already know regular expressions — the first chapter
-covers them from scratch.
+*not* assume you already know regular expressions —
+:ref:`Chapter 1 <Chapter_regex>` covers them from scratch.
 
 .. index:: regular expressions
 
@@ -106,5 +106,9 @@ Thanks are owed to the Apache HTTP Server documentation team, whose
 work I have drawn on extensively, and to the many people on the ``#httpd``
 IRC channel and the httpd mailing lists who have, over the years, asked
 the questions that shaped the content of this book.
+
+And to my muses, Rhi, Z, and E, I love you more than the whole world.
+
+Finally, to Maria, who makes everything beautiful. And so that was all right, Best Beloved. Do you see?
 
 -- Rich Bowen, April 2026

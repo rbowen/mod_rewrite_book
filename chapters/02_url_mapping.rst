@@ -1,9 +1,9 @@
 .. _Chapter_url_mapping:
 
 
-======================
-Chapter 2: URL Mapping
-======================
+===========
+URL Mapping
+===========
 
 
 .. epigraph::

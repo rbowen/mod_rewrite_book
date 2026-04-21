@@ -1,12 +1,14 @@
+.. _Chapter_conditional_configuration:
+
 .. _conditional-configuration:
 
 
 .. index:: conditional configuration
 .. index:: pair: configuration; conditional
 
-=====================================
-Chapter 12: Conditional Configuration
-=====================================
+=========================
+Conditional Configuration
+=========================
 
 .. epigraph::
 
