@@ -1,9 +1,22 @@
 .. _Chapter_rewriterule:
 
 
+.. index:: RewriteRule
+.. index:: pair: directives; RewriteRule
+.. index:: pair: RewriteRule; syntax
+
 ======================
 Chapter 4: RewriteRule
 ======================
+
+.. epigraph::
+
+   | Them that takes cakes
+   | Which the Parsee-man bakes
+   | Makes dreadful mistakes.
+
+   -- Rudyard Kipling, *How the Rhinoceros Got His Skin*
+
 
 
 We'll start the main technical discussion of mod_rewrite with the
@@ -24,6 +37,10 @@ of this all.
 
 .. _syntax:
 
+
+.. index:: pair: RewriteRule; PATTERN
+.. index:: pair: RewriteRule; TARGET
+.. index:: pair: RewriteRule; FLAGS
 
 Syntax
 ------
@@ -51,12 +68,23 @@ FLAGS
 .. _pattern:
 
 
+.. index:: pair: RewriteRule; pattern matching
+.. index:: regular expressions
+.. index:: PCRE
+.. index:: VirtualHost context
+.. index:: per-directory context
+.. index:: backreferences
+
 Pattern
 -------
 
 
 The ``PATTERN`` argument of the ``RewriteRule`` is a regular expression that
 is applied to the URL path, or file path, depending on the context.
+
+
+.. index:: query string
+.. index:: pair: RewriteRule; query string
 
 In VirtualHost context, or in server-wide context, ``PATTERN`` will be
 matched against the part of the URL after the hostname and port, and
@@ -79,6 +107,9 @@ regular expression is, and how to craft one.
 .. _target:
 
 
+.. index:: pair: RewriteRule; substitution
+.. index:: pair: RewriteRule; target
+
 Target
 ------
 
@@ -87,6 +118,9 @@ The target of a ``RewriteRule`` can be one of the following:
 
 .. _a-file-system-path:
 
+
+.. index:: file-system path
+.. index:: pair: RewriteRule target; file-system path
 
 A file-system path
 ~~~~~~~~~~~~~~~~~~
@@ -100,6 +134,10 @@ file-system
 
 .. _url-path:
 
+
+.. index:: URL-path
+.. index:: pair: RewriteRule target; URL-path
+.. index:: pair: RewriteRule flags; PT (passthrough)
 
 URL-path
 ~~~~~~~~
@@ -120,6 +158,10 @@ described below.
 .. _absolute-url:
 
 
+.. index:: pair: RewriteRule target; absolute URL
+.. index:: redirect
+.. index:: pair: RewriteRule flags; R (redirect)
+
 Absolute URL
 ~~~~~~~~~~~~
 
@@ -132,6 +174,9 @@ an external redirect back to the current host, see the ``[R]`` flag below.
 
 .. _dash:
 
+
+.. index:: pair: RewriteRule target; - (dash)
+.. index:: pass-through
 
 \- (dash)
 ~~~~~~~~~

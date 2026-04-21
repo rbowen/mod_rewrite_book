@@ -1,9 +1,23 @@
 .. _Chapter_rewriterule_flags:
 
 
+.. index:: RewriteRule flags
+.. index:: pair: RewriteRule; flags
+
 ============================
 Chapter 6: RewriteRule Flags
 ============================
+
+.. epigraph::
+
+   | She said to him ever so many times, graciously waving her
+   | tail, 'My son, when you find a Hedgehog you must drop him
+   | into the water and then he will uncoil, and when you catch
+   | a Tortoise you must scoop him out of his shell with your
+   | paw.'
+
+   -- Rudyard Kipling, *The Beginning of the Armadillos*
+
 
 
 Flags modify the behavior of the rule. You may have zero or more flags,
@@ -24,6 +38,13 @@ There are a *lot* of flags. Here they are:
 
 .. _b---escape-backreferences:
 
+
+.. index:: pair: RewriteRule flags; B flag
+.. index:: pair: RewriteRule flags; escape backreferences
+.. index:: B flag
+.. index:: backreferences
+.. index:: AllowEncodedSlashes
+.. index:: pair: directives; AllowEncodedSlashes
 
 B - escape backreferences
 -------------------------
@@ -65,6 +86,10 @@ backend may break if presented with an unescaped URL.
 .. _c---chain:
 
 
+.. index:: pair: RewriteRule flags; C flag
+.. index:: pair: RewriteRule flags; chain
+.. index:: C flag
+
 C - chain
 ---------
 
@@ -77,6 +102,11 @@ together, will be skipped.
 
 .. _co---cookie:
 
+
+.. index:: pair: RewriteRule flags; CO flag
+.. index:: pair: RewriteRule flags; cookie
+.. index:: CO flag
+.. index:: cookies
 
 CO - cookie
 -----------
@@ -99,6 +129,8 @@ You must declare a name, a value, and a domain for the cookie to be set.
 .. _domain:
 
 
+.. index:: pair: cookies; domain
+
 Domain
 ~~~~~~
 
@@ -113,6 +145,8 @@ values:
 .. _lifetime:
 
 
+.. index:: pair: cookies; lifetime
+
 Lifetime
 ~~~~~~~~
 
@@ -123,6 +157,8 @@ session. This is the default value if none is specified.
 
 .. _path:
 
+
+.. index:: pair: cookies; path
 
 Path
 ~~~~
@@ -135,6 +171,8 @@ that is, the entire website.
 .. _secure:
 
 
+.. index:: pair: cookies; secure flag
+
 Secure
 ~~~~~~
 
@@ -144,6 +182,8 @@ translated via secure (https) connections.
 
 .. _httponly:
 
+
+.. index:: pair: cookies; HttpOnly flag
 
 httponly
 ~~~~~~~~
@@ -178,6 +218,11 @@ to expire in 1440 minutes (24 hours) and will be returned for all URIs
 
 .. _dpi---discardpath:
 
+
+.. index:: pair: RewriteRule flags; DPI flag
+.. index:: pair: RewriteRule flags; discardpath
+.. index:: DPI flag
+.. index:: PATH_INFO
 
 DPI - discardpath
 -----------------
@@ -214,6 +259,11 @@ appended.
 
 .. _e---env:
 
+
+.. index:: pair: RewriteRule flags; E flag
+.. index:: pair: RewriteRule flags; env
+.. index:: E flag
+.. index:: environment variables
 
 E - env
 -------
@@ -286,6 +336,9 @@ environment variable at the same time:
 .. _end:
 
 
+.. index:: pair: RewriteRule flags; END flag
+.. index:: END flag
+
 END
 ---
 
@@ -302,6 +355,11 @@ This does not apply to new requests resulting from external redirects.
 
 .. _f---forbidden:
 
+
+.. index:: pair: RewriteRule flags; F flag
+.. index:: pair: RewriteRule flags; forbidden
+.. index:: F flag
+.. index:: pair: HTTP status codes; 403 Forbidden
 
 F - forbidden
 -------------
@@ -331,6 +389,11 @@ returned immediately, and no further rules are evaluated.
 .. _g---gone:
 
 
+.. index:: pair: RewriteRule flags; G flag
+.. index:: pair: RewriteRule flags; gone
+.. index:: G flag
+.. index:: pair: HTTP status codes; 410 Gone
+
 G - gone
 --------
 
@@ -353,6 +416,10 @@ returned immediately, and no further rules are evaluated.
 
 .. _h---handler:
 
+
+.. index:: pair: RewriteRule flags; H flag
+.. index:: pair: RewriteRule flags; handler
+.. index:: H flag
 
 H - handler
 -----------
@@ -389,6 +456,10 @@ captured match within parenthesis of the regular expression.
 
 .. _l---last:
 
+
+.. index:: pair: RewriteRule flags; L flag
+.. index:: pair: RewriteRule flags; last
+.. index:: L flag
 
 L - last
 --------
@@ -440,6 +511,10 @@ directive.
 .. _n---next:
 
 
+.. index:: pair: RewriteRule flags; N flag
+.. index:: pair: RewriteRule flags; next
+.. index:: N flag
+
 N - next
 --------
 
@@ -466,6 +541,10 @@ You can think of this as a while loop: While this pattern still matches
 .. _nc---nocase:
 
 
+.. index:: pair: RewriteRule flags; NC flag
+.. index:: pair: RewriteRule flags; nocase
+.. index:: NC flag
+
 NC - nocase
 -----------
 
@@ -486,6 +565,10 @@ and .JPG files are both acceptable, for example.
 
 .. _ne---noescape:
 
+
+.. index:: pair: RewriteRule flags; NE flag
+.. index:: pair: RewriteRule flags; noescape
+.. index:: NE flag
 
 NE - noescape
 -------------
@@ -508,6 +591,11 @@ error condition.
 
 .. _ns---nosubreq:
 
+
+.. index:: pair: RewriteRule flags; NS flag
+.. index:: pair: RewriteRule flags; nosubreq
+.. index:: NS flag
+.. index:: subrequests
 
 NS - nosubreq
 -------------
@@ -534,6 +622,16 @@ requests.
 
 .. _p---proxy:
 
+
+.. index:: pair: RewriteRule flags; P flag
+.. index:: pair: RewriteRule flags; proxy
+.. index:: P flag
+.. index:: mod_proxy
+.. index:: proxy
+.. index:: ProxyPass
+.. index:: pair: directives; ProxyPass
+.. index:: ProxyPassMatch
+.. index:: pair: directives; ProxyPassMatch
 
 P - proxy
 ---------
@@ -562,6 +660,9 @@ directive, to map remote content into the namespace of the local server.
 
 .. _security-warning:
 
+
+.. index:: pair: mod_rewrite; security considerations
+
 Security Warning
 
 Take care when constructing the target URL of the rule, considering the
@@ -571,6 +672,9 @@ hostname part of the URL is either fixed, or does not allow the client
 undue influence.
 
 .. _performance-warning:
+
+
+.. index:: pair: mod_rewrite; performance
 
 Performance warning
 
@@ -589,6 +693,11 @@ proxying.
 
 .. _pt---passthrough:
 
+
+.. index:: pair: RewriteRule flags; PT flag
+.. index:: pair: RewriteRule flags; passthrough
+.. index:: PT flag
+.. index:: Alias
 
 PT - passthrough
 ----------------
@@ -625,6 +734,11 @@ that is to rewrite to -.
 .. _qsa---qsappend:
 
 
+.. index:: pair: RewriteRule flags; QSA flag
+.. index:: pair: RewriteRule flags; qsappend
+.. index:: QSA flag
+.. index:: query string
+
 QSA - qsappend
 --------------
 
@@ -650,6 +764,10 @@ query string will be discarded.
 .. _qsd---qsdiscard:
 
 
+.. index:: pair: RewriteRule flags; QSD flag
+.. index:: pair: RewriteRule flags; qsdiscard
+.. index:: QSD flag
+
 QSD - qsdiscard
 ---------------
 
@@ -670,6 +788,12 @@ replaced with the query string in the ``RewriteRule`` target URI.
 
 .. _r---redirect:
 
+
+.. index:: pair: RewriteRule flags; R flag
+.. index:: pair: RewriteRule flags; redirect
+.. index:: R flag
+.. index:: redirect
+.. index:: pair: HTTP status codes; 302 redirect
 
 R - redirect
 ------------
@@ -700,6 +824,10 @@ request' warnings.
 
 .. _s---skip:
 
+
+.. index:: pair: RewriteRule flags; S flag
+.. index:: pair: RewriteRule flags; skip
+.. index:: S flag
 
 S - skip
 --------
@@ -754,12 +882,21 @@ else-clause:
    # END
 
 
+.. index:: If directive
+.. index:: ElseIf directive
+.. index:: Else directive
+
 It is probably easier to accomplish this kind of configuration using the
 ``<If>``, ``<ElseIf>``, and ``<Else>`` directives instead. (2.4 and later -
 See ref\{if}.)
 
 .. _t---type:
 
+
+.. index:: pair: RewriteRule flags; T flag
+.. index:: pair: RewriteRule flags; type
+.. index:: T flag
+.. index:: MIME type
 
 T - type
 --------

@@ -1,9 +1,21 @@
 .. _Chapter_rewritecond:
 
 
+.. index:: RewriteCond
+.. index:: pair: directives; RewriteCond
+.. index:: pair: RewriteCond; syntax
+
 ======================
 Chapter 7: RewriteCond
 ======================
+
+.. epigraph::
+
+   | He was grey and he was woolly, and his pride was
+   | inordinate.
+
+   -- Rudyard Kipling, *The Sing-Song of Old Man Kangaroo*
+
 
 
 The ``RewriteCond`` directive attaches additional conditions on a
@@ -36,6 +48,14 @@ These definitions will be expanded in the sections below.
 
 .. _teststring:
 
+
+.. index:: pair: RewriteCond; TestString
+.. index:: server variables
+.. index:: backreferences
+.. index:: pair: backreferences; $N (RewriteRule)
+.. index:: pair: backreferences; %N (RewriteCond)
+.. index:: pair: RewriteCond; RewriteMap expansions
+
 TestString
 
 TestString is a string which can contain the following expanded
@@ -60,10 +80,22 @@ Server-Variables
    These are variables of the form %\{ NAME_OF_VARIABLE } where
    NAME_OF_VARIABLE can be a string taken from the following list:
 
+
+.. index:: pair: server variables; HTTP_HOST
+.. index:: pair: server variables; HTTP_REFERER
+.. index:: pair: server variables; HTTP_USER_AGENT
+.. index:: pair: server variables; HTTP_COOKIE
+
 HTTP headers:
 
 HTTP_USER_AGENT HTTP_REFERER HTTP_COOKIE HTTP_FORWARDED HTTP_HOST
 HTTP_PROXY_CONNECTION HTTP_ACCEPT
+
+
+.. index:: pair: server variables; REMOTE_ADDR
+.. index:: pair: server variables; REMOTE_HOST
+.. index:: pair: server variables; REQUEST_METHOD
+.. index:: pair: server variables; QUERY_STRING
 
 connection & request:
 
@@ -78,6 +110,13 @@ SERVER_PROTOCOL SERVER_SOFTWARE
 date and time:
 
 TIME_YEAR TIME_MON TIME_DAY TIME_HOUR TIME_MIN TIME_SEC TIME_WDAY TIME
+
+
+.. index:: pair: server variables; REQUEST_URI
+.. index:: pair: server variables; REQUEST_FILENAME
+.. index:: pair: server variables; HTTPS
+.. index:: pair: server variables; REQUEST_SCHEME
+.. index:: pair: server variables; THE_REQUEST
 
 specials:
 
@@ -130,6 +169,10 @@ REQUEST_SCHEME
    Will contain the scheme of the request (usually "http" or "https").
    This value can be influenced with ServerName.
 
+
+.. index:: ap_expr
+.. index:: pair: expressions; ap_expr
+
 If the TestString has the special value expr, the CondPattern will be
 treated as an ap_expr. HTTP headers referenced in the expression will be
 added to the Vary header if the novary flag is not given.
@@ -154,6 +197,11 @@ REQUEST_URI in that case. In order to obtain the full local filesystem
 path of the request in per-server context, use an URL-based look-ahead
 ``%{LA-U:REQUEST_FILENAME}`` to determine the final value of
 REQUEST_FILENAME.
+
+
+.. index:: pair: server variables; ENV
+.. index:: pair: server variables; SSL
+.. index:: pair: server variables; HTTP (header lookup)
 
 ``%{ENV:variable}``, where variable can be any environment variable, is
 also available. This is looked-up via internal Apache httpd structures
@@ -180,6 +228,10 @@ It has to be kept in mind that conditions follow a short circuit logic
 in the case of the 'ornext|OR' flag so that certain conditions might not
 be evaluated at all.
 
+
+.. index:: pair: server variables; LA-U (URL look-ahead)
+.. index:: pair: server variables; LA-F (filename look-ahead)
+
 ``%{LA-U:variable}`` can be used for look-aheads which perform an internal
 (URL-based) sub-request to determine the final value of variable. This
 can be used to access variable for rewriting which is not available at
@@ -201,6 +253,18 @@ sub-request, to determine the final value of variable. Most of the time,
 this is the same as LA-U above.
 
 .. _condpattern:
+
+
+.. index:: pair: RewriteCond; CondPattern
+.. index:: lexicographic comparison
+.. index:: pair: RewriteCond; file attribute tests
+.. index:: pair: RewriteCond; -d (is directory)
+.. index:: pair: RewriteCond; -f (is regular file)
+.. index:: pair: RewriteCond; -s (has size)
+.. index:: pair: RewriteCond; -l (is symlink)
+.. index:: pair: RewriteCond; -x (executable)
+.. index:: pair: RewriteCond; -F (subrequest file)
+.. index:: pair: RewriteCond; -U (subrequest URL)
 
 CondPattern
 
@@ -321,6 +385,12 @@ the site hostname, to block unwanted hotlinking.
 
 .. _flag:
 
+
+.. index:: pair: RewriteCond; flags
+.. index:: pair: RewriteCond flags; NC (nocase)
+.. index:: pair: RewriteCond flags; OR (ornext)
+.. index:: pair: RewriteCond flags; NV (novary)
+
 Flag
 
 
@@ -360,6 +430,9 @@ this flag should be only used if the meaning of the Vary header is well
 understood.
 
 .. _examples:
+
+
+.. index:: pair: RewriteCond; examples
 
 Examples
 

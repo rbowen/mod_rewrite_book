@@ -6,12 +6,12 @@
 # -- Project information -----------------------------------------------------
 
 project = 'mod_rewrite And Friends'
-copyright = '2013–2025, Rich Bowen'
+copyright = '2013–2026, Rich Bowen. Licensed under the Apache License, Version 2.0'
 author = 'Rich Bowen'
 
 # The full version, including alpha/beta/rc tags
-release = '3.0'
-version = '3.0'
+release = '3.1.1'
+version = '3.1'
 
 # -- General configuration ---------------------------------------------------
 

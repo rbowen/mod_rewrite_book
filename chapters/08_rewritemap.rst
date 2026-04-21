@@ -1,9 +1,22 @@
 .. _Chapter_rewritemap:
 
 
+.. index:: RewriteMap
+.. index:: pair: directives; RewriteMap
+
 =====================
 Chapter 8: RewriteMap
 =====================
+
+.. epigraph::
+
+   | He took that skin, and he shook that skin, and he scrubbed
+   | that skin, and he rubbed that skin just as full of old,
+   | dry, stale, tickly cake-crumbs and some burned currants
+   | as ever it could possibly hold.
+
+   -- Rudyard Kipling, *How the Rhinoceros Got His Skin*
+
 
 
 The ``RewriteMap`` directive gives you a way to call external mapping
@@ -15,6 +28,11 @@ things. In this chapter we'll discuss how to use a ``RewriteMap`` in a
 
 .. _creating-a-rewritemap:
 
+
+.. index:: pair: RewriteMap; creating
+.. index:: pair: RewriteMap; MapName
+.. index:: pair: RewriteMap; MapType
+.. index:: pair: RewriteMap; MapSource
 
 Creating a RewriteMap
 ---------------------
@@ -51,6 +69,9 @@ be specified in a ``.htaccess`` file.
 .. _using-a-rewritemap:
 
 
+.. index:: pair: RewriteMap; usage
+.. index:: pair: RewriteMap; syntax
+
 Using a RewriteMap
 ------------------
 
@@ -81,6 +102,8 @@ requested URI, you could use the variable ``%{REQUEST_URI}`` rather than
 .. _rewritemap-types:
 
 
+.. index:: pair: RewriteMap; types
+
 RewriteMap Types
 ----------------
 
@@ -91,6 +114,8 @@ There are a number of different map types which may be used in a
 .. _int:
 
 
+.. index:: pair: RewriteMap types; int (internal function)
+
 int
 ~~~~
 
@@ -100,6 +125,9 @@ itself. There are four such functions:
 
 .. _toupper:
 
+
+.. index:: pair: RewriteMap internal functions; toupper
+.. index:: toupper
 
 toupper
 ~~~~~~~
@@ -119,6 +147,9 @@ all upper case characters.
 .. _tolower:
 
 
+.. index:: pair: RewriteMap internal functions; tolower
+.. index:: tolower
+
 tolower
 ~~~~~~~
 
@@ -137,6 +168,9 @@ to lower case characters.
 .. _escape:
 
 
+.. index:: pair: RewriteMap internal functions; escape
+.. index:: escape
+
 escape
 ~~~~~~
 
@@ -144,12 +178,17 @@ escape
 .. _unescape:
 
 
+.. index:: pair: RewriteMap internal functions; unescape
+.. index:: unescape
+
 unescape
 ~~~~~~~~
 
 
 .. _txt:
 
+
+.. index:: pair: RewriteMap types; txt (text file)
 
 txt
 ~~~
@@ -160,6 +199,8 @@ A ``txt`` map defines a one-to-one mapping from argument to target.
 .. _rnd:
 
 
+.. index:: pair: RewriteMap types; rnd (random)
+
 rnd
 ~~~
 
@@ -169,6 +210,10 @@ A ``rnd`` map will randomly select one value from the specified text file.
 .. _dbm:
 
 
+.. index:: pair: RewriteMap types; dbm (hash file)
+.. index:: DBM hash file
+.. index:: httpddbm
+
 dbm
 ~~~
 
@@ -176,12 +221,17 @@ dbm
 .. _prg:
 
 
+.. index:: pair: RewriteMap types; prg (external program)
+
 prg
 ~~~
 
 
 .. _dbd:
 
+
+.. index:: pair: RewriteMap types; dbd (SQL query)
+.. index:: pair: RewriteMap types; fastdbd
 
 dbd
 ~~~

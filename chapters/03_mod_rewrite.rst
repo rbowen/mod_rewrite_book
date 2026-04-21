@@ -1,9 +1,23 @@
 .. _Chapter_mod_rewrite:
 
 
+.. index:: mod_rewrite
+.. index:: pair: modules; mod_rewrite
+.. index:: pair: mod_rewrite; introduction
+
 ======================================
 Chapter 3: Introduction to mod_rewrite
 ======================================
+
+.. epigraph::
+
+   | He ate the starfish and the garfish, and the crab and the dab,
+   | and the plaice and the dace, and the skate and his mate, and
+   | the mackereel and the pickereel, and the really truly
+   | twirly-whirly eel.
+
+   -- Rudyard Kipling, *How the Whale Got His Throat*
+
 
 
 mod_rewrite is the power tool of Apache httpd URL mapping. Of course,
@@ -22,6 +36,10 @@ common scenarios.
 
 .. _loading-mod_rewrite:
 
+
+.. index:: LoadModule
+.. index:: pair: directives; LoadModule
+.. index:: pair: mod_rewrite; loading
 
 Loading mod_rewrite
 -------------------
@@ -76,6 +94,9 @@ Now, point your browser at that location:
    http://example.com/test_rewrite/index.html
 
 
+.. index:: Internal Server Error
+.. index:: pair: errors; Internal Server Error
+
 You'll see one of two things. Either you'll see the words
 Hello, mod_rewrite in your browser, or you'll see the ominous words
 Internal Server Error. In the former case, everything is fine -
@@ -107,6 +128,9 @@ part of any Apache http server's bag of tricks.
 .. _rewriteengine:
 
 
+.. index:: RewriteEngine
+.. index:: pair: directives; RewriteEngine
+
 RewriteEngine
 -------------
 
@@ -132,6 +156,10 @@ mod_rewrite occurs in a scope where ``RewriteEngine`` has been turned on.
 .. _mod_rewrite-in-.htaccess-files:
 
 
+.. index:: .htaccess
+.. index:: pair: mod_rewrite; .htaccess files
+.. index:: per-directory context
+
 mod_rewrite in .htaccess files
 ------------------------------
 
@@ -143,11 +171,19 @@ for configuration.
 .. _what-are-.htaccess-files:
 
 
+.. index:: pair: .htaccess; overview
+.. index:: AllowOverride
+.. index:: pair: directives; AllowOverride
+
 What are .htaccess files?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ``.htaccess`` files are per-directory configuration files, for use by people
+
+.. index:: server context
+.. index:: pair: configuration; server context
+
 who don't have access to the main server configuration file. For the
 most part, you put configuration directives into .htaccess files just as
 you would in a ``<Directory>`` block in the server configuration, but
@@ -182,13 +218,14 @@ A typical configuration to permit the use of .htaccess files looks like:
    <Directory />
        AllowOverride None
    </Directory>
-   
    DocumentRoot /var/www/html
    <Directory /var/www/html>
        AllowOverride All
        Options +FollowSymLinks
    </Directory>
 
+
+.. index:: pair: directives; Options FollowSymLinks
 
 That is to say, .htaccess files are disallowed for the entire
 filesystem, starting at the root, but then are permitted in the document
@@ -205,6 +242,10 @@ mod_rewrite.
 
 .. _ok-so-whats-the-deal-with-mod_rewrite-in-.htaccess-files:
 
+
+.. index:: RewriteMap
+.. index:: pair: .htaccess; restrictions
+.. index:: pair: .htaccess; path stripping
 
 Ok, so, what's the deal with mod_rewrite in .htaccess files?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -274,6 +315,8 @@ become more clear as we proceed and you see more examples.
 .. _so-what-do-i-do:
 
 
+.. index:: pair: .htaccess; limitations
+
 So, what do I do?
 ~~~~~~~~~~~~~~~~~
 
@@ -289,6 +332,9 @@ We aim to help you do that at each step along this journey.
 .. _rewriteoptions:
 
 
+.. index:: RewriteOptions
+.. index:: pair: directives; RewriteOptions
+
 RewriteOptions
 --------------
 
@@ -297,6 +343,9 @@ RewriteOptions TODO
 
 .. _rewritebase:
 
+
+.. index:: RewriteBase
+.. index:: pair: directives; RewriteBase
 
 RewriteBase
 -----------

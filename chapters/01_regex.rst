@@ -5,8 +5,11 @@ Chapter 1: Regular Expressions
 ==============================
 
 
+.. epigraph::
+
    In the high and far-off times the Elephant, O Best Beloved, had no trunk.
-   -- Rudyard Kipling, The Elephant's Child
+
+   -- Rudyard Kipling, *The Elephant's Child*
 
 
 .. index:: Regular expressions
@@ -28,8 +31,19 @@ all: they're just intimidated by regular expressions.
 
 There is one excellent book about regular expressions, and if you want
 to become a regular expression (or "regex") guru, you should get it. That
-book is `**Mastering Regular Expressions** <http://regex.info/book.html>`_
-by Jeffrey Friedl.
+book is `Mastering Regular Expressions <http://regex.info/book.html>`_
+by Jeffrey Friedl. The third edition dates from 2006, but regular
+expression fundamentals have not changed significantly since then, and it
+remains the gold standard on the subject — no other book has come close
+to replacing it.
+
+Two other books are worth mentioning:
+`Regular Expressions Cookbook <https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/>`_
+by Jan Goyvaerts and Steven Levithan (O'Reilly, 2nd edition 2012) is a
+practical, recipe-oriented companion, and the
+`Regular Expression Pocket Reference <https://www.oreilly.com/library/view/regular-expression-pocket/9780596514273/>`_
+by Tony Stubblebine (O'Reilly, 2nd edition 2007) is handy to keep nearby
+when you need a quick syntax reminder.
 
 If you just want to know enough about regex to master mod_rewrite, read
 this chapter a few times, and that should be sufficient.
@@ -113,8 +127,10 @@ Matching anything
 
 .. index:: .
 
+.. index:: pair: regular expressions; . (dot)
 
-The ``.`` character in a regular expression matches any character. For example, 
+
+The ``.`` character in a regular expression matches any character. For example,
 consider the following pattern:
 
 
@@ -225,7 +241,11 @@ Anchoring text
 
 .. index:: ^
 
+.. index:: pair: regular expressions; ^ (caret)
+
 .. index:: $
+
+.. index:: pair: regular expressions; $ (dollar sign)
 
 
 Referred to as anchor characters, these ensure that a string starts with, or ends with, a
@@ -268,7 +288,9 @@ Matching one or more characters
 
 .. index:: +
 
-.. index:: Matching one or more characters
+.. index:: pair: regular expressions; + (one or more)
+
+
 
 
 The + character allows a pattern or character to match more than once. For example, the 
@@ -290,7 +312,9 @@ Matching zero or more characters
 
 .. index:: *
 
-.. index:: Matching zero or more characters
+.. index:: pair: regular expressions; * (zero or more)
+
+
 
 
 The ``*`` character allows the previous character to match zero or more times. That is to say, it's
@@ -337,7 +361,9 @@ whitespace, followed by a ``#``. This ensures that the first non-space character
 Repetition quantifiers
 ----------------------
 
-.. index:: {n,m}
+.. index:: single: {n,m}
+
+.. index:: pair: regular expressions; {n,m} (repetition)
 
 .. index:: Repetition
 
@@ -411,7 +437,7 @@ patterns.
 
 .. index:: Examples of greedy matching
 
-.. index:: Greedy matching,examples
+.. index:: pair: greedy matching; examples
 
 
 .. rubric:: Examples of greedy matching
@@ -438,6 +464,8 @@ Making a match optional
 .. index:: Optional matching
 
 .. index:: ?
+
+.. index:: pair: regular expressions; ? (optional/non-greedy)
 
 
 The ``?`` character makes a single character match optional. This is extremely useful for 
@@ -478,6 +506,8 @@ Grouping and capturing
 .. index:: Capturing
 
 .. index:: ( )
+
+.. index:: pair: regular expressions; ( ) (grouping/capturing)
 
 
 Parentheses allow you to group several characters as a unit, and also to capture the results of 
@@ -552,7 +582,9 @@ Character Classes
 
 .. index:: [ \]
 
-.. index:: Character classes
+.. index:: pair: regular expressions; [ ] (character class)
+
+
 
 
 A character class allows you to define a set of characters, and match any one of them. There 
@@ -883,145 +915,119 @@ Regex tools
 
 .. index:: Regular expression tools
 
-.. index:: Tools,regular expressions
+.. index:: pair: tools; regular expressions
 
 
-TODO Ensure that these tools all still exist.
-
-If you're going to spend more than just a little time messing with regexes, you're 
-eventually going to want a tool that helps you visualize what's going on. There are a number 
-of them available, each of which has different strengths and weaknesses. You'll find that 
-most of the really good tools for regular expression development come out of the Perl 
-community, where regular expressions are particularly popular, and tend to get used in 
-almost every program.
-
-
-Regex Coach
-~~~~~~~~~~~
-
-.. index:: Regex coach
-
-
-Regex Coach is available for Windows and Linux, 
-and can be downloaded from <http://www.weitz.de/regex-coach>. 
-Regex Coach allows you to step through a regular expression and watch
-what it does and does not match. This can be extremely instructive in
-learning to write your own regular expressions.
-
-TODO
-   SCREENSHOT
-
-Regex Coach is free, but it is not Open Source.
-
-
-Reggy
-~~~~~
-
-.. index:: Reggy
-
-
-Reggy is a Mac OS X application that provides a simple interface for
-crafting and testing regular expressions. It will identify what parts of
-a string are matched by your regular expression.
-
-Reggy is available at <http://code.google.com/p/reggy/> and is
-licensed under the GPL.
-
-TODO
-   SCREENSHOT
-
-
-pcretest
-~~~~~~~~
-
-.. index:: pcretest
-
-
-pcretest is a command-line regular expression tester that is available
-on most distributions of Linux, where it is usually installed by
-default.
-
-In addition to simply telling you whether a particular string matched or
-not, it will also tell you what each of the various backreferences will
-be set to.
-
-In the SCREENSHOT you can see what each of the various backreferences
-will be set to once the regular expression has been evaluated.
-
-TODO: Screen shot
-
-
-Visual Regexp
-~~~~~~~~~~~~~
-
-.. index:: Visual Regexp
-
-
-Visual Regexp, available at <http://laurent.riesterer.free.fr/regexp/>, has more features
-than the options listed above, and might be a good option once you have
-mastered the basics of regular expressions and are ready to move onto
-something a little more sophisticated. It shows backreferences, and
-offers a wide variety of suggestions to help build a regex.
-
-Visual Regexp is available as a Windows executable or as a Tcl/Tk
-script. 
-
-TODO
-   SCREENSHOT
-
-
-Regular Expression Tester
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. index:: Regular Expression Tester
-
-
-Rather than being a stand-alone application like the others listed
-above, this is a Firefox plugin. It's available at
-<https://addons.mozilla.org/en-US/firefox/addon/2077>, and, of
-course, requires Firefox to work.
+If you're going to spend more than just a little time messing with regexes, you're
+eventually going to want a tool that helps you visualize what's going on. There are a number
+of them available, each of which has different strengths and weaknesses.
 
 
 Online tools
 ~~~~~~~~~~~~
 
 
-.. index
-   Online regex testers
+Online regex testers have become the most popular way to develop and
+debug regular expressions. They require no installation, and most offer
+real-time matching, syntax highlighting, and explanations of what your
+pattern is doing.
 
-In addition to these tools, there are many online tools, which you can
-use without having to download or install anything. These are of a wide
-variety of feature sets and quality, so I'd encourage you to shop around
-a little to find one that seems to work well. These appear and disappear
-on a weekly basis, and so I can't promise that these sites will still
-be available at the time that you read this, but here are some that are
-worth mentioning at the time of writing:
+.. index:: regex101
 
+regex101
+^^^^^^^^
+
+<https://regex101.com/> is arguably the best regex testing tool available
+today. It supports PCRE2, JavaScript, Python, Golang, Java, and .NET
+regex flavors. It provides a detailed explanation of each part of your
+pattern, highlights matches and capture groups in real time, and includes
+a quick reference sidebar. You can save and share your expressions via
+URL. regex101 is free to use; the source code is not open source, but
+it runs entirely in the browser after the initial page load and can be
+used offline.
+
+For the purposes of this book, select the **PCRE2** flavor, as that is
+the regex engine used by Apache httpd.
+
+.. index:: RegExr
 
 RegExr
 ^^^^^^
 
+<https://regexr.com/> is another excellent online regex tester. It
+provides real-time matching, an expression library, and hover-over
+explanations of pattern components. RegExr is open source
+(`MIT license <https://github.com/gskinner/regexr>`_).
 
-.. index
-   RegExr
-
-<http://gskinner.com/RegExr/> - Includes a variety of pre-defined
-character classes, and the ability to save your regular expressions for
-later reference. Requires Javascript to use.
-
+.. index:: Regex Pal
 
 Regex Pal
 ^^^^^^^^^
 
+<https://www.regexpal.com/> is a simpler, no-frills online regex
+tester. It does one thing — show you what matches — and does it well.
+Useful when you just want a quick check without the overhead of a
+full-featured tool.
 
-.. index
-   Regex Pal
+
+Command-line tools
+~~~~~~~~~~~~~~~~~~
 
 
-<http://regexpal.com/> - Less full-featured than RegExr, but
-sufficient for the purpose of crafting and testing regular expressions
-for the purpose of mod_rewrite, which doesn't require replace
-functionality or multi-line matches.
+.. index:: pcre2test
+
+pcre2test
+^^^^^^^^^
+
+``pcre2test`` is a command-line regex tester that ships with the PCRE2
+library. On most Linux distributions, you can install it via the
+``pcre2-utils`` or ``pcre2-tools`` package. On macOS, it is available
+via Homebrew (``brew install pcre2``).
+
+In addition to telling you whether a particular string matched, it shows
+what each backreference captures:
+
+.. code-block:: none
+
+   $ pcre2test
+   re> /^\/(\w+)\/(.*)$/
+   data> /products/widget-42
+    0: /products/widget-42
+    1: products
+    2: widget-42
+
+This is the same PCRE2 engine that Apache httpd uses, so what
+``pcre2test`` tells you is exactly what ``mod_rewrite`` will do.
+
+.. note::
+
+   If you encounter references to the older ``pcretest`` command, that
+   was the PCRE1 version. PCRE1 is end-of-life; ``pcre2test`` is its
+   replacement.
+
+.. index:: grex
+
+grex
+^^^^
+
+`grex <https://github.com/pemistahl/grex>`_ is an open source
+command-line tool (written in Rust, MIT license) that works in the
+opposite direction — you give it example strings, and it generates a
+regular expression that matches them. This can be a useful starting point
+when you know what you want to match but aren't sure how to express it.
+
+
+Learning resources
+~~~~~~~~~~~~~~~~~~
+
+
+.. index:: regexlearn.com
+
+If you prefer an interactive tutorial over reading documentation,
+`RegexLearn <https://regexlearn.com/>`_ provides a step-by-step course
+that teaches regex by doing. It is open source
+(`MIT license <https://github.com/aykutkardas/regexlearn.com>`_).
+
 
 
 RewriteRule generators
@@ -1049,11 +1055,11 @@ great waste of time, and much frustration.
 Keep a bookmark in this chapter, and refer back to it when you're trying 
 to figure out what a particular regex is doing.
 
-Other recommended reference sources include the Perl regular expression 
-documentation, which you can find online at 
-<http://www.perldoc.com/perl5.8.0/pod/perlre.html> or by typing 
-``perldoc perlre`` at your command line, and the PCRE documentation, which 
-you can find online at <http://pcre.org/pcre.txt>. This is useful even
+Other recommended reference sources include the Perl regular expression
+documentation, which you can find online at
+<https://perldoc.perl.org/perlre> or by typing
+``perldoc perlre`` at your command line, and the PCRE documentation, which
+you can find online at <https://www.pcre.org/current/doc/html/>. This is useful even
 if you're using regex in other implementations (like ``mod_rewrite``, for
 example), since the syntax is largely the same across implementations.
 

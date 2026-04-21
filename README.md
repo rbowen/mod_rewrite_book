@@ -14,9 +14,37 @@ The book is written in [reStructuredText](https://docutils.sourceforge.io/rst.ht
 
 ### Prerequisites
 
-- **Python 3.8+** (any recent version)
-- **[uv](https://docs.astral.sh/uv/)** (recommended) — or `pip install sphinx` if you prefer a global install
-- **LaTeX distribution** (for PDF only) — e.g. `brew install mactex-no-gui` on macOS, or `apt install texlive-full` on Debian/Ubuntu
+**Required (for HTML and ePub):**
+
+- **Python 3.8+**
+- **[uv](https://docs.astral.sh/uv/)** (recommended) — or install Sphinx globally with `pip install sphinx`
+
+**Optional (for PDF output only):**
+
+- A **LaTeX distribution** with `latexmk` and `pdflatex`:
+
+  | OS | Install command |
+  |---|---|
+  | macOS | `brew install mactex-no-gui` |
+  | Debian / Ubuntu | `sudo apt install texlive-full latexmk` |
+  | Fedora / RHEL | `sudo dnf install texlive-scheme-full latexmk` |
+  | Arch | `sudo pacman -S texlive-most latexmk` |
+  | Windows | Install [MiKTeX](https://miktex.org/) or [TeX Live](https://tug.org/texlive/) |
+
+If LaTeX is not installed, `build.sh` will still generate HTML and ePub successfully and skip the PDF step.
+
+**Installing uv:**
+
+```bash
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Or via pip
+pip install uv
+```
 
 ### HTML
 
@@ -55,20 +83,20 @@ make linkcheck   # verify external links
 make clean       # remove all build output
 ```
 
-### All formats at once
+### All formats
 
 ```bash
-uv run --with sphinx -- sphinx-build -b html . _build/html && \
-uv run --with sphinx -- sphinx-build -b epub . _build/epub && \
-uv run --with sphinx -- sphinx-build -b latex . _build/latex && \
-cd _build/latex && make
+./build.sh
 ```
+
+This cleans the output directory and builds HTML, ePub, and PDF in one go.
 
 ## Structure
 
 ```
 ├── conf.py                 — Sphinx configuration
 ├── index.rst               — Master table of contents
+├── build.sh                — Build all formats (HTML, ePub, PDF)
 ├── Makefile                — Build targets
 ├── cover.jpg
 ├── images/                 — Figures and screenshots
@@ -105,4 +133,6 @@ This book has been through a few format migrations:
 
 ## License
 
-Copyright © 2013–2025 Rich Bowen. All rights reserved.
+Copyright © 2013–2026 Rich Bowen.
+
+Licensed under the [Apache License, Version 2.0](LICENSE). See the LICENSE file for details.

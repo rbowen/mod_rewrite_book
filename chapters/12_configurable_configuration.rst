@@ -1,13 +1,27 @@
 .. _conditional-configuration:
 
 
+.. index:: conditional configuration
+.. index:: pair: configuration; conditional
+
 =====================================
 Chapter 12: Conditional Configuration
 =====================================
 
+.. epigraph::
+
+   | Once upon a most early time was a Neolithic man. He was not
+   | a Jute or an Angle, or even a Dravidian, which he might
+   | well have been, Best Beloved, but never mind why.
+
+   -- Rudyard Kipling, *How the First Letter Was Written*
+
+
 
 .. _introduction:
 
+
+.. index:: pair: Apache HTTP Server; version 2.4 configuration
 
 Introduction
 ------------
@@ -23,8 +37,19 @@ In this part of the book, we discuss some of this functionality. Some of
 it is specific to version 2.4 and later, while some of it has been
 available for years.
 
+.. index:: IfModule
+.. index:: pair: directives; IfModule
+.. index:: IfVersion
+.. index:: pair: directives; IfVersion
+
+
 .. _match-directive:
 
+
+.. index:: FilesMatch
+.. index:: pair: directives; FilesMatch
+.. index:: RedirectMatch
+.. index:: pair: directives; RedirectMatch
 
 Match Directives
 ----------------
@@ -34,6 +59,10 @@ FilesMatch, RedirectMatch, etc.
 
 .. _ifdefine:
 
+
+.. index:: IfDefine
+.. index:: pair: directives; IfDefine
+.. index:: pair: command-line switches; -D flag
 
 IfDefine
 --------
@@ -108,6 +137,9 @@ You could then, for example, start the server up with:
 .. _define:
 
 
+.. index:: Define
+.. index:: pair: directives; Define
+
 Define
 ------
 
@@ -160,6 +192,15 @@ path, which is then used several times in the configuration:
 .. _if-elsif-and-else:
 
 
+.. index:: If directive
+.. index:: pair: directives; If
+.. index:: ElseIf directive
+.. index:: pair: directives; ElseIf
+.. index:: Else directive
+.. index:: pair: directives; Else
+.. index:: ap_expr
+.. index:: expression parser
+
 <If>, <Elsif>, and <Else>
 -------------------------
 
@@ -179,6 +220,8 @@ Consider the following examples to give you some ideas:
 
 .. _canonical-hostname:
 
+
+.. index:: pair: If directive; canonical hostname example
 
 Canonical hostname
 ^^^^^^^^^^^^^^^^^^
@@ -208,6 +251,8 @@ perform this redirection, but ``<If>`` provides a more intuitive syntax:
 .. _image-hotlinking:
 
 
+.. index:: pair: If directive; hotlinking example
+
 Image hotlinking
 ^^^^^^^^^^^^^^^^
 
@@ -232,6 +277,9 @@ ensure that the request originated within a page on your site:
 .. _mod_macro:
 
 
+.. index:: mod_macro
+.. index:: pair: modules; mod_macro
+
 mod_macro
 ---------
 
@@ -253,12 +301,18 @@ file on disk.
 .. _mod_proxy_express:
 
 
+.. index:: mod_proxy_express
+.. index:: pair: modules; mod_proxy_express
+
 mod_proxy_express
 -----------------
 
 
 .. _mod_vhost_alias:
 
+
+.. index:: mod_vhost_alias
+.. index:: pair: modules; mod_vhost_alias
 
 mod_vhost_alias
 ---------------
@@ -267,12 +321,16 @@ mod_vhost_alias
 .. _conditional-logging:
 
 
+.. index:: pair: logging; conditional
+
 Conditional logging
 ^^^^^^^^^^^^^^^^^^^
 
 
 .. _env:
 
+
+.. index:: pair: logging; environment variables
 
 env=
 ^^^^
@@ -281,6 +339,8 @@ env=
 .. _per-module-logging:
 
 
+.. index:: pair: logging; per-module
+
 Per-module logging
 ^^^^^^^^^^^^^^^^^^
 
@@ -288,12 +348,16 @@ Per-module logging
 .. _per-directory-logging:
 
 
+.. index:: pair: logging; per-directory
+
 Per-directory logging
 ^^^^^^^^^^^^^^^^^^^^^
 
 
 .. _piped-logging:
 
+
+.. index:: pair: logging; piped
 
 Piped logging
 ^^^^^^^^^^^^^

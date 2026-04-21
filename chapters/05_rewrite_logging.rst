@@ -1,9 +1,22 @@
 .. _Chapter_rewrite_logging:
 
 
+.. index:: rewrite logging
+.. index:: pair: mod_rewrite; logging
+.. index:: pair: debugging; mod_rewrite
+
 ==========================
 Chapter 5: Rewrite Logging
 ==========================
+
+.. epigraph::
+
+   | Then Kolokolo Bird said, with a mournful cry, 'Go to the
+   | banks of the great grey-green, greasy Limpopo River, all
+   | set about with fever-trees, and find out.'
+
+   -- Rudyard Kipling, *The Elephant's Child*
+
 
 
 Exactly how you turn on logging for mod_rewrite will depend on what
@@ -13,6 +26,9 @@ the changes that happened at that time.
 
 If you're not sure what version you're running, you can get the ``httpd``
 binary to tell you with the ``-v`` flag:
+
+
+.. index:: pair: Apache HTTP Server; version detection
 
 
 .. code-block:: none
@@ -26,6 +42,13 @@ reason, the ``RewriteLog`` directive may not be used in ``.htaccess`` files,
 but may only be invoked in the server configuration file.
 
 .. _and-earlier:
+
+
+.. index:: RewriteLog
+.. index:: pair: directives; RewriteLog
+.. index:: RewriteLogLevel
+.. index:: pair: directives; RewriteLogLevel
+.. index:: pair: logging; httpd 2.2
 
 2.2 and earlier
 
@@ -51,6 +74,13 @@ verbose, but they also don't harm anything.
 
 .. _and-later:
 
+
+.. index:: LogLevel
+.. index:: pair: directives; LogLevel
+.. index:: pair: logging; httpd 2.4
+.. index:: trace level
+.. index:: pair: mod_rewrite; trace level
+
 2.4 and later
 
 In the 2.4 version of the server, many changes were made to the way that
@@ -69,6 +99,11 @@ Rewrite log entries will now show up in the main error log file, as
 specified by the ``ErrorLog`` directive.
 
 .. _whats-in-the-rewrite-log---an-example:
+
+
+.. index:: pair: rewrite logging; examples
+.. index:: ErrorLog
+.. index:: pair: directives; ErrorLog
 
 What's in the Rewrite log? - An example
 
@@ -264,6 +299,11 @@ This kind of detailed log trail tells you very specifically what's going
 on, and what happened at each step. [#2]_
 
 .. _rewriterules-in-.htaccess-files---an-example:
+
+
+.. index:: pair: .htaccess; rewrite logging
+.. index:: pair: per-directory context; logging
+.. index:: pair: .htaccess; perdir prefix stripping
 
 RewriteRules in .htaccess files - An example
 
