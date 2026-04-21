@@ -1,8 +1,3 @@
-[book]
-:doctype: book
-:toclevels: 3
-:toc: 
-
 [[Chapter_proxy]]
 == Chapter 9: Proxies and mod_rewrite
 

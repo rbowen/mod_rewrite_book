@@ -1,10 +1,11 @@
-## TODO
+[appendix]
+== TODO
 
 This book is a work in progress, and I expect it to remain such for years to come. This is the place to check to see if you've purchased the latest version, and what changed from one version to another.
 
 While the version number starts with 0.something, you can expect that there's quite a bit of work yet to do. Once it is 1.something, you can expect that changes will be fairly minor. I think. We'll see.
 
-### TODO
+=== TODO
 
 * Standardize how we display example
 * Write mod_rewrite chapter(s)
@@ -21,11 +22,9 @@ While the version number starts with 0.something, you can expect that there's qu
 * Update/Replace the second on regex testing tools, since these appear
   and vanish pretty quickly.
 
+=== Revision History
 
-### REVISION HISTORY
-
-
-* 0.00 Started March 7, 2013. Started TOC and a little of the initial text. Published HTML version to website at <http://rewrite.rcbowen.com/>
+* 0.00 Started March 7, 2013. Started TOC and a little of the initial text. Published HTML version to website at http://rewrite.rcbowen.com/
 * 0.01 March 12, 2013. Initial publish to Amazon.com in Kindle form.
 * 0.02 March 18, 2013. Munged the TOC around a bit to make the chapters less crowded. Will end up with some sparse chapters initially. So what.
 * 0.03 March 18, 2013. Added a bunch about flags. Completed reorg of TOC. I hope.
@@ -33,14 +32,6 @@ While the version number starts with 0.something, you can expect that there's qu
 * 0.12 April 16, 2013. Started RewriteMap stuff, and various other tweaks and fixes.
 * 0.15 August 10, 2013. Attended Flock. Decided to convert all LaTeX to rST instead. Many benefits, but quite a bit of work. Should have a rebuild in the next few days.
 * 0.20 August 12, 2013. Completed conversion from LaTeX to rST. I'm sure there's still some orts here and there, but it's good enough to tag.
-
-* 0.30 - Christmas 2017. Yet another conversion, this time, to ASCIIdoc. Borrowed tools and templates from <https://github.com/akosma/eBook-Template> to get started. Website has been moved to <http://mod-rewrite.org>. We'll start publising it there again once we have a shippable version.
-
-* 0.31 - Christmas 2018. Will the format changing never end? Converted to MarkDown and
-  GitBook. https://toolchain.gitbook.com/ But I'm starting to remember
-  that I rejected GitBook because it doesn't seem like there's a way to
-  generate an index easily.
-
-* 0.32 - The brief experiement with going back to Markdown abandoned,
-  since Gitbook supports asciidoc. I'm going to focus on writing, and
-  figure out indexing at some later date.
+* 0.30 - Christmas 2017. Yet another conversion, this time, to ASCIIdoc. Borrowed tools and templates from https://github.com/akosma/eBook-Template to get started. Website has been moved to http://mod-rewrite.org. We'll start publising it there again once we have a shippable version.
+* 0.31 - Christmas 2018. Will the format changing never end? Converted to MarkDown and GitBook. https://toolchain.gitbook.com/ But I'm starting to remember that I rejected GitBook because it doesn't seem like there's a way to generate an index easily.
+* 0.32 - The brief experiement with going back to Markdown abandoned, since Gitbook supports asciidoc. I'm going to focus on writing, and figure out indexing at some later date.

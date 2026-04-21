@@ -1,8 +1,3 @@
-[book]
-:doctype: book
-:toclevels: 3
-:toc: 
-
 [[conditional-configuration]]
 == Chapter 12: Conditional Configuration
 
