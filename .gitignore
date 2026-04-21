@@ -1,2 +1,21 @@
+# Sphinx build output
+_build/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Old build artifacts
 book.html
 book.pdf

@@ -1,11 +1,17 @@
-[appendix]
-== TODO
+
+====
+TODO
+====
+
 
 This book is a work in progress, and I expect it to remain such for years to come. This is the place to check to see if you've purchased the latest version, and what changed from one version to another.
 
 While the version number starts with 0.something, you can expect that there's quite a bit of work yet to do. Once it is 1.something, you can expect that changes will be fairly minor. I think. We'll see.
 
-=== TODO
+
+TODO
+~~~~
+
 
 * Standardize how we display example
 * Write mod_rewrite chapter(s)
@@ -14,15 +20,15 @@ While the version number starts with 0.something, you can expect that there's qu
 * Write Content Munging chapter
 * Write Conditional Configuration chapter
 * Provide issue tracker where people can log errata
-* Convert all LaTeX to RST
 * Verify all desired formats (pdf, html, epub)
 * Automated publishing tools
-* Asciidoctor-pdf doesn't do footnotes right. Either they need to fix
-  this, or I need to remove all footnotes.
 * Update/Replace the second on regex testing tools, since these appear
   and vanish pretty quickly.
 
-=== Revision History
+
+Revision History
+----------------
+
 
 * 0.00 Started March 7, 2013. Started TOC and a little of the initial text. Published HTML version to website at http://rewrite.rcbowen.com/
 * 0.01 March 12, 2013. Initial publish to Amazon.com in Kindle form.
@@ -35,3 +41,4 @@ While the version number starts with 0.something, you can expect that there's qu
 * 0.30 - Christmas 2017. Yet another conversion, this time, to ASCIIdoc. Borrowed tools and templates from https://github.com/akosma/eBook-Template to get started. Website has been moved to http://mod-rewrite.org. We'll start publising it there again once we have a shippable version.
 * 0.31 - Christmas 2018. Will the format changing never end? Converted to MarkDown and GitBook. https://toolchain.gitbook.com/ But I'm starting to remember that I rejected GitBook because it doesn't seem like there's a way to generate an index easily.
 * 0.32 - The brief experiement with going back to Markdown abandoned, since Gitbook supports asciidoc. I'm going to focus on writing, and figure out indexing at some later date.
+* 3.0 - April 2026. Converted back to reStructuredText / Sphinx. Full circle. Sphinx handles indexing, footnotes, cross-references, and multi-format output (HTML, ePub, PDF) natively — all the things that were missing or broken in every other toolchain. Ruby dependency replaced by Python. Build via ``uv run --with sphinx`` with no global install required.

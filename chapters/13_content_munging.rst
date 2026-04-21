@@ -1,5 +1,10 @@
-[[Chapter_content_munging]]
-== Chapter 13: Content Munging
+.. _Chapter_content_munging:
+
+
+===========================
+Chapter 13: Content Munging
+===========================
+
 
 While mod_rewrite modifies aspects of the HTTP request - most commonly
 the REQUEST_URI, sometimes you want to modify the content which is
@@ -9,14 +14,30 @@ be used in a variety of circumstances.
 We're going to look at three of these modules, and then at Filters in
 general.
 
-[[mod_substitute]]
-=== mod_substitute
+.. _mod_substitute:
 
-[[mod_sed]]
-=== mod_sed
 
-[[mod_proxy_html]]
-=== mod_proxy_html
+mod_substitute
+--------------
 
-[[filters]]
-=== Filters
+
+.. _mod_sed:
+
+
+mod_sed
+-------
+
+
+.. _mod_proxy_html:
+
+
+mod_proxy_html
+--------------
+
+
+.. _filters:
+
+
+Filters
+-------
+

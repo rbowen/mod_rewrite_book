@@ -1,22 +1,42 @@
-BOOK = book
-SRCS = $(BOOK).adoc $(wildcard chapters/*.adoc)
+# Makefile for Sphinx documentation
+#
+# mod_rewrite And Friends
 
-all: html pdf
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+SOURCEDIR     = .
+BUILDDIR      = _build
 
-html: $(BOOK).html
+.PHONY: help clean html epub pdf latexpdf linkcheck
 
-pdf: $(BOOK).pdf
+help:
+	@echo "Available targets:"
+	@echo "  html      - Build HTML documentation"
+	@echo "  epub      - Build EPUB ebook"
+	@echo "  latexpdf  - Build PDF via LaTeX"
+	@echo "  pdf       - Alias for latexpdf"
+	@echo "  linkcheck - Check external links"
+	@echo "  clean     - Remove build artifacts"
 
-$(BOOK).html: $(SRCS)
-	bundle exec asciidoctor -o $@ $(BOOK).adoc
+html:
+	$(SPHINXBUILD) -b html $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
-$(BOOK).pdf: $(SRCS)
-	bundle exec asciidoctor-pdf -o $@ $(BOOK).adoc
+epub:
+	$(SPHINXBUILD) -b epub $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/epub
+	@echo "Build finished. The EPUB file is in $(BUILDDIR)/epub."
 
-setup:
-	bundle install
+latexpdf:
+	$(SPHINXBUILD) -b latex $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/latex
+	$(MAKE) -C $(BUILDDIR)/latex all-pdf
+	@echo "Build finished. The PDF is in $(BUILDDIR)/latex."
+
+pdf: latexpdf
+
+linkcheck:
+	$(SPHINXBUILD) -b linkcheck $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/linkcheck
+	@echo "Link check complete. Results are in $(BUILDDIR)/linkcheck."
 
 clean:
-	rm -f $(BOOK).html $(BOOK).pdf
-
-.PHONY: all html pdf setup clean
+	rm -rf $(BUILDDIR)

@@ -1,5 +1,10 @@
-[[Chapter_mod_rewrite]]
-== Chapter 3: Introduction to mod_rewrite
+.. _Chapter_mod_rewrite:
+
+
+======================================
+Chapter 3: Introduction to mod_rewrite
+======================================
+
 
 mod_rewrite is the power tool of Apache httpd URL mapping. Of course,
 sometimes you just need a screwdriver, but when you need the power tool,
@@ -15,16 +20,22 @@ In this chapter we'll cover mod_rewrite syntax and usage, and in the
 next chapter we'll give a variety of examples of using mod_rewrite in
 common scenarios.
 
-[[loading-mod_rewrite]]
-=== Loading mod_rewrite
+.. _loading-mod_rewrite:
+
+
+Loading mod_rewrite
+-------------------
+
 
 To use mod_rewrite in any context, you need to have the module loaded.
 If you're the server administrator, this means having the following line
 somewhere in your Apache httpd configuration:
 
-----
-LoadModule rewrite_module modules/mod_rewrite.so
-----
+
+.. code-block:: none
+
+   LoadModule rewrite_module modules/mod_rewrite.so
+
 
 This tells httpd that it needs to load mod_rewrite at startup time, so
 as to make its functionality available to your configuration files.
@@ -40,42 +51,50 @@ test_rewrite
 Create a file in that directory called .htaccess and put the following
 text in it:
 
-----
-RewriteEngine on
-----
+
+.. code-block:: none
+
+   RewriteEngine on
+
 
 Create another file in that directory called index.html containing the
 following text:
 
-----
-<html>
-Hello, mod_rewrite
-</html>
-----
+
+.. code-block:: none
+
+   <html>
+   Hello, mod_rewrite
+   </html>
+
 
 Now, point your browser at that location:
 
-----
-http://example.com/test_rewrite/index.html
-----
+
+.. code-block:: none
+
+   http://example.com/test_rewrite/index.html
+
 
 You'll see one of two things. Either you'll see the words
 Hello, mod_rewrite in your browser, or you'll see the ominous words
 Internal Server Error. In the former case, everything is fine -
-mod_rewrite is loaded and your `.htacces` file worked just fine. If you
+mod_rewrite is loaded and your ``.htacces`` file worked just fine. If you
 got an Internal Server Error, that was httpd complaining that it didn't
-know what to do with the `RewriteEngine` directive, because mod_rewrite
+know what to do with the ``RewriteEngine`` directive, because mod_rewrite
 wasn't loaded.
 
 If you have access to the server's error log file, you'll see the
 following in it:
 
-----
-Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
-----
+
+.. code-block:: none
+
+   Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+
 
 Which is httpd's way of saying that you used a directive
-(`RewriteEngine`) without first loading the module that defines that
+(``RewriteEngine``) without first loading the module that defines that
 directive.
 
 If you see the Internal Server Error message, or that log file message,
@@ -85,39 +104,53 @@ mod_rewrite for you.
 However, this is fairly unlikely, since mod_rewrite is a fairly standard
 part of any Apache http server's bag of tricks.
 
-[[rewriteengine]]
-=== RewriteEngine
+.. _rewriteengine:
 
-In the section above, we used the `RewriteEngine` directive without
+
+RewriteEngine
+-------------
+
+
+In the section above, we used the ``RewriteEngine`` directive without
 defining what it does.
 
-The `RewriteEngine` directive enables or disables the runtime rewriting
-engine. The directive defaults to `off`, so the result is that rewrite
+The ``RewriteEngine`` directive enables or disables the runtime rewriting
+engine. The directive defaults to ``off``, so the result is that rewrite
 directives will be ignored in any scope where you don't have the
 following:
 
-----
-RewriteEngine On
-----
+
+.. code-block:: none
+
+   RewriteEngine On
+
 
 While we won't always include that in every example in this book, it
 should be assumed, from this point forward, that every use of
-mod_rewrite occurs in a scope where `RewriteEngine` has been turned on.
+mod_rewrite occurs in a scope where ``RewriteEngine`` has been turned on.
 
-[[mod_rewrite-in-.htaccess-files]]
-=== mod_rewrite in .htaccess files
+.. _mod_rewrite-in-.htaccess-files:
+
+
+mod_rewrite in .htaccess files
+------------------------------
+
 
 Before we go any further, it's critical to note that things are
 different, in several important ways, if you have to use .htaccess files
 for configuration.
 
-[[what-are-.htaccess-files]]
-==== What are .htaccess files?
+.. _what-are-.htaccess-files:
 
-`.htaccess` files are per-directory configuration files, for use by people
+
+What are .htaccess files?
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+``.htaccess`` files are per-directory configuration files, for use by people
 who don't have access to the main server configuration file. For the
 most part, you put configuration directives into .htaccess files just as
-you would in a `<Directory>` block in the server configuration, but
+you would in a ``<Directory>`` block in the server configuration, but
 there are some differences.
 
 The most important of these differences is that the .htaccess file is
@@ -138,55 +171,60 @@ results in a slowdown that grows with the depth of the directory tree.
 
 In Apache httpd 2.2 and earlier, .htaccess files are enabled by default
 - that is the configuration directive that enables them,
-`AllowOverride`, has a default value of `All`. In 2.4 and later, it has
-a default value of `None`, so .htaccess files are disabled by default.
+``AllowOverride``, has a default value of ``All``. In 2.4 and later, it has
+a default value of ``None``, so .htaccess files are disabled by default.
 
 A typical configuration to permit the use of .htaccess files looks like:
 
-----
-<Directory />
-    AllowOverride None
-</Directory>
 
-DocumentRoot /var/www/html
-<Directory /var/www/html>
-    AllowOverride All
-    Options +FollowSymLinks
-</Directory>
-----
+.. code-block:: none
+
+   <Directory />
+       AllowOverride None
+   </Directory>
+   
+   DocumentRoot /var/www/html
+   <Directory /var/www/html>
+       AllowOverride All
+       Options +FollowSymLinks
+   </Directory>
+
 
 That is to say, .htaccess files are disallowed for the entire
 filesystem, starting at the root, but then are permitted in the document
 directories. This prevents httpd
-from looking for .htaccess files in `/`, `/var`, and `/var/www` on the way to
-looking in `/var/www/html`.footnote:[Or, more to the point, it prevents 
-malicious end-users from finding ways to look there.]
+from looking for .htaccess files in ``/``, ``/var``, and ``/var/www`` on the way to
+looking in ``/var/www/html``. [#1]_
 
 Note that in order to enable the use of mod_rewrite directives in
-`.htaccess` files, you also need to enable `Options FollowSymLinks`. A
-`RewriteRule` may be thought of as a kind of symlink, because it allows
+``.htaccess`` files, you also need to enable ``Options FollowSymLinks``. A
+``RewriteRule`` may be thought of as a kind of symlink, because it allows
 you to serve content from other directories via a rewrite. Thus, for
 reasons of security, it is necessary to enable symlinks in order to use
 mod_rewrite.
 
-[[ok-so-whats-the-deal-with-mod_rewrite-in-.htaccess-files]]
-==== Ok, so, what's the deal with mod_rewrite in .htaccess files?
+.. _ok-so-whats-the-deal-with-mod_rewrite-in-.htaccess-files:
+
+
+Ok, so, what's the deal with mod_rewrite in .htaccess files?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 There are two major differences that you must be aware of before we
 proceed any further. The exact implications of these differences will
 become more apparent as we go, but I wouldn't want them to surprise you.
 
 First, there are two directives that you cannot use in .htaccess files.
-These directives are `RewriteMap` and (prior to httpd 2.4) `RewriteLog`.
+These directives are ``RewriteMap`` and (prior to httpd 2.4) ``RewriteLog``.
 These must be defined in the main server configuration. The reasons for
 this will be discussed in greater length when we get to the sections
 about those directives RewriteMap and RewriteLogging, respectively.).
 
-Second, and more importantly, the syntax of `RewriteRule` directives
+Second, and more importantly, the syntax of ``RewriteRule`` directives
 changes in .htaccess context in a way that you'll need to be aware of
-every time you write a `RewriteRule`. Specifically, the directory path
+every time you write a ``RewriteRule``. Specifically, the directory path
 that you're in will be removed from the URL path before it is presented
-to the `RewriteRule`.
+to the ``RewriteRule``.
 
 The exact implications of this will become clearer as we show you
 examples. And, indeed, every example in this book will be presented in a
@@ -199,35 +237,46 @@ not yet introduced several of the concepts presented in this example, so
 please be patient for now.
 
 Consider a situation where you want to apply a rewrite to content in the
-`/images/puppies/` subdirectory of your website. You have four options:
-You can put the `RewriteRule` in the main server configuration file; You
+``/images/puppies/`` subdirectory of your website. You have four options:
+You can put the ``RewriteRule`` in the main server configuration file; You
 can place it in a .htacess file in the root of your website; You can
-place it in a .htaccess file in the `images` directory; Or you can place
-it in a .htaccess file in the `images/puppies` directory.
+place it in a .htaccess file in the ``images`` directory; Or you can place
+it in a .htaccess file in the ``images/puppies`` directory.
 
 Here's what the rule might look like in those various scenarios:
 
-[cols=",",options="header",]
-|===================================================================
-|Location |Rule
-|Main config |`RewriteRule ^/images/puppies/(.*).jpg /dogs/$1.gif`
-|Root directory |`RewriteRule ^images/puppies/(.*).jpg /dogs/$1.gif`
-|images directory |`RewriteRule ^puppies/(.*).jpg /dogs/$1.gif`
-|images/puppies directory |`RewriteRule ^(.*).jpg /dogs/$1.gif`
-|===================================================================
+
+.. list-table::
+   :header-rows: 1
+   :widths: auto
+
+   * - Location
+     - Rule
+   * - Main config
+     - ``RewriteRule ^/images/puppies/(.*).jpg /dogs/$1.gif``
+   * - Root directory
+     - ``RewriteRule ^images/puppies/(.*).jpg /dogs/$1.gif``
+   * - images directory
+     - ``RewriteRule ^puppies/(.*).jpg /dogs/$1.gif``
+   * - images/puppies directory
+     - ``RewriteRule ^(.*).jpg /dogs/$1.gif``
 
 For the moment, don't worry too much about what the individual rules do.
 Look instead at the URL path that is being considered in each rule, and
 notice that for each directory that a .htaccess file is placed in, the
-directory path that `RewriteRule` may consider is relative to that
+directory path that ``RewriteRule`` may consider is relative to that
 directory, and anything above that becomes invisible for the purpose of
 mod_rewrite.
 
 Don't worry too much if this isn't crystal clear at this point. It will
 become more clear as we proceed and you see more examples.
 
-[[so-what-do-i-do]]
-==== So, what do I do?
+.. _so-what-do-i-do:
+
+
+So, what do I do?
+~~~~~~~~~~~~~~~~~
+
 
 If you don't have access to the main server configuration file, as it
 the case for many of the readers of this book, don't despair.
@@ -237,13 +286,23 @@ limitations, and adjust accordingly when presented with an example rule.
 
 We aim to help you do that at each step along this journey.
 
-[[rewriteoptions]]
-=== RewriteOptions
+.. _rewriteoptions:
+
+
+RewriteOptions
+--------------
+
 
 RewriteOptions TODO
 
-[[rewritebase]]
-=== RewriteBase
+.. _rewritebase:
+
+
+RewriteBase
+-----------
+
 
 TODO
 
+
+.. [#1] Or, more to the point, it prevents  malicious end-users from finding ways to look there.

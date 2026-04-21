@@ -1,3 +1,0 @@
-[[Chapter_proxy]]
-== Chapter 9: Proxies and mod_rewrite
-

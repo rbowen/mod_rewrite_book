@@ -1,8 +1,13 @@
-[[Chapter_recipes]]
-== Chapter 14: Recipes
+.. _Chapter_recipes:
+
+
+===================
+Chapter 14: Recipes
+===================
+
 
 In this chapter, we'll present various common problems, and a variety of
-ways to solve them using `mod_rewrite`, or one of the other tools
+ways to solve them using ``mod_rewrite``, or one of the other tools
 discussed in this book.
 
 Some of these recipes have already been presented in other parts of the
