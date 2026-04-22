@@ -9,13 +9,13 @@ Glossary
    .htaccess
       A per-directory configuration file, placed in a directory served by
       httpd, that applies directives to that directory and its children.
-      Rewrite rules in ``.htaccess`` behave differently than those in
+      Rewrite rules in :file:`.htaccess` behave differently than those in
       server config — see :ref:`rewritebase` and Chapter 3.
 
    AllowOverride
       A directive that controls which types of directives are permitted
-      in ``.htaccess`` files. ``AllowOverride All`` enables everything;
-      ``AllowOverride None`` (the 2.4 default) disables ``.htaccess``
+      in :file:`.htaccess` files. ``AllowOverride All`` enables everything;
+      ``AllowOverride None`` (the 2.4 default) disables :file:`.htaccess`
       entirely.
 
    Apache HTTP Server
@@ -37,7 +37,7 @@ Glossary
    content negotiation
       The process by which httpd selects the best representation of a
       resource based on the client's ``Accept-*`` headers.
-      ``mod_negotiation`` and ``MultiViews`` implement this. See
+      :module:`mod_negotiation` and ``MultiViews`` implement this. See
       Chapter 2.
 
    CondPattern
@@ -46,12 +46,12 @@ Glossary
 
    directive
       A configuration command in the httpd configuration file (or
-      ``.htaccess``). Examples: ``RewriteRule``, ``DocumentRoot``,
+      :file:`.htaccess`). Examples: ``RewriteRule``, ``DocumentRoot``,
       ``ProxyPass``.
 
    DocumentRoot
       The directory from which httpd serves static files by default.
-      A request for ``/page.html`` maps to ``DocumentRoot/page.html``.
+      A request for :file:`/page.html` maps to :file:`DocumentRoot/page.html`.
 
    ErrorDocument
       A directive that specifies a custom response for a given HTTP
@@ -59,7 +59,7 @@ Glossary
       custom 404 page.
 
    FallbackResource
-      A ``mod_dir`` directive that specifies a default handler for
+      A :module:`mod_dir` directive that specifies a default handler for
       requests that don't match any existing file — the mechanism behind
       most front-controller frameworks. See Chapter 2.
 
@@ -70,8 +70,8 @@ Glossary
 
    front controller
       A web application design pattern where all requests are routed
-      through a single entry point (typically ``index.php`` or
-      ``app.py``). ``FallbackResource`` and ``mod_rewrite`` both
+      through a single entry point (typically :file:`index.php` or
+      :file:`app.py`). ``FallbackResource`` and :module:`mod_rewrite` both
       support this pattern.
 
    handler
@@ -81,48 +81,48 @@ Glossary
 
    httpd
       The Apache HTTP Server daemon. The executable is typically called
-      ``httpd`` or ``apache2`` depending on the distribution.
+      :file:`httpd` or ``apache2`` depending on the distribution.
 
    MIME type
       A label identifying the type of content, such as ``text/html`` or
-      ``image/png``. httpd uses MIME types (via ``mod_mime``) to
+      ``image/png``. httpd uses MIME types (via :module:`mod_mime`) to
       determine how to serve files.
 
-   mod_alias
+   :module:`mod_alias`
       The module providing ``Alias``, ``AliasMatch``, ``Redirect``,
       ``RedirectMatch``, ``ScriptAlias``, and ``ScriptAliasMatch``
-      directives. Simpler and faster than ``mod_rewrite`` for static
+      directives. Simpler and faster than :module:`mod_rewrite` for static
       URL mapping.
 
-   mod_proxy
+   :module:`mod_proxy`
       The core proxy module. By itself it provides the framework
       (``ProxyPass``, ``ProxyPassReverse``); pair it with a protocol
-      module like ``mod_proxy_http`` or ``mod_proxy_fcgi`` for actual
+      module like :module:`mod_proxy_http` or :module:`mod_proxy_fcgi` for actual
       proxying. See Chapter 9.
 
-   mod_rewrite
+   :module:`mod_rewrite`
       The rule-based URL rewriting engine. Uses PCRE regular expressions
       to match and transform request URLs. The subject of most of this
       book.
 
    MultiViews
       An ``Options`` setting that enables content negotiation via
-      ``mod_negotiation``. A request for ``/doc`` will match
-      ``doc.en.html``, ``doc.fr.html``, etc., based on the client's
+      :module:`mod_negotiation`. A request for ``/doc`` will match
+      :file:`doc.en.html`, :file:`doc.fr.html`, etc., based on the client's
       language preferences.
 
    PCRE
       Perl Compatible Regular Expressions — the regex library used by
-      ``mod_rewrite``. Syntax is documented in ``man pcre2pattern`` or
+      :module:`mod_rewrite`. Syntax is documented in ``man pcre2pattern`` or
       ``man perlre``.
 
    per-directory context
       Configuration that applies within a ``<Directory>`` block or
-      ``.htaccess`` file. Rewrite rules in this context operate on the
+      :file:`.htaccess` file. Rewrite rules in this context operate on the
       URL-path with the directory prefix stripped. See ``RewriteBase``.
 
    ProxyPass
-      The primary ``mod_proxy`` directive for reverse proxying. Maps a
+      The primary :module:`mod_proxy` directive for reverse proxying. Maps a
       local URL prefix to a backend server URL.
 
    ProxyPassReverse
@@ -137,7 +137,7 @@ Glossary
 
    RewriteBase
       A directive that sets the base URL for per-directory rewrites.
-      Only meaningful in ``.htaccess`` or ``<Directory>`` context.
+      Only meaningful in :file:`.htaccess` or ``<Directory>`` context.
       See Chapter 3.
 
    RewriteCond
@@ -160,19 +160,19 @@ Glossary
       inheritance, URI handling, and other edge cases. See Chapter 3.
 
    RewriteRule
-      The central directive of ``mod_rewrite``. Matches a URL pattern
+      The central directive of :module:`mod_rewrite`. Matches a URL pattern
       and transforms it into a new URL or triggers an action (redirect,
       proxy, forbid, etc.). See Chapter 4.
 
    reverse proxy
       A server that accepts client requests and forwards them to one or
       more backend servers, returning the response as if it originated
-      from the proxy itself. ``mod_proxy`` with ``ProxyPass`` is the
+      from the proxy itself. :module:`mod_proxy` with ``ProxyPass`` is the
       standard httpd reverse proxy. The ``[P]`` flag in ``RewriteRule``
       also triggers proxying.
 
    server context
-      Configuration that applies at the top level of ``httpd.conf`` or
+      Configuration that applies at the top level of :file:`httpd.conf` or
       within a ``<VirtualHost>`` block, as opposed to per-directory
       context.
 
@@ -194,7 +194,7 @@ Glossary
    URL mapping
       The process by which httpd determines what resource corresponds
       to a requested URL. Involves ``DocumentRoot``, ``Alias``,
-      ``Redirect``, ``mod_rewrite``, and other modules. See Chapter 2.
+      ``Redirect``, :module:`mod_rewrite`, and other modules. See Chapter 2.
 
    URL-path
       The path component of a URL, without the scheme, host, or query

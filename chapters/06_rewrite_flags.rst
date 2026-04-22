@@ -53,7 +53,7 @@ B - escape backreferences
 The [B] flag instructs RewriteRule to escape non-alphanumeric characters
 before applying the transformation.
 
-mod_rewrite has to unescape URLs before mapping them, so backreferences
+:module:`mod_rewrite` has to unescape URLs before mapping them, so backreferences
 are unescaped at the time they are applied. Using the B flag,
 non-alphanumeric characters in backreferences will be escaped. (See
 backreferences for discussion of backreferences.) For example, consider
@@ -266,7 +266,7 @@ Path
 
 
 The path, on the current website, for which the cookie is valid, such as
-``/customers/`` or ``/files/download/``. By default, this is set to ``/`` -
+:file:`/customers/` or :file:`/files/download/`. By default, this is set to ``/`` -
 that is, the entire website.
 
 .. _secure:
@@ -311,7 +311,7 @@ Consider this example:
 
 
 In the example give, the rule doesn't rewrite the request. The '-'
-rewrite target tells mod_rewrite to pass the request through unchanged.
+rewrite target tells :module:`mod_rewrite` to pass the request through unchanged.
 Instead, it sets a cookie called 'frontdoor' to a value of 'yes'. The
 cookie is valid for any host in the .example.com domain. It will be set
 to expire in 1440 minutes (24 hours) and will be returned for all URIs
@@ -338,12 +338,12 @@ In per-directory context, the URI each ``RewriteRule`` compares against is
 the concatenation of the current values of the URI and ``PATH_INFO``.
 
 The current URI can be the initial URI as requested by the client, the
-result of a previous round of mod_rewrite processing, or the result of a
-prior rule in the current round of mod_rewrite processing.
+result of a previous round of :module:`mod_rewrite` processing, or the result of a
+prior rule in the current round of :module:`mod_rewrite` processing.
 
 In contrast, the ``PATH_INFO`` that is appended to the URI before each
 rule reflects only the value of ``PATH_INFO`` before this round of
-mod_rewrite processing. As a consequence, if large portions of the URI
+:module:`mod_rewrite` processing. As a consequence, if large portions of the URI
 are matched and copied into a substitution in multiple ``RewriteRule``
 directives, without regard for which parts of the URI came from the
 current ``PATH_INFO``, the final URI may have multiple copies of
@@ -352,8 +352,8 @@ current ``PATH_INFO``, the final URI may have multiple copies of
 Use this flag on any substitution where the ``PATH_INFO`` that resulted
 from the previous mapping of this request to the filesystem is not of
 interest. This flag permanently forgets the ``PATH_INFO`` established
-before this round of mod_rewrite processing began. ``PATH_INFO`` will not
-be recalculated until the current round of mod_rewrite processing
+before this round of :module:`mod_rewrite` processing began. ``PATH_INFO`` will not
+be recalculated until the current round of :module:`mod_rewrite` processing
 completes. Subsequent rules during this round of processing will see
 only the direct result of substitutions, without any ``PATH_INFO``
 appended.
@@ -541,7 +541,7 @@ not contain the literal . character.
 
 This can be also used to force the handler based on some conditions. For
 example, the following snippet used in per-server context allows .php
-files to be displayed by mod_php if they are requested with the .phps
+files to be displayed by :module:`mod_php` if they are requested with the .phps
 extension:
 
 
@@ -551,7 +551,7 @@ extension:
 
 
 The regular expression above - ``^(/source/.+\.php)s$`` - will match any
-request that starts with ``/source/`` followed by 1 or n characters
+request that starts with :file:`/source/` followed by 1 or n characters
 followed by ``.phps`` literally. The backreference ``$1`` referrers to the
 captured match within parenthesis of the regular expression.
 
@@ -566,7 +566,7 @@ L - last
 --------
 
 
-The ``[L]`` flag causes mod_rewrite to stop processing the rule set. In
+The ``[L]`` flag causes :module:`mod_rewrite` to stop processing the rule set. In
 most contexts, this means that if the rule matches, no further rules
 will be processed. This corresponds to the last command in Perl, or the
 break command in C. Use this flag to indicate that the current rule
@@ -594,7 +594,7 @@ processing from occurring in per-directory (htaccess) context. This does
 not apply to new requests resulting from external redirects.
 
 The example given here will rewrite any request to index.php, giving the
-original request as a query string argument to ``index.php``, however, the
+original request as a query string argument to :file:`index.php`, however, the
 ``RewriteCond`` ensures that if the request is already for index.php, the
 ``RewriteRule`` will be skipped.
 
@@ -705,7 +705,7 @@ NS - nosubreq
 Use of the ``[NS]`` flag prevents the rule from being used on subrequests.
 For example, a page which is included using an SSI (Server Side Include)
 is a subrequest, and you may want to avoid rewrites happening on those
-subrequests. Also, when mod_dir tries to find out information about
+subrequests. Also, when :module:`mod_dir` tries to find out information about
 possible directory default files (such as index.html files), this is an
 internal subrequest, and you often want to avoid rewrites on such
 subrequests. On subrequests, it is not always useful, and can even cause
@@ -738,7 +738,7 @@ P - proxy
 ---------
 
 
-Use of the ``[P]`` flag causes the request to be handled by mod_proxy, and
+Use of the ``[P]`` flag causes the request to be handled by :module:`mod_proxy`, and
 handled via a proxy request. For example, if you wanted all image
 requests to be handled by a back-end image server, you might do
 something like the following:
@@ -755,7 +755,7 @@ considered.
 
 You must make sure that the substitution string is a valid URI
 (typically starting with <http://hostname>) which can be handled by the
-mod_proxy. If not, you will get an error from the proxy module. Use this
+:module:`mod_proxy`. If not, you will get an error from the proxy module. Use this
 flag to achieve a more powerful implementation of the ``ProxyPass``
 directive, to map remote content into the namespace of the local server.
 
@@ -779,7 +779,7 @@ undue influence.
 
 Performance warning
 
-Using this flag triggers the use of mod_proxy, without handling of
+Using this flag triggers the use of :module:`mod_proxy`, without handling of
 persistent connections. This means the performance of your proxy will be
 better if you set it up with ``ProxyPass`` or ``ProxyPassMatch``.
 
@@ -787,7 +787,7 @@ This is because this flag triggers the use of the default worker, which
 does not handle connection pooling. Avoid using this flag and prefer
 those directives, whenever you can.
 
-Note: mod_proxy must be enabled in order to use this flag.
+Note: :module:`mod_proxy` must be enabled in order to use this flag.
 
 See Chapter ref\{chapter_proxy} for a more thorough treatment of
 proxying.
@@ -811,7 +811,7 @@ causes the result of the ``RewriteRule`` to be passed back through URL
 mapping, so that location-based mappings, such as ``Alias``, ``Redirect``,
 or ``ScriptAlias``, for example, might have a chance to take effect.
 
-If, for example, you have an ``Alias`` for ``/icons``, and have a
+If, for example, you have an ``Alias`` for :file:`/icons`, and have a
 ``RewriteRule`` pointing there, you should use the ``[PT]`` flag to ensure
 that the ``Alias`` is evaluated.
 
@@ -1065,10 +1065,10 @@ a problem before resorting to rewrite, which will invariably be a less
 efficient solution than the alternatives.
 
 If used in per-directory context, use only - (dash) as the substitution
-for the entire round of mod_rewrite processing, otherwise the MIME-type
+for the entire round of :module:`mod_rewrite` processing, otherwise the MIME-type
 set with this flag is lost due to an internal re-processing (including
-subsequent rounds of mod_rewrite processing). The L flag can be useful
-in this context to end the current round of mod_rewrite processing.
+subsequent rounds of :module:`mod_rewrite` processing). The L flag can be useful
+in this context to end the current round of :module:`mod_rewrite` processing.
 
 .. _unsafeallow3f:
 
@@ -1083,7 +1083,7 @@ UnsafeAllow3F
 
 By default, if the request URI contains an encoded question mark
 (``%3f``) and the substitution string contains a literal ``?``
-(separating path from query string), mod_rewrite will halt the rewrite
+(separating path from query string), :module:`mod_rewrite` will halt the rewrite
 and return a 403 Forbidden response. This safeguard protects against
 scenarios where an attacker could manipulate captured encoded question
 marks to inject unexpected query string parameters.
@@ -1116,7 +1116,7 @@ UnsafePrefixStat
 
 When a ``RewriteRule`` is used in server (virtualhost) context and the
 substitution string begins with a variable or backreference that
-resolves to a filesystem path, mod_rewrite will automatically prefix
+resolves to a filesystem path, :module:`mod_rewrite` will automatically prefix
 the substitution with the document root. This prevents the substitution
 from inadvertently mapping to a path outside the intended document tree.
 
@@ -1137,7 +1137,7 @@ derived from variables or backreferences.
    RewriteRule "^(.*)$" "%1/sub/$1" [UnsafePrefixStat]
 
 Without the ``[UnsafePrefixStat]`` flag, the ``%1`` backreference at the
-start of the substitution would cause mod_rewrite to prefix the result
+start of the substitution would cause :module:`mod_rewrite` to prefix the result
 with the document root, potentially producing an incorrect double-rooted
 path.
 
@@ -1154,7 +1154,7 @@ UNC
 ---
 
 
-The ``[UNC]`` flag prevents mod_rewrite from merging multiple leading
+The ``[UNC]`` flag prevents :module:`mod_rewrite` from merging multiple leading
 slashes in the substitution result into a single slash. This is
 necessary on Windows systems when the substitution resolves to a UNC
 (Universal Naming Convention) path such as ``\\server\share``, which

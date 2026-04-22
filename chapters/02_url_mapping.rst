@@ -8,10 +8,10 @@ URL Mapping
 
 .. epigraph::
 
-   | Hear and attend and listen; for this befell and behappened and
-   | became and was: O my Best Beloved, when the tame animals were wild.
+   | The first thing you learn in life is you're a fool.
+   | The last thing you learn in life is you're the same fool.
 
-   -- Rudyard Kipling, *Just So Stories*
+   -- Ray Bradbury, *Dandelion Wine*
 
 
 .. index:: URL Mapping
@@ -29,7 +29,7 @@ When the Apache http server receives a request, it is processed in a
 variety of ways to see what resource it represents. This process is
 called URL Mapping.
 
-mod_rewrite is part of this process, but will be handled separately,
+:module:`mod_rewrite` is part of this process, but will be handled separately,
 since it is a large portion of the contents of this book.
 
 The exact order in which these steps are applied may vary from one
@@ -45,12 +45,10 @@ steps, but the way in which you have configured your particular server.
 mod_rewrite
 ~~~~~~~~~~~
 
-mod_rewrite is perhaps the most powerful part of this process. That is,
-of course, why it features prominently in the name of this book. Indeed,
-mod_rewrite spans several chapters of this book, and has an entire Part
-all its own, part mod_rewrite.
+:module:`mod_rewrite` is perhaps the most powerful part of this process. That is,
+of course, why it features prominently in the name of this book.
 
-For now, we'll just say that mod_rewrite fills a variety of different
+For now, we'll just say that :module:`mod_rewrite` fills a variety of different
 roles in the URL mapping process. It can, among other things, modify a
 URL once it is received, in many different ways.
 
@@ -125,14 +123,14 @@ is serve a directory index.
 FallbackResource
 ~~~~~~~~~~~~~~~~
 
-The ``FallbackResource`` directive, provided by ``mod_dir``, defines a
+The ``FallbackResource`` directive, provided by :module:`mod_dir`, defines a
 default resource to serve when a request doesn't map to any existing
 file in the filesystem. This is the mechanism behind the "front
 controller" pattern used by virtually every modern web framework — Laravel,
 Symfony, WordPress, Drupal, and many others.
 
 Before ``FallbackResource`` existed (it was introduced in httpd 2.2.16),
-the standard way to implement a front controller was a ``mod_rewrite``
+the standard way to implement a front controller was a :module:`mod_rewrite`
 rule like this:
 
 
@@ -145,7 +143,7 @@ rule like this:
 
 
 That four-line incantation — "if it's not an existing file or directory,
-send it to ``index.php``" — appears in countless ``.htaccess`` files
+send it to :file:`index.php`" — appears in countless :file:`.htaccess` files
 across the web. ``FallbackResource`` replaces it with a single line:
 
 
@@ -185,7 +183,7 @@ when a file isn't found:
 If you find yourself writing a ``RewriteCond !-f`` / ``RewriteCond !-d``
 pair, stop and consider ``FallbackResource`` first. It's simpler, faster
 (no regex engine involved), and communicates the intent much more
-clearly. Save ``mod_rewrite`` for cases where you need to transform the
+clearly. Save :module:`mod_rewrite` for cases where you need to transform the
 URL, not merely route it.
 
 .. _automatic-directory-listings:
@@ -200,7 +198,7 @@ URL, not merely route it.
 Automatic directory listings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The module mod_autoindex serves a file listing for any directory that
+The module :module:`mod_autoindex` serves a file listing for any directory that
 doesn't contain a DirectoryIndex file. (See section
 :ref:`directoryindex` above.)
 
@@ -228,8 +226,8 @@ Typically, a directory will look like the example shown below.
 
 
 For further discussion of the autoindex functionality, consult the
-mod_autoindex documentation at
-<http://httpd.apache.org/docs/current/mod/mod_autoindex.html>.
+:module:`mod_autoindex` documentation at
+<http://httpd.apache.org/docs/current/mod/:module:`mod_autoindex`.html>.
 
 _Future versions of this book will include more detailed information
 about directory listings._
@@ -300,7 +298,7 @@ AliasMatch and ScriptAliasMatch
 ``Alias`` and ``ScriptAlias``. They allow you to use regular expressions
 to match the URL and use backreferences in the target path.
 
-For example, to map user CGI directories without ``mod_userdir``:
+For example, to map user CGI directories without :module:`mod_userdir`:
 
 
 .. code-block:: apache
@@ -309,7 +307,7 @@ For example, to map user CGI directories without ``mod_userdir``:
 
 
 A request for ``http://example.com/~alice/cgi-bin/stats.pl`` would
-execute ``/home/alice/cgi-bin/stats.pl``.
+execute :file:`/home/alice/cgi-bin/stats.pl`.
 
 Similarly, ``AliasMatch`` can map patterns of URLs to filesystem
 locations:
@@ -320,8 +318,8 @@ locations:
    AliasMatch "^/docs/([a-z]{2})/" "/srv/docs/$1/"
 
 
-This maps ``/docs/en/`` to ``/srv/docs/en/``, ``/docs/fr/`` to
-``/srv/docs/fr/``, and so on.
+This maps :file:`/docs/en/` to :file:`/srv/docs/en/`, :file:`/docs/fr/` to
+:file:`/srv/docs/fr/`, and so on.
 
 A common gotcha: unlike ``Alias``, which treats the URL prefix as a
 literal string, ``AliasMatch`` consumes the entire URL-path during the
@@ -405,9 +403,9 @@ path structure:
    RedirectMatch 301 "^/oldsite/(.*)" "https://newsite.example.com/$1"
 
 
-This redirects ``/oldsite/page.html`` to
+This redirects :file:`/oldsite/page.html` to
 ``https://newsite.example.com/page.html``, and so on for any path
-under ``/oldsite/``.
+under :file:`/oldsite/`.
 
 Another common use is stripping or adding file extensions:
 
@@ -570,7 +568,7 @@ mod_vhost_alias
 When you have a handful of virtual hosts, writing an explicit
 ``<VirtualHost>`` block for each one is straightforward. When you have
 hundreds or thousands — as a hosting provider might — individual blocks
-become unmanageable. ``mod_vhost_alias`` solves this by dynamically
+become unmanageable. :module:`mod_vhost_alias` solves this by dynamically
 deriving the document root from the hostname of the incoming request.
 
 The simplest configuration uses ``VirtualDocumentRoot`` with
@@ -584,7 +582,7 @@ the ``%0`` interpolation token, which expands to the full server name:
 
 
 A request for ``http://www.example.com/page.html`` is served from
-``/var/www/vhosts/www.example.com/page.html``. No per-host
+:file:`/var/www/vhosts/www.example.com/page.html`. No per-host
 configuration is needed — just create the directory and drop in the
 files.
 
@@ -600,14 +598,14 @@ characters for hash-based directory layouts:
 
 
 This maps ``www.domain.example.com`` to
-``/var/www/vhosts/example.com/d/o/m/domain/``.
+:file:`/var/www/vhosts/example.com/d/o/m/domain/`.
 
 There's also ``VirtualScriptAlias`` and ``VirtualScriptAliasIP`` for
 CGI directories, and ``VirtualDocumentRootIP`` for IP-based mass
 hosting.
 
-Before reaching for ``mod_rewrite`` to implement mass virtual hosting,
-check whether ``mod_vhost_alias`` does what you need — it's faster and
+Before reaching for :module:`mod_rewrite` to implement mass virtual hosting,
+check whether :module:`mod_vhost_alias` does what you need — it's faster and
 far simpler to maintain.
 
 .. _proxying:
@@ -621,9 +619,9 @@ Proxying
 --------
 
 
-``mod_proxy`` and its family of protocol-specific sub-modules
-(``mod_proxy_http``, ``mod_proxy_fcgi``, ``mod_proxy_ajp``,
-``mod_proxy_wstunnel``, and others) allow httpd to forward requests to
+:module:`mod_proxy` and its family of protocol-specific sub-modules
+(:module:`mod_proxy_http`, :module:`mod_proxy_fcgi`, :module:`mod_proxy_ajp`,
+:module:`mod_proxy_wstunnel`, and others) allow httpd to forward requests to
 another server and return the response to the client. This is a form of
 URL mapping — the URL is mapped not to a local file but to a remote
 resource.
@@ -643,7 +641,7 @@ response so that redirects point to the proxy's URL rather than the
 backend's. Without it, clients may be redirected to URLs they can't
 reach.
 
-Proxying interacts with ``mod_rewrite`` via the ``[P]`` flag, which
+Proxying interacts with :module:`mod_rewrite` via the ``[P]`` flag, which
 is discussed in :ref:`Chapter_proxy`. The short version: ``[P]``
 causes a ``RewriteRule`` substitution to be treated as a proxy request.
 This is powerful but has subtleties — and in many cases a simple
@@ -658,7 +656,7 @@ This is powerful but has subtleties — and in many cases a simple
 mod_proxy_express
 ~~~~~~~~~~~~~~~~~
 
-``mod_proxy_express`` does for reverse proxying what ``mod_vhost_alias``
+:module:`mod_proxy_express` does for reverse proxying what :module:`mod_vhost_alias`
 does for document roots: it dynamically maps incoming hostnames to
 backend URLs using a DBM file, without requiring per-host configuration.
 
@@ -695,7 +693,7 @@ mod_actions
 -----------
 
 
-``mod_actions`` lets you trigger a CGI script based on the MIME type of
+:module:`mod_actions` lets you trigger a CGI script based on the MIME type of
 the requested resource or the HTTP request method.
 
 The ``Action`` directive maps a handler or MIME type to a CGI script:
@@ -707,7 +705,7 @@ The ``Action`` directive maps a handler or MIME type to a CGI script:
 
 
 Any request for a ``.gif`` file will be handled by
-``/cgi-bin/image-handler.cgi``, which receives the original URL in the
+:file:`/cgi-bin/image-handler.cgi`, which receives the original URL in the
 ``PATH_INFO`` and ``PATH_TRANSLATED`` environment variables.
 
 You can also fire a script for a specific HTTP method using the
@@ -720,7 +718,7 @@ You can also fire a script for a specific HTTP method using the
 
 
 This is a niche feature, but when you need it, it's simpler than trying
-to match request methods with ``mod_rewrite``.
+to match request methods with :module:`mod_rewrite`.
 
 .. _mod_imagemap:
 
@@ -732,7 +730,7 @@ mod_imagemap
 ------------
 
 
-``mod_imagemap`` provides server-side image map processing — an early
+:module:`mod_imagemap` provides server-side image map processing — an early
 web technology where different regions of an image could link to
 different URLs. Clicking on a specific area of the image sends the
 coordinates to the server, which looks them up in a map file and
@@ -740,7 +738,7 @@ returns the appropriate URL.
 
 While server-side image maps have been almost entirely replaced by
 client-side image maps (the HTML ``<map>`` and ``<area>`` elements) and
-modern JavaScript-driven interfaces, ``mod_imagemap`` remains part of
+modern JavaScript-driven interfaces, :module:`mod_imagemap` remains part of
 the httpd distribution for backwards compatibility.
 
 .. _mod_negotiation:
@@ -756,7 +754,7 @@ mod_negotiation
 ---------------
 
 
-``mod_negotiation`` implements content negotiation — the ability for the
+:module:`mod_negotiation` implements content negotiation — the ability for the
 server to choose the best representation of a resource based on the
 client's stated preferences (language, media type, encoding, character
 set).
@@ -770,14 +768,14 @@ directive:
    Options +MultiViews
 
 
-With ``MultiViews`` enabled, a request for ``/docs/manual`` causes
+With ``MultiViews`` enabled, a request for :file:`/docs/manual` causes
 httpd to search for files matching the pattern ``/docs/manual.*`` and
 choose the best match based on the ``Accept-*`` headers in the request.
-So if both ``manual.en.html`` and ``manual.fr.html`` exist, a French
+So if both :file:`manual.en.html` and :file:`manual.fr.html` exist, a French
 browser will receive the French version.
 
 A more explicit approach uses type maps — files (typically with a
-``.var`` extension) that list the available variants and their
+:file:`.var` extension) that list the available variants and their
 properties:
 
 .. code-block:: none
@@ -794,7 +792,7 @@ properties:
 
 
 Content negotiation is worth understanding because it can interact
-with ``mod_rewrite`` in surprising ways. If ``MultiViews`` is on and
+with :module:`mod_rewrite` in surprising ways. If ``MultiViews`` is on and
 you have a rewrite rule that expects a literal file path, the
 negotiation phase may match a file before your rule fires — or your
 rule may fire and then negotiation remaps the result. When debugging
@@ -811,7 +809,7 @@ mod_userdir
 -----------
 
 
-``mod_userdir`` enables the classic Unix convention of per-user web
+:module:`mod_userdir` enables the classic Unix convention of per-user web
 directories accessed via ``http://example.com/~username/``. The
 ``UserDir`` directive specifies which directory within a user's home
 directory serves as their web root:
@@ -823,7 +821,7 @@ directory serves as their web root:
 
 
 A request for ``http://example.com/~alice/index.html`` is then served
-from ``/home/alice/public_html/index.html``.
+from :file:`/home/alice/public_html/index.html`.
 
 You can also point ``UserDir`` at an entirely different directory tree:
 
@@ -833,7 +831,7 @@ You can also point ``UserDir`` at an entirely different directory tree:
    UserDir /var/www/users
 
 
-This maps ``~alice`` to ``/var/www/users/alice/``, regardless of where
+This maps ``~alice`` to :file:`/var/www/users/alice/`, regardless of where
 Alice's home directory actually is.
 
 For security, you should typically disable ``UserDir`` for sensitive
@@ -856,8 +854,8 @@ explicitly enable specific users:
 
 
 The ``~`` in URLs can be awkward, and some administrators prefer cleaner
-paths like ``/users/alice/``. This is achievable with an ``AliasMatch``
-(see :ref:`aliasmatch` above) and doesn't require ``mod_userdir`` at
+paths like :file:`/users/alice/`. This is achievable with an ``AliasMatch``
+(see :ref:`aliasmatch` above) and doesn't require :module:`mod_userdir` at
 all.
 
 .. _mod_speling:
@@ -871,9 +869,11 @@ mod_speling
 -----------
 
 
-``mod_speling`` (yes, with one "l") attempts to fix mistyped URLs by
+:module:`mod_speling` [#speling-name]_ attempts to fix mistyped URLs by
 performing a case-insensitive match and allowing up to one character
 error — an insertion, omission, transposition, or wrong character.
+
+.. [#speling-name] Yes, with one "l" — because it's hilarious, see?
 
 Enable it with:
 
@@ -882,9 +882,12 @@ Enable it with:
 
    CheckSpelling On
 
+Note that the directive is ``CheckSpelling`` — with two l's. [#checkspelling]_
 
-If a request for ``/Index.HTML`` doesn't find a file but
-``/index.html`` exists, ``mod_speling`` will issue a 301 redirect to
+.. [#checkspelling] Just to keep you on your toes.
+
+If a request for :file:`/Index.HTML` doesn't find a file but
+:file:`/index.html` exists, :module:`mod_speling` will issue a 301 redirect to
 the correct URL. If multiple close matches exist, the client receives
 a 300 (Multiple Choices) response listing the candidates.
 
@@ -893,15 +896,15 @@ differences without attempting to fix other misspellings.
 
 Caveats:
 
-- ``mod_speling`` performs a directory scan for each miss, which can
+- :module:`mod_speling` performs a directory scan for each miss, which can
   be expensive on busy servers or large directories.
 - It may match files you didn't intend — for example, correcting a
-  request for ``/status`` to ``/stats.html`` when you meant the
+  request for ``/status`` to :file:`/stats.html` when you meant the
   ``server-status`` handler.
 - It should not be enabled in DAV-enabled directories, where it can
   redirect write operations to unintended resources.
 
-``mod_speling`` can eliminate a surprising number of 404 errors caused
+:module:`mod_speling` can eliminate a surprising number of 404 errors caused
 by case differences — particularly useful when migrating from a
 case-insensitive filesystem (Windows/IIS) to a case-sensitive one
 (Linux). It's a lighter touch than writing ``RewriteRule`` patterns to
@@ -947,6 +950,4 @@ Note that ``FallbackResource`` (see :ref:`fallbackresource` above)
 fires *before* the 404 would be generated. If ``FallbackResource`` is
 set, ``ErrorDocument 404`` will only trigger for requests that your
 fallback handler itself decides to reject.
-
-
 

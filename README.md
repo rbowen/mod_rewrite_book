@@ -31,6 +31,12 @@ The book is written in [reStructuredText](https://docutils.sourceforge.io/rst.ht
   | Arch | `sudo pacman -S texlive-most latexmk` |
   | Windows | Install [MiKTeX](https://miktex.org/) or [TeX Live](https://tug.org/texlive/) |
 
+**Optional (for Kindle output):**
+
+- **[Calibre](https://calibre-ebook.com/)** — provides `ebook-convert` for ePub → azw3 conversion:
+  - macOS: `brew install calibre`
+  - Other platforms: [download from calibre-ebook.com](https://calibre-ebook.com/download)
+
 If LaTeX is not installed, `build.sh` will still generate HTML and ePub successfully and skip the PDF step.
 
 **Installing uv:**

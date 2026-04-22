@@ -237,7 +237,7 @@ cookie itself. So, when someone accesses your site using the hostname
 ``example.com``, you want to redirect that request to use the hostname
 ``www.example.com``.
 
-In previous versions of httpd, you may have used ``mod_rewrite`` to
+In previous versions of httpd, you may have used :module:`mod_rewrite` to
 perform this redirection, but ``<If>`` provides a more intuitive syntax:
 
 
@@ -286,7 +286,7 @@ mod_macro
 ---------
 
 
-``mod_macro`` has been around for a while, but with the 2.4 version of the
+:module:`mod_macro` has been around for a while, but with the 2.4 version of the
 server it is now one of the modules that comes with the server itself,
 rather than being a third-party module obtained and installed
 separately.

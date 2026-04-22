@@ -19,8 +19,8 @@ RewriteRule
 
 
 
-We'll start the main technical discussion of mod_rewrite with the
-RewriteRule directive, as it is the workhorse of mod_rewrite, and the
+We'll start the main technical discussion of :module:`mod_rewrite` with the
+RewriteRule directive, as it is the workhorse of :module:`mod_rewrite`, and the
 directive that you'll encounter most frequently.
 
 RewriteRule performs manipulation of a requested URL, and along the way
@@ -90,7 +90,7 @@ In VirtualHost context, or in server-wide context, ``PATTERN`` will be
 matched against the part of the URL after the hostname and port, and
 before the query string. For example, in the URL
 <http://example.com/dogs/index.html?dog=collie>, the pattern will be
-matched against ``/dogs/index.html``.
+matched against :file:`/dogs/index.html`.
 
 In Directory and htaccess context, ``PATTERN`` will be matched against the
 filesystem path, after removing the prefix that led the server to the
@@ -144,10 +144,10 @@ URL-path
 
 
 A DocumentRoot-relative path to the resource to be served. Note that
-mod_rewrite tries to guess whether you have specified a file-system path
+:module:`mod_rewrite` tries to guess whether you have specified a file-system path
 or a URL-path by checking to see if the first segment of the path exists
 at the root of the file-system. For example, if you specify a
-Substitution string of ``/www/file.html``, then this will be treated as a
+Substitution string of :file:`/www/file.html`, then this will be treated as a
 URL-path unless a directory named www exists at the root or your
 file-system (or, in the case of using rewrites in a .htaccess file,
 relative to your document root), in which case it will be treated as a
@@ -166,7 +166,7 @@ Absolute URL
 ~~~~~~~~~~~~
 
 
-If an absolute URL is specified, mod_rewrite checks to see whether the
+If an absolute URL is specified, :module:`mod_rewrite` checks to see whether the
 hostname matches the current host. If it does, the scheme and hostname
 are stripped out and the resulting path is treated as a URL-path.
 Otherwise, an external redirect is performed for the given URL. To force

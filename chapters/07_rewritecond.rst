@@ -176,7 +176,7 @@ specification.
 SERVER_NAME and SERVER_PORT depend on the values of UseCanonicalName and
 UseCanonicalPhysicalPort respectively.
 
-Those that are special to mod_rewrite include those below.
+Those that are special to :module:`mod_rewrite` include those below.
 
 IS_SUBREQ
    Will contain the text "true" if the request currently being processed
@@ -209,7 +209,7 @@ REQUEST_FILENAME
 HTTPS
    Will contain the text "on" if the connection is using SSL/TLS, or
    "off" otherwise. (This variable can be safely used regardless of
-   whether or not mod_ssl is loaded).
+   whether or not :module:`mod_ssl` is loaded).
 REQUEST_SCHEME
    Will contain the scheme of the request (usually "http" or "https").
    This value can be influenced with ServerName.
@@ -254,7 +254,7 @@ and (if not found there) via getenv() from the Apache httpd server
 process.
 
 ``%{SSL:variable}``, where variable is the name of an SSL environment
-variable, can be used whether or not mod_ssl is loaded, but will always
+variable, can be used whether or not :module:`mod_ssl` is loaded, but will always
 expand to the empty string if it is not. Example:
 ``%{SSL:SSL_CIPHER_USEKEYSIZE}`` may expand to 128.
 
@@ -285,10 +285,10 @@ the current stage, but will be set in a later phase.
 For instance, to rewrite according to the REMOTE_USER variable from
 within the per-server context (httpd.conf file) you must use
 ``%{LA-U:REMOTE_USER}`` - this variable is set by the authorization phases,
-which come after the URL translation phase (during which mod_rewrite
+which come after the URL translation phase (during which :module:`mod_rewrite`
 operates).
 
-On the other hand, because mod_rewrite implements its per-directory
+On the other hand, because :module:`mod_rewrite` implements its per-directory
 context (.htaccess file) via the Fixup phase of the API and because the
 authorization phases come before this phase, you just can use
 ``%{REMOTE_USER}`` in that context.
@@ -480,8 +480,150 @@ understood.
 .. index:: pair: RewriteCond; examples
 
 Examples
+--------
 
-Query Strings .. index
-   rewritemap_int '''''''''''''
+The following examples show ``RewriteCond`` in common real-world
+scenarios. Many of these appear again in :ref:`Chapter_recipes` with
+additional discussion.
+
+
+.. index:: pair: RewriteCond; query string matching
+
+Matching query strings
+~~~~~~~~~~~~~~~~~~~~~~
+
+``RewriteRule`` only matches against the URL-path — it never sees the
+query string. To test query string content, use ``RewriteCond`` with
+``%{QUERY_STRING}``:
+
+
+.. code-block:: apache
+
+   # Redirect old query-string-based URLs to clean paths
+   RewriteCond %{QUERY_STRING}  ^id=([0-9]+)$
+   RewriteRule ^/product$       /product/%1?  [R=301,L]
+
+
+This turns ``/product?id=42`` into ``/product/42``. The trailing ``?``
+in the substitution strips the original query string (without it, the
+query string is passed through by default). The ``%1`` backreference
+comes from the ``RewriteCond`` capture group, not from ``RewriteRule``.
+
+
+.. index:: pair: RewriteCond; hostname matching
+
+Hostname-based routing
+~~~~~~~~~~~~~~~~~~~~~~
+
+Test the ``Host:`` header to apply rules only to specific hostnames:
+
+
+.. code-block:: apache
+
+   # Redirect www to non-www
+   RewriteCond %{HTTP_HOST} ^www\.example\.com$ [NC]
+   RewriteRule ^(.*)$       https://example.com$1 [R=301,L]
+
+
+The ``[NC]`` flag on the condition makes the hostname comparison
+case-insensitive.
+
+
+.. index:: pair: RewriteCond; file existence check
+.. index:: pair: RewriteCond; -f (file test)
+.. index:: pair: RewriteCond; -d (directory test)
+
+File and directory existence
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``-f`` and ``-d`` tests check whether a path exists on disk. This
+is the basis of the front-controller pattern:
+
+
+.. code-block:: apache
+
+   # If the request isn't an existing file or directory, route to index.php
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule ^(.*)$ /index.php [L]
+
+
+The ``!`` negates the test. Both conditions must be true (the default
+is AND), so the rule fires only when the request matches *neither* an
+existing file nor an existing directory.
+
+Note: ``FallbackResource`` (see :ref:`fallbackresource`) does the same
+thing in a single line. Use ``RewriteCond !-f`` only when you need
+additional conditions or URL transformations that ``FallbackResource``
+can't express.
+
+
+.. index:: pair: RewriteCond; time-based rules
+
+Time-based rules
+~~~~~~~~~~~~~~~~
+
+The ``TIME_*`` variables let you vary behavior by time of day, day of
+week, or date:
+
+
+.. code-block:: apache
+
+   # Maintenance window: redirect all traffic between 2 AM and 4 AM
+   RewriteCond %{TIME_HOUR} ^0[2-3]$
+   RewriteRule !^/maintenance\.html$ /maintenance.html [R=302,L]
+
+
+The ``RewriteRule`` pattern uses ``!`` to exclude the maintenance page
+itself — without this, you'd create an infinite redirect loop.
+
+
+.. index:: pair: RewriteCond; HTTPS detection
+
+Requiring HTTPS
+~~~~~~~~~~~~~~~
+
+Test whether the connection is secure:
+
+
+.. code-block:: apache
+
+   RewriteCond %{HTTPS} !=on
+   RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+
+
+Or, if you're behind a load balancer that terminates TLS and forwards
+``X-Forwarded-Proto``:
+
+
+.. code-block:: apache
+
+   RewriteCond %{HTTP:X-Forwarded-Proto} !https
+   RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+
+
+Note the syntax ``%{HTTP:HeaderName}`` for testing arbitrary HTTP
+request headers.
+
+
+.. index:: pair: RewriteCond; combining with OR
+
+Combining conditions with OR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, multiple ``RewriteCond`` directives are ANDed. Use the
+``[OR]`` flag for OR logic:
+
+
+.. code-block:: apache
+
+   # Block two specific user agents
+   RewriteCond %{HTTP_USER_AGENT} BadBot  [NC,OR]
+   RewriteCond %{HTTP_USER_AGENT} EvilScraper [NC]
+   RewriteRule ^ - [F]
+
+
+The ``[F]`` flag returns a 403 Forbidden. The rule fires if *either*
+condition matches.
 
 

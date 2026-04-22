@@ -4,6 +4,19 @@
 import sys, os
 sys.path.insert(0, os.path.abspath('_ext'))
 
+# -- Custom roles ------------------------------------------------------------
+
+from docutils.parsers.rst import roles
+from docutils import nodes
+
+def module_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    """Custom role for Apache module names: :module:`mod_rewrite`"""
+    node = nodes.literal(rawtext, text, classes=['module'])
+    return [node], []
+
+roles.register_local_role('module', module_role)
+
+
 # mod_rewrite And Friends
 # by Rich Bowen
 
@@ -14,8 +27,8 @@ copyright = '2013–2026, Rich Bowen. Licensed under the Apache License, Version
 author = 'Rich Bowen'
 
 # The full version, including alpha/beta/rc tags
-release = '3.1.2'
-version = '3.1'
+release = '3.7.0'
+version = '3.7'
 
 # -- General configuration ---------------------------------------------------
 
@@ -81,7 +94,8 @@ epub_use_index = True
 
 # -- Options for todo extension ----------------------------------------------
 
-todo_include_todos = True
+# Set to True during development to see todo items in the rendered output
+todo_include_todos = False
 
 # -- Intersphinx configuration -----------------------------------------------
 

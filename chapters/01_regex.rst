@@ -22,8 +22,8 @@ Regular Expressions
 
 
 Much of the content in this book requires that you have some mastery
-of regular expressions. Indeed, in my years of teaching ``mod_rewrite``,
-it has been my observation that most people don't find ``mod_rewrite`` hard at
+of regular expressions. Indeed, in my years of teaching :module:`mod_rewrite`,
+it has been my observation that most people don't find :module:`mod_rewrite` hard at
 all: they're just intimidated by regular expressions.
 
 .. index:: Mastering Regular Expressions by Jeffrey Friedl
@@ -51,9 +51,9 @@ Finally, even if you never intend to write a line of Perl, the Perl
 regular expression man page (``man perlre``) is one of the best regex
 references available on any Unix system. It's thorough, well-organized,
 and covers every feature of PCRE — which is the regex flavor that
-``mod_rewrite`` uses. It's already installed on most systems.
+:module:`mod_rewrite` uses. It's already installed on most systems.
 
-If you just want to know enough about regex to master mod_rewrite, read
+If you just want to know enough about regex to master :module:`mod_rewrite`, read
 this chapter a few times, and that should be sufficient.
 
 The goal of this chapter is to introduce the building blocks - the basic 
@@ -564,7 +564,7 @@ than one set of parentheses, the second one will be captured to the variable ``$
 and so on. Only values up through ``$9`` are available, however.  The reason for this is that ``$10`` 
 would be ambiguous. It might mean ``$1``, followed by a literal zero (0), or it might mean ``$10``.  
 Rather than providing additional syntax to disambiguate this term, the designer of 
-mod_rewrite instead chose to only provide backreferences through ``$9``.
+:module:`mod_rewrite` instead chose to only provide backreferences through ``$9``.
 
 The exact way in which you can exploit this feature will be more obvious later, once we 
 start looking at the RewriteRule directive in :ref:`Chapter_rewriterule`
@@ -814,7 +814,7 @@ Matching URIs
 ~~~~~~~~~~~~~
 
 
-Finally, since this is, after all, a book about mod_rewrite, it seems reasonable to give 
+Finally, since this is, after all, a book about :module:`mod_rewrite`, it seems reasonable to give 
 some examples of matching URIs, as that is what you will primarily be doing for the rest of 
 the book.
 
@@ -1008,7 +1008,7 @@ what each backreference captures:
     2: widget-42
 
 This is the same PCRE2 engine that Apache httpd uses, so what
-``pcre2test`` tells you is exactly what ``mod_rewrite`` will do.
+``pcre2test`` tells you is exactly what :module:`mod_rewrite` will do.
 
 .. note::
 
@@ -1057,7 +1057,7 @@ Summary
 
 
 Having a good grasp of Regular Expressions is a necessary prerequisite 
-to working with mod_rewrite. All too often, people try to build regular 
+to working with :module:`mod_rewrite`. All too often, people try to build regular 
 expressions by the brute-force method, trying various different 
 combinations at random until something seems to mostly work. This 
 results in expressions that are inefficient and fragile, as well as a 
@@ -1071,7 +1071,7 @@ documentation, which you can find online at
 <https://perldoc.perl.org/perlre> or by typing
 ``perldoc perlre`` at your command line, and the PCRE documentation, which
 you can find online at <https://www.pcre.org/current/doc/html/>. This is useful even
-if you're using regex in other implementations (like ``mod_rewrite``, for
+if you're using regex in other implementations (like :module:`mod_rewrite`, for
 example), since the syntax is largely the same across implementations.
 
 

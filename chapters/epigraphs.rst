@@ -44,14 +44,15 @@ Chapter 1: Regular Expressions
 Chapter 2: URL Mapping
 ~~~~~~~~~~~~~~~~~~~~~~
 
-   | Hear and attend and listen; for this befell and behappened and
-   | became and was: O my Best Beloved, when the tame animals were wild.
+   | The first thing you learn in life is you're a fool.
+   | The last thing you learn in life is you're the same fool.
 
-   -- Rudyard Kipling, *Just So Stories*
+   -- Ray Bradbury, *Dandelion Wine*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+URL mapping is the first thing every httpd admin learns — and the
+first place they discover how much they still have to learn.
 
 
 Chapter 3: Introduction to mod_rewrite
@@ -129,16 +130,16 @@ Chapter 7: RewriteCond
 Chapter 8: RewriteMap
 ~~~~~~~~~~~~~~~~~~~~~
 
-   | He took that skin, and he shook that skin, and he scrubbed
-   | that skin, and he rubbed that skin just as full of old,
-   | dry, stale, tickly cake-crumbs and some burned currants
-   | as ever it could possibly hold.
+   | And memories, he knew, were not glass treasures to be
+   | kept locked within a box. They were bright ribbons to
+   | be hung in the wind.
 
-   -- Rudyard Kipling, *How the Rhinoceros Got His Skin*
+   -- Terry Brooks, *The Talismans of Shannara*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+RewriteMaps externalize knowledge — lookups, translations, redirects —
+into files and programs rather than locking them inside rewrite rules.
 
 
 Chapter 9: Proxies and mod_rewrite
@@ -212,14 +213,13 @@ Chapter 13: Content Munging
 Chapter 14: Recipes
 ~~~~~~~~~~~~~~~~~~~
 
-   | If you swim to latitude Fifty North, longitude Forty West
-   | (that is magic), you will find, sitting on a raft, in the
-   | middle of the sea, one ship-wrecked Mariner, who, it is
-   | only fair to tell you, is a man of infinite-resource-and-sagacity.
+   | Not to know that no space of regret can make amends
+   | for one life's opportunity misused!
 
-   -- Rudyard Kipling, *How the Whale Got His Throat*
+   -- Charles Dickens, *A Christmas Carol*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Jacob Marley's ghost, lamenting wasted opportunity — a fitting
+epigraph for a chapter full of recipes to avoid common mistakes.
 

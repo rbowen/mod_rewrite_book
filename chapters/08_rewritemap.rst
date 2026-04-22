@@ -10,12 +10,11 @@ RewriteMap
 
 .. epigraph::
 
-   | He took that skin, and he shook that skin, and he scrubbed
-   | that skin, and he rubbed that skin just as full of old,
-   | dry, stale, tickly cake-crumbs and some burned currants
-   | as ever it could possibly hold.
+   | And memories, he knew, were not glass treasures to be
+   | kept locked within a box. They were bright ribbons to
+   | be hung in the wind.
 
-   -- Rudyard Kipling, *How the Rhinoceros Got His Skin*
+   -- Terry Brooks, *The Talismans of Shannara*
 
 
 
@@ -64,7 +63,7 @@ MapSource
 The ``RewriteMap`` directive must be used either in virtualhost context,
 or in global server context. This is because a ``RewriteMap`` is loaded at
 server startup time, rather than at request time, and, as such, cannot
-be specified in a ``.htaccess`` file.
+be specified in a :file:`.htaccess` file.
 
 .. _using-a-rewritemap:
 
@@ -156,7 +155,7 @@ int
 ~~~
 
 
-An ``int`` map type is an internal function, pre-defined by ``mod_rewrite``
+An ``int`` map type is an internal function, pre-defined by :module:`mod_rewrite`
 itself. There are four such functions:
 
 .. _toupper:
@@ -308,9 +307,9 @@ faster lookups.
 
 **Context restriction:** The ``RewriteMap`` directive itself must
 appear in server or virtual host context — you cannot declare it in a
-``.htaccess`` file. However, once declared, the map can be *used* in
+:file:`.htaccess` file. However, once declared, the map can be *used* in
 ``RewriteRule`` and ``RewriteCond`` directives anywhere, including
-``.htaccess``.
+:file:`.htaccess`.
 
 .. _rnd:
 
@@ -347,7 +346,7 @@ load-balancing:
    RewriteRule ^/app/(.*)    http://${servers:dynamic}/app/$1   [P]
 
 
-Each request for ``/static/logo.png`` is proxied to a randomly
+Each request for :file:`/static/logo.png` is proxied to a randomly
 selected server from the ``static`` list.
 
 **Weighting trick:** To weight the selection toward a particular server,
@@ -363,7 +362,7 @@ This gives ``www1`` a 75% probability and ``www2`` a 25% probability.
 
 Note that this is a very basic form of load balancing with no health
 checking or session affinity. For production load balancing, use
-``mod_proxy_balancer`` instead. The ``rnd`` map is most useful for
+:module:`mod_proxy_balancer` instead. The ``rnd`` map is most useful for
 simple cases like distributing static asset requests or A/B testing.
 
 .. _dbm:
@@ -414,7 +413,7 @@ produces by default — it chooses the best available type for your
 platform.
 
 **Note:** Some DBM implementations create two files (e.g.,
-``redirectmap.map.dir`` and ``redirectmap.map.pag``). Always reference
+:file:`redirectmap.map.dir` and :file:`redirectmap.map.pag`). Always reference
 the base name without extensions in the ``RewriteMap`` directive.
 
 **Caching:** Like ``txt`` maps, ``dbm`` maps are cached in memory and
@@ -511,7 +510,7 @@ dbd
 ~~~
 
 A ``dbd`` map looks up keys via a SQL query, using a database
-connection managed by ``mod_dbd``. This lets you drive rewrite rules
+connection managed by :module:`mod_dbd`. This lets you drive rewrite rules
 from a database table that can be updated in real time without touching
 configuration files or restarting the server.
 
@@ -536,7 +535,7 @@ placeholder for the lookup key:
    RewriteRule ^/r/(.*) ${myquery:$1|/not-found.html} [R=301]
 
 
-You must also configure ``mod_dbd`` with a database connection:
+You must also configure :module:`mod_dbd` with a database connection:
 
 
 .. code-block:: apache
@@ -559,6 +558,6 @@ updated by a CMS). Use ``fastdbd`` when the data is relatively stable
 and you want to minimize database load (e.g., a redirect table that's
 updated weekly).
 
-``mod_dbd`` is required — the ``dbd`` and ``fastdbd`` map types will
+:module:`mod_dbd` is required — the ``dbd`` and ``fastdbd`` map types will
 produce a configuration error if it is not loaded.
 

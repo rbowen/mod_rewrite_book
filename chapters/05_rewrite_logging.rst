@@ -19,12 +19,12 @@ Rewrite Logging
 
 
 
-Exactly how you turn on logging for mod_rewrite will depend on what
+Exactly how you turn on logging for :module:`mod_rewrite` will depend on what
 version of the Apache http server you are running. Logging got some
 updates in the 2.4 release of the server, and the rewrite log was one of
 the changes that happened at that time.
 
-If you're not sure what version you're running, you can get the ``httpd``
+If you're not sure what version you're running, you can get the :file:`httpd`
 binary to tell you with the ``-v`` flag:
 
 
@@ -38,7 +38,7 @@ binary to tell you with the ``-v`` flag:
 
 As with any other logging, the log file is opened when the server is
 started up, before the server relinquishes its root privileges. For this
-reason, the ``RewriteLog`` directive may not be used in ``.htaccess`` files,
+reason, the ``RewriteLog`` directive may not be used in :file:`.htaccess` files,
 but may only be invoked in the server configuration file.
 
 .. _and-earlier:
@@ -52,13 +52,13 @@ but may only be invoked in the server configuration file.
 
 2.2 and earlier
 
-Prior to httpd 2.4, the way to enable mod_rewrite logging is with the
+Prior to httpd 2.4, the way to enable :module:`mod_rewrite` logging is with the
 ``RewriteLog`` and ``RewriteLogLevel`` directives.
 
 The ``RewriteLog`` directive should be set to the location of your rewrite
 log file, and the ``RewriteLogLevel`` is set to a value from 0 to 5 to
 indicate the desired verbosity of the log file, with 0 being no log
-entries, and 5 being to log every time mod_rewrite even thinks about
+entries, and 5 being to log every time :module:`mod_rewrite` even thinks about
 doing something.
 
 You'll often find advice online suggesting that ``RewriteLogLevel`` be set
@@ -87,7 +87,7 @@ In the 2.4 version of the server, many changes were made to the way that
 logging works. One of these changes was the addition of per-module log
 configurations. This rendered the ``RewriteLog`` directive superfluous.
 So, from 2.4 on, rewrite logging is enabled using the ``LogLevel``
-directive, specifying a ``trace`` log level for mod_rewrite.
+directive, specifying a ``trace`` log level for :module:`mod_rewrite`.
 
 
 .. code-block:: none
@@ -108,7 +108,7 @@ specified by the ``ErrorLog`` directive.
 What's in the Rewrite log? - An example
 
 The best way to talk about what's in the rewrite log is to show you some
-examples of the kinds of things that mod_rewrite logs.
+examples of the kinds of things that :module:`mod_rewrite` logs.
 
 Consider a simple rewrite scenario such as follows:
 
@@ -126,8 +126,8 @@ Consider a simple rewrite scenario such as follows:
    # RewriteLog /var/log/httpd/rewrite.log
 
 
-This ruleset says "If it's not already ``index.php``, rewrite it to
-``index.php``.
+This ruleset says "If it's not already :file:`index.php`, rewrite it to
+:file:`index.php`.
 
 Now, we'll make a request for the URL http://localhost/example and see
 what gets logged:
@@ -236,7 +236,7 @@ a time.
 ``[localhost/sid#7f985f445348][rid#7f985f949040/initial]``
    This is the unique identifier for the request.
 ``init rewrite engine with requested uri /example``
-   Ahah! Finally! The actual log message from mod_rewrite!
+   Ahah! Finally! The actual log message from :module:`mod_rewrite`!
 
 Now that you know what all of the various fields are in the log entry,
 let's just look at the ones we actually care about. Here's the log file
@@ -262,12 +262,12 @@ I've removed the extraneous information, and split the log entries into
 two logical chunks.
 
 In the first bit, the requested URL ``/example`` is run through the
-ruleset and ends up getting rewritten to ``/index.php``, as desired.
+ruleset and ends up getting rewritten to :file:`/index.php`, as desired.
 
-In the second bit, the browser requests the URL ``/favicon.ico`` as a side
+In the second bit, the browser requests the URL :file:`/favicon.ico` as a side
 effect of the initial request. ``favicon`` is the icon that appears in
 your browser address bar next to the URL, and is an automatic feature of
-most browsers. As such, you're likely to see mention of ``favicon.ico`` in
+most browsers. As such, you're likely to see mention of :file:`favicon.ico` in
 your log files from time to time, and it's nothing to worry too much
 about. You can read more about favicons at
 <http://en.wikipedia.org/wiki/Favicon>.
@@ -291,9 +291,9 @@ pattern ``matched``.
 
 Since the ``RewriteRule`` pattern and the ``RewriteCond`` both matched, we
 continue on to the right hand side of the ``RewriteRule`` and apply the
-rewrite, and ``/example`` is rewritten to ``index.php``, which is also
+rewrite, and ``/example`` is rewritten to :file:`index.php`, which is also
 logged. A final log entry tells us what the local path result ends up
-being after this process, which is ``index.php``.
+being after this process, which is :file:`index.php`.
 
 This kind of detailed log trail tells you very specifically what's going
 on, and what happened at each step. [#2]_
@@ -307,7 +307,7 @@ on, and what happened at each step. [#2]_
 
 RewriteRules in .htaccess files - An example
 
-We've previously discussed using mod_rewrite in .htaccess files, but
+We've previously discussed using :module:`mod_rewrite` in .htaccess files, but
 it's time to see what this actually looks like in practice. Let's
 replace the configuration file entry above with a .htaccess file
 instead, placed in the root document directory of our website. So, I'm
@@ -393,7 +393,7 @@ rather than considering the string ``/example``, as we did the first time
 through, now we're looking at the string ``example``. While this may seem
 trivial at this point, as we proceed to more complex examples, that
 leading slash will be the difference between a pattern matching and not
-matching, so you need to be aware of this every time you use ``.htaccess``
+matching, so you need to be aware of this every time you use :file:`.htaccess`
 files.
 
 The next few lines of the log proceed as before, except that we're
@@ -401,18 +401,18 @@ looking at ``example`` rather than ``/example`` in each line. Carefully
 compare the log entries from the first time through to the ones this
 time.
 
-What happens next is a surprise to most first-time users of mod_rewrite.
-The requested URI ``example`` is redirected to the URI ``/index.php``, and
+What happens next is a surprise to most first-time users of :module:`mod_rewrite`.
+The requested URI ``example`` is redirected to the URI :file:`/index.php`, and
 the whole process starts over again with that new URL. This is because,
 in perdir context, once a rewrite has been executed, that target URL
 must get passed back to the URL mapping process to determine what that
 URL maps to ... which may include invoking a .htaccess file.
 
 In this case, this causes the ruleset to be executed all over again,
-with the rewritten URL ``/index.php``.
+with the rewritten URL :file:`/index.php`.
 
 The remainder of the log should look very familiar. It's the same as
-what we saw before, with ``/index.php`` getting stripped to ``index.php``
+what we saw before, with :file:`/index.php` getting stripped to :file:`index.php`
 and run through the paces. This time around, however, the ``RewriteCond``
 does not match, and so the request is passed through unchanged.
 
