@@ -6,7 +6,7 @@ This book covers `mod_rewrite` in depth — regular expressions, `RewriteRule`, 
 
 ## Status
 
-This is a **work in progress** (v3.0). See the appendix for revision history and the TODO list.
+This is a **work in progress** (v3.2.0). See the appendix for revision history and the TODO list.
 
 ## Building
 
