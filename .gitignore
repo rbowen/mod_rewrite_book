@@ -8,3 +8,6 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Sync script
+sync-files.sh

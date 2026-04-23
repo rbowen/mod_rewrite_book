@@ -93,6 +93,12 @@ performance.
 .. index:: pair: book formats; reStructuredText
 .. index:: pair: book formats; Sphinx
 
+Errata and Feedback
+-------------------
+
+Found an error, have a suggestion, or want to contribute? Please file
+an issue at https://github.com/rbowen/mod_rewrite_book/issues.
+
 Acknowledgments
 ---------------
 
@@ -112,3 +118,4 @@ And to my muses, Rhi, Z, and E, I love you more than the whole world.
 Finally, to Maria, who makes everything beautiful. And so that was all right, Best Beloved. Do you see?
 
 -- Rich Bowen, April 2026
+

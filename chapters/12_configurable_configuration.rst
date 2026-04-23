@@ -12,11 +12,9 @@ Conditional Configuration
 
 .. epigraph::
 
-   | Once upon a most early time was a Neolithic man. He was not
-   | a Jute or an Angle, or even a Dravidian, which he might
-   | well have been, Best Beloved, but never mind why.
+   | Any sufficiently advanced technology is indistinguishable from magic.
 
-   -- Rudyard Kipling, *How the First Letter Was Written*
+   -- Arthur C. Clarke, *Profiles of the Future*
 
 
 

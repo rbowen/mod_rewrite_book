@@ -7,10 +7,16 @@ Access control with mod_rewrite
 
 .. epigraph::
 
-   | And when anybody spoke to him he said 'Humph!'
-   | Just 'Humph!' and no more.
+   | When the dragons grow too mighty
+   | To slay with pen or sword
+   | I grow weary of the battle
+   | And the storm I walk toward
+   | When all around is madness
+   | And there's no safe port in view
+   | I long to turn my path homeward
+   | To stop awhile with you
 
-   -- Rudyard Kipling, *How the Camel Got His Hump*
+   -- Rush, *Madrigal*
 
 
 This chapter covers using :module:`mod_rewrite` to control access to

@@ -7,10 +7,9 @@ Proxies and mod_rewrite
 
 .. epigraph::
 
-   | And the Animals said, 'O Eldest Magician, what shall we
-   | play at?' and he said, 'I will show you.'
+   | [Quote needed]
 
-   -- Rudyard Kipling, *The Crab That Played with the Sea*
+   -- [Author], *[Work]*
 
 
 This chapter explores the intersection of :module:`mod_rewrite` and

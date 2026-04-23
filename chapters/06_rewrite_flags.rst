@@ -10,13 +10,13 @@ RewriteRule Flags
 
 .. epigraph::
 
-   | She said to him ever so many times, graciously waving her
-   | tail, 'My son, when you find a Hedgehog you must drop him
-   | into the water and then he will uncoil, and when you catch
-   | a Tortoise you must scoop him out of his shell with your
-   | paw.'
+   | My girl came to the study
+   | and said Help me;
+   | I told her I had a time problem
+   | which meant:
+   | I would die for you but I don't have ten minutes.
 
-   -- Rudyard Kipling, *The Beginning of the Armadillos*
+   -- Brenda Hillman, *Time Problem*
 
 
 

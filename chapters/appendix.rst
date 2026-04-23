@@ -13,16 +13,11 @@ While the version number starts with 0.something, you can expect that there's qu
 TODO
 ~~~~
 
-
-* Write Content Munging chapter (Chapter 13 — outlined)
-* Write Proxy chapter content (Chapter 9 — outlined)
-* Write Virtual Hosts chapter content (Chapter 10 — outlined)
-* Write Access Control chapter content (Chapter 11 — outlined)
-* Provide issue tracker where people can log errata
-* Verify all desired formats (pdf, html, epub)
-* Automated publishing tools
-* Update/Replace the section on regex testing tools, since these appear
-  and vanish pretty quickly
+* [done] Issue tracker: https://github.com/rbowen/mod_rewrite_book/issues
+* [done] Verify all desired formats (pdf, html, epub)
+* [done] Update/Replace the section on regex testing tools
+* Fill in remaining epigraph notes (12 of 15 chapters)
+* Resolve remaining duplicate epigraph source (*The Elephant's Child* — Ch01 and Ch05)
 
 
 .. index:: revision history
@@ -53,3 +48,4 @@ Revision History
 * 3.1.1 - April 21, 2026. Epigraphs: converted chapter-opening quotes to ``.. epigraph::`` directives for proper rendering; added epigraphs to all 15 chapters (Kipling, Pratchett, Lear); created List of Epigraphs backmatter page. Outlines: detailed section outlines with ``.. todo::`` stubs for the four empty chapters (9 Proxy, 10 Vhosts, 11 Access, 13 Content Munging). Build fixes: resolved 16 Sphinx warnings (blank-line formatting after index entries across 8 files, duplicate cross-reference labels, code-block lexing errors, index directives inserted inside code blocks).
 * 3.1.2 - April 21, 2026. Completeness pass: all 28 RewriteRule flags documented (added BNP, BCTLS, BNE, QSL, UnsafeAllow3F, UnsafePrefixStat, UNC; updated B flag with selective escaping syntax). Full RewriteOptions section (11 values: Inherit, InheritBefore, InheritDown, InheritDownBefore, IgnoreInherit, AllowNoSlash, AllowAnyURI, MergeBase, IgnoreContextInfo, LegacyPrefixDocRoot, LongURLOptimization). Full RewriteBase section. Chapter 8 (RewriteMap) fleshed out: Default Values, escape, unescape, txt, rnd, dbm, prg, dbd. Chapter 9 expanded with all 15 :module:`mod_proxy` family modules. Version badge system (:file:`_ext/version_badge.py`) with shape-based styling for grayscale/print. Chapter 7 server variables reformatted as ``hlist`` columns. Glossary populated with 43 terms. Toctree restructured: unnumbered Preface, numbered chapters 1–14, unnumbered back matter. ``man perlre`` reference added to Chapter 1. Log dates updated to 2026. Chapter-level labels added for cross-referencing.
 * 3.2.0 - April 22, 2026. Chapter 14 (Recipes): all 33 recipe stubs replaced with full working content — 126 code examples covering HTTP→HTTPS redirects, hostname canonicalization, trailing slashes, domain migration, clean URLs, front controllers, hotlink blocking, user-agent filtering, cookie-based redirects, IP access control, reverse proxy URL rewriting, TLS-terminating proxies, WebSocket proxying, query string manipulation, rewrite loop diagnosis, :file:`.htaccess` vs server config differences, ``[L]`` flag behavior, rewrite log debugging, fallback resources, maintenance mode, special characters, performance with large redirect sets, and "when not to use :module:`mod_rewrite`" guidance. Chapter 7 (RewriteCond): examples section rewritten with 6 practical scenarios (query string matching, hostname routing, file existence, time-based rules, HTTPS detection, OR conditions). Every chapter now has substantive content.
+* 3.3.0–3.7.0 - April 22–23, 2026. Markup and content pass. Added custom ``:module:`` role to :file:`conf.py` for Apache module names (renders monospace with ``module`` CSS class). Applied ``:file:`` markup to 155 filesystem paths/filenames across 13 chapters. Applied ``:module:`` markup to 285 module references (``mod_rewrite``, ``mod_proxy``, etc.) across 17 chapters, skipping titles and code blocks. Four chapters written from stubs: Chapter 13 (Content Munging) — :module:`mod_substitute`, :module:`mod_sed`, :module:`mod_proxy_html`, and the filter framework; Chapter 9 (Proxy) — ``[P]`` vs ``ProxyPass``, basic/conditional/RewriteMap proxying, SSL/TLS, common pitfalls; Chapter 10 (Virtual Hosts) — dynamic vhosts, map files, Alias interaction, :module:`mod_vhost_alias` comparison, per-user vhosts, logging; Chapter 11 (Access Control) — hotlink protection, bot blocking, IP deny lists, referer deflection, time-based access, HTTPS redirect, environment variable gating, when not to use :module:`mod_rewrite`. Epigraph updates: Ch02 → Ray Bradbury (*Dandelion Wine*), Ch08 → Terry Brooks (*The Talismans of Shannara*), Ch14 → Charles Dickens (*A Christmas Carol*); notes filled in for new epigraphs.

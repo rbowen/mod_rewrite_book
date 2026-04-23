@@ -9,9 +9,10 @@ Regular Expressions
 
 .. epigraph::
 
-   In the high and far-off times the Elephant, O Best Beloved, had no trunk.
+   | The first thing you learn in life is you're a fool.
+   | The last thing you learn in life is you're the same fool.
 
-   -- Rudyard Kipling, *The Elephant's Child*
+   -- Ray Bradbury, *Dandelion Wine*
 
 
 .. index:: Regular expressions

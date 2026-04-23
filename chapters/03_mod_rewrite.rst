@@ -11,12 +11,9 @@ Introduction to mod_rewrite
 
 .. epigraph::
 
-   | He ate the starfish and the garfish, and the crab and the dab,
-   | and the plaice and the dace, and the skate and his mate, and
-   | the mackereel and the pickereel, and the really truly
-   | twirly-whirly eel.
+   In the high and far-off times the Elephant, O Best Beloved, had no trunk.
 
-   -- Rudyard Kipling, *How the Whale Got His Throat*
+   -- Rudyard Kipling, *The Elephant's Child*
 
 
 

@@ -6,10 +6,8 @@ List of Epigraphs
 =================
 
 
-Each chapter opens with an epigraph, mostly drawn from Rudyard
-Kipling's *Just So Stories* (1902), with occasional forays into
-other authors. This page collects them in one place, with room
-for notes on why each was chosen.
+Each chapter opens with an epigraph drawn from a different author.
+This page collects them in one place, with notes on why each was chosen.
 
 
 Preface
@@ -26,23 +24,18 @@ Preface
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+The frogs see "lots of ones" — individual problems without the bigger
+picture. The book teaches you to count higher: to see the patterns
+behind the individual redirects and rewrite rules.
+
+*Wings* is the third book in the Nome Trilogy, also known as the
+Bromeliad, by Terry Pratchett. It tells the story of traveling far away
+to find home, and is one of our (Maria and me) favorite books. You
+should read it. It's way better than this book. -rcb
 
 
 Chapter 1: Regular Expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   | In the high and far-off times the Elephant, O Best Beloved, had no trunk.
-
-   -- Rudyard Kipling, *The Elephant's Child*
-
-*Notes:*
-
-.. todo:: Why this quote for this chapter?
-
-
-Chapter 2: URL Mapping
-~~~~~~~~~~~~~~~~~~~~~~
 
    | The first thing you learn in life is you're a fool.
    | The last thing you learn in life is you're the same fool.
@@ -51,80 +44,126 @@ Chapter 2: URL Mapping
 
 *Notes:*
 
-URL mapping is the first thing every httpd admin learns — and the
-first place they discover how much they still have to learn.
+Regular expressions are the first thing the book teaches, and the first
+place every reader feels foolish. You'll return to them throughout your
+career and feel the same way again.
+
+Every summer I read *Dandelion Wine*. It's a bittersweet story about
+growing up, and learning, and losing, and I find something new in it
+every time. Hope you have the same experience with this book. -rcb
+
+
+Chapter 2: URL Mapping
+~~~~~~~~~~~~~~~~~~~~~~
+
+   | Some people are heroes. And some people jot down notes.
+   | Sometimes they're the same person.
+
+   -- Terry Pratchett, *The Truth*
+
+*Notes:*
+
+Not every contribution is heroic. Some people write the documentation,
+maintain the maps, keep the config files clean. All skills are valuable.
+
+I got involved in open source because I'm a writer, not a programmer. I
+stayed involved because that was celebrated, and because the communities
+can be delightful. I'm still not a programmer, although I tried to be for 
+a few years. But this quote always reminds me that all skills are valuable. -rcb
 
 
 Chapter 3: Introduction to mod_rewrite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   | He ate the starfish and the garfish, and the crab and the dab,
-   | and the plaice and the dace, and the skate and his mate, and
-   | the mackereel and the pickereel, and the really truly
-   | twirly-whirly eel.
-
-   -- Rudyard Kipling, *How the Whale Got His Throat*
-
-*Notes:*
-
-.. todo:: Why this quote for this chapter?
-
-
-Chapter 4: RewriteRule
-~~~~~~~~~~~~~~~~~~~~~~
-
-   | Them that takes cakes
-   | Which the Parsee-man bakes
-   | Makes dreadful mistakes.
-
-   -- Rudyard Kipling, *How the Rhinoceros Got His Skin*
-
-*Notes:*
-
-.. todo:: Why this quote for this chapter?
-
-
-Chapter 5: Rewrite Logging
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   | Then Kolokolo Bird said, with a mournful cry, 'Go to the
-   | banks of the great grey-green, greasy Limpopo River, all
-   | set about with fever-trees, and find out.'
+   In the high and far-off times the Elephant, O Best Beloved, had no trunk.
 
    -- Rudyard Kipling, *The Elephant's Child*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Before this chapter, you had no trunk — no mod_rewrite. The Elephant's
+Child got its trunk by sticking its nose where it didn't belong and
+having it stretched by a crocodile. Most people learn mod_rewrite the
+same way.
+
+I used to read the *Just So Stories* to the kids when they were little,
+and I did all the voices. *The Elephant's Child* was always a favorite. 
+'Led go! You are hurtig be!' Consider doing the voices while reading
+this chapter. -rcb
+
+
+Chapter 4: RewriteRule
+~~~~~~~~~~~~~~~~~~~~~~
+
+   | Quickly, bring me a beaker of wine, that I may wet
+   | my brain and say something clever.
+
+   -- Aristophanes (attributed)
+
+*Notes:*
+
+The moment you sit down to write your first RewriteRule and need
+some liquid courage to say something clever. Perhaps apocryphal,
+but whatevs. -rcb
+
+
+Chapter 5: Rewrite Logging
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   | Oh, I have slipped the surly bonds of earth
+   | And danced the skies on laughter-silvered wings.
+
+   -- John Gillespie Magee Jr., *High Flight*
+
+*Notes:*
+
+Rising above the chaos to see clearly — which is exactly what the
+rewrite log gives you.
+
+This poem celebrates finding the beautiful amidst the ugly. It was
+written by a fighter pilot who died in a mid-air collision over 
+England in 1941, at the age of 19. I learned it in high school and 
+it's stayed with me ever since. -rcb
 
 
 Chapter 6: RewriteRule Flags
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   | She said to him ever so many times, graciously waving her
-   | tail, 'My son, when you find a Hedgehog you must drop him
-   | into the water and then he will uncoil, and when you catch
-   | a Tortoise you must scoop him out of his shell with your
-   | paw.'
+   | My girl came to the study
+   | and said Help me;
+   | I told her I had a time problem
+   | which meant:
+   | I would die for you but I don't have ten minutes.
 
-   -- Rudyard Kipling, *The Beginning of the Armadillos*
+   -- Brenda Hillman, *Time Problem*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Every flag is a choice about how to spend your processing time. ``[L]``
+says stop here. ``[S]`` skips ahead. ``[END]`` says we're done.
+
+This poem always reminds me that our most valuable asset is our time, 
+and we choose how to spend it. It's always a choice, so choose wisely, and prioritize what actually
+matters. -rcb
 
 
 Chapter 7: RewriteCond
 ~~~~~~~~~~~~~~~~~~~~~~
 
-   | He was grey and he was woolly, and his pride was
-   | inordinate.
+   | Snore on in your front row seat
+   | Let not my voice disturb the wordless heaven your eyes have found
 
-   -- Rudyard Kipling, *The Sing-Song of Old Man Kangaroo*
+   -- James Kirkup, *To An Old Lady Asleep At A Poetry Reading*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+RewriteCond checks whether anyone is paying attention before the rule
+fires. Sometimes the answer is no, and that's fine — the request passes
+through untouched.
+
+I won the Kenya national poetry competition reciting this one, and I think 
+of it every time I'm on stage and see someone in the audience who isn't 
+quite paying attention. -rcb
 
 
 Chapter 8: RewriteMap
@@ -141,58 +180,75 @@ Chapter 8: RewriteMap
 RewriteMaps externalize knowledge — lookups, translations, redirects —
 into files and programs rather than locking them inside rewrite rules.
 
+The Shannara books, by Terry Brooks, were what got me into reading high
+fantasy, and warrant re-reading regularly, although there are 33 of
+them, so that's a pretty serious undertaking. -rcb
+
 
 Chapter 9: Proxies and mod_rewrite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   | And the Animals said, 'O Eldest Magician, what shall we
-   | play at?' and he said, 'I will show you.'
-
-   -- Rudyard Kipling, *The Crab That Played with the Sea*
+   [Quote needed]
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Using rewrite rules to make dynamic proxying decisions — routing
+requests to backends based on conditions.
 
 
 Chapter 10: Virtual hosts and mod_rewrite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   | But the wildest of all the wild animals was the Cat.
-   | He walked by himself, and all places were alike to him.
-
-   -- Rudyard Kipling, *The Cat That Walked by Himself*
+   [Quote needed]
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Dynamic virtual hosting — mapping hostnames to directories on the fly,
+without per-host configuration.
 
 
 Chapter 11: Access control with mod_rewrite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   | And when anybody spoke to him he said 'Humph!'
-   | Just 'Humph!' and no more.
+   | When the dragons grow too mighty
+   | To slay with pen or sword
+   | I grow weary of the battle
+   | And the storm I walk toward
+   | When all around is madness
+   | And there's no safe port in view
+   | I long to turn my path homeward
+   | To stop awhile with you
 
-   -- Rudyard Kipling, *How the Camel Got His Hump*
+   -- Rush, *Madrigal*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Keeping the dragons out, and knowing when to stop fighting. The whole
+chapter is about access control, and the closing section is about when
+to put the sword down and use simpler tools instead.
+
+And of course we have to have a Rush quote. If you're a Rush fan you know 
+that it's practically impossible to choose just one. (Rest well, Neil)
+This is one of the most beautiful of Rush's songs, and not much known
+outside of the fans. It expresses the beauty of having a true friend to
+rest with from the struggles of the world. -rcb
 
 
 Chapter 12: Conditional Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   | Once upon a most early time was a Neolithic man. He was not
-   | a Jute or an Angle, or even a Dravidian, which he might
-   | well have been, Best Beloved, but never mind why.
+   | Any sufficiently advanced technology is indistinguishable from magic.
 
-   -- Rudyard Kipling, *How the First Letter Was Written*
+   -- Arthur C. Clarke, *Profiles of the Future*
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+The chapter where the config file stops being static and starts being
+programmable. To someone used to plain directives, ``<If>`` expressions
+and ``Define`` variables look like magic.
+
+I met Clarke in Colombo, Sri Lanka, at ApacheCon Asia 2006. All I could 
+think of to say to him was "Thank you for the stories." -rcb
 
 
 Chapter 13: Content Munging
@@ -207,8 +263,12 @@ Chapter 13: Content Munging
 
 *Notes:*
 
-.. todo:: Why this quote for this chapter?
+Whimsical nonsense for a chapter about transforming content into
+something new — munging things into strange and wonderful shapes.
 
+Lear's nonsense was another staple for reading to the kids. The Jumblies
+and the Pobble were also favorites. Lovely brain candy after too much
+seriousness in the world. -rcb
 
 Chapter 14: Recipes
 ~~~~~~~~~~~~~~~~~~~
@@ -222,4 +282,9 @@ Chapter 14: Recipes
 
 Jacob Marley's ghost, lamenting wasted opportunity — a fitting
 epigraph for a chapter full of recipes to avoid common mistakes.
+
+*A Christmas Carol* is another favorite book, and I read it every year
+too, and watch several of the movies. Patrick Stewart's version is, of
+course, the best, closely followed by the Muppet one. -rcb
+
 

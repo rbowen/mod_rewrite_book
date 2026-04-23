@@ -11,11 +11,10 @@ RewriteRule
 
 .. epigraph::
 
-   | Them that takes cakes
-   | Which the Parsee-man bakes
-   | Makes dreadful mistakes.
+   | Quickly, bring me a beaker of wine, that I may wet
+   | my brain and say something clever.
 
-   -- Rudyard Kipling, *How the Rhinoceros Got His Skin*
+   -- Aristophanes (attributed)
 
 
 

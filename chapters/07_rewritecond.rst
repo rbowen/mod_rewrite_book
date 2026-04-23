@@ -11,10 +11,10 @@ RewriteCond
 
 .. epigraph::
 
-   | He was grey and he was woolly, and his pride was
-   | inordinate.
+   | Snore on in your front row seat
+   | Let not my voice disturb the wordless heaven your eyes have found
 
-   -- Rudyard Kipling, *The Sing-Song of Old Man Kangaroo*
+   -- James Kirkup, *To An Old Lady Asleep At A Poetry Reading*
 
 
 

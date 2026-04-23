@@ -6,7 +6,9 @@ This book covers `mod_rewrite` in depth — regular expressions, `RewriteRule`, 
 
 ## Status
 
-This is a **work in progress** (v3.2.0). See the appendix for revision history and the TODO list.
+This is a **work in progress** (v3.7.0). See the appendix for revision history and the TODO list.
+
+Found a bug, typo, or have a suggestion? [File an issue](https://github.com/rbowen/mod_rewrite_book/issues).
 
 ## Building
 
@@ -55,7 +57,7 @@ pip install uv
 ### HTML
 
 ```bash
-uv run --with sphinx -- sphinx-build -b html . _build/html
+uv run --with sphinx -- sphinx-build -b html -d _build/doctrees . _build/html
 ```
 
 Open `_build/html/index.html` in your browser to view.
@@ -63,7 +65,7 @@ Open `_build/html/index.html` in your browser to view.
 ### ePub
 
 ```bash
-uv run --with sphinx -- sphinx-build -b epub . _build/epub
+uv run --with sphinx -- sphinx-build -b epub -d _build/doctrees . _build/epub
 ```
 
 The ePub file will be at `_build/epub/mod_rewrite And Friends.epub`.
@@ -71,7 +73,7 @@ The ePub file will be at `_build/epub/mod_rewrite And Friends.epub`.
 ### PDF (via LaTeX)
 
 ```bash
-uv run --with sphinx -- sphinx-build -b latex . _build/latex
+uv run --with sphinx -- sphinx-build -b latex -d _build/doctrees . _build/latex
 cd _build/latex && make
 ```
 

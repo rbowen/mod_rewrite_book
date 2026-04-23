@@ -8,10 +8,10 @@ URL Mapping
 
 .. epigraph::
 
-   | The first thing you learn in life is you're a fool.
-   | The last thing you learn in life is you're the same fool.
+   | Some people are heroes. And some people jot down notes.
+   | Sometimes they're the same person.
 
-   -- Ray Bradbury, *Dandelion Wine*
+   -- Terry Pratchett, *The Truth*
 
 
 .. index:: URL Mapping

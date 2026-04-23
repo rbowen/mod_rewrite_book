@@ -7,10 +7,9 @@ Virtual hosts and mod_rewrite
 
 .. epigraph::
 
-   | But the wildest of all the wild animals was the Cat.
-   | He walked by himself, and all places were alike to him.
+   | [Quote needed]
 
-   -- Rudyard Kipling, *The Cat That Walked by Himself*
+   -- [Author], *[Work]*
 
 
 This chapter covers using :module:`mod_rewrite` for dynamic virtual host

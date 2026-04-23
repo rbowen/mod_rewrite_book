@@ -11,11 +11,10 @@ Rewrite Logging
 
 .. epigraph::
 
-   | Then Kolokolo Bird said, with a mournful cry, 'Go to the
-   | banks of the great grey-green, greasy Limpopo River, all
-   | set about with fever-trees, and find out.'
+   | Oh, I have slipped the surly bonds of earth
+   | And danced the skies on laughter-silvered wings.
 
-   -- Rudyard Kipling, *The Elephant's Child*
+   -- John Gillespie Magee Jr., *High Flight*
 
 
 
