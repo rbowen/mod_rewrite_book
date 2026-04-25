@@ -9,6 +9,7 @@
 Rewrite Logging
 ===============
 
+
 .. epigraph::
 
    | Oh, I have slipped the surly bonds of earth
@@ -18,84 +19,147 @@ Rewrite Logging
 
 
 
-Exactly how you turn on logging for :module:`mod_rewrite` will depend on what
-version of the Apache http server you are running. Logging got some
-updates in the 2.4 release of the server, and the rewrite log was one of
-the changes that happened at that time.
+I can't overstate how important the rewrite log is. When your
+``RewriteRule`` doesn't do what you expected — and it won't, at least the
+first three times — the rewrite log is where you go to find out what
+actually happened. It's the difference between debugging and guessing.
 
-If you're not sure what version you're running, you can get the :file:`httpd`
-binary to tell you with the ``-v`` flag:
+Rewrite logging uses the ``LogLevel`` directive with per-module trace
+levels. If you remember nothing else from this chapter, remember this
+one line:
 
+.. code-block:: apache
 
-.. index:: pair: Apache HTTP Server; version detection
+   LogLevel warn rewrite:trace3
 
-
-.. code-block:: none
-
-   httpd -v
-
-
-As with any other logging, the log file is opened when the server is
-started up, before the server relinquishes its root privileges. For this
-reason, the ``RewriteLog`` directive may not be used in :file:`.htaccess` files,
-but may only be invoked in the server configuration file.
-
-.. _and-earlier:
+That turns on enough :module:`mod_rewrite` logging to see what's happening
+without drowning in noise. The rewrite log entries show up in your main
+error log (the file specified by ``ErrorLog``), tagged with
+``[rewrite:traceN]`` so you can find them.
 
 
-.. index:: RewriteLog
-.. index:: pair: directives; RewriteLog
-.. index:: RewriteLogLevel
-.. index:: pair: directives; RewriteLogLevel
-.. index:: pair: logging; httpd 2.2
+.. _trace-levels:
 
-2.2 and earlier
+.. index:: pair: rewrite logging; trace levels
+.. index:: pair: LogLevel; trace levels
+.. index:: pair: mod_rewrite; trace levels
 
-Prior to httpd 2.4, the way to enable :module:`mod_rewrite` logging is with the
-``RewriteLog`` and ``RewriteLogLevel`` directives.
+Trace Levels
+------------
 
-The ``RewriteLog`` directive should be set to the location of your rewrite
-log file, and the ``RewriteLogLevel`` is set to a value from 0 to 5 to
-indicate the desired verbosity of the log file, with 0 being no log
-entries, and 5 being to log every time :module:`mod_rewrite` even thinks about
-doing something.
+The ``LogLevel`` directive accepts trace levels from ``trace1`` through
+``trace8`` for :module:`mod_rewrite`. Each level includes everything from the
+levels above it, so ``trace3`` gives you ``trace1`` and ``trace2`` output as
+well. Here's what each level gives you:
 
-You'll often find advice online suggesting that ``RewriteLogLevel`` be set
-to 9 for maximum verbosity. Numbers higher than 5 don't make it more
-verbose, but they also don't harm anything.
+.. list-table::
+   :header-rows: 1
+   :widths: 15 85
+
+   * - Level
+     - What it logs
+   * - ``trace1``
+     - Rule match/no-match results — the high-level outcome
+   * - ``trace2``
+     - Rewrite results and pass-through decisions — what the URL was rewritten to
+   * - ``trace3``
+     - Rule pattern application — which pattern was applied to which URI
+   * - ``trace4``
+     - ``RewriteCond`` evaluation details — the input string, the pattern, and whether it matched
+   * - ``trace5``
+     - ``RewriteMap`` lookups — map name, lookup key, and result (or failure)
+   * - ``trace6``
+     - Map cache behavior — cache hits and misses
+   * - ``trace7``
+     - Large data dumps (rarely useful)
+   * - ``trace8``
+     - Even larger data dumps (almost never useful)
+
+In practice, ``trace3`` is the sweet spot for most debugging. It shows you
+which rule is being tried against which URI, without burying you in
+condition details. Step up to ``trace4`` or ``trace5`` when you need to
+understand *why* a condition didn't match, or when a ``RewriteMap`` lookup
+is returning something unexpected.
+
+.. warning::
+
+   Running at ``trace6`` or higher on a production server will slow things
+   down noticeably. The server has to write a log entry for practically
+   every internal operation :module:`mod_rewrite` performs. Use high trace
+   levels only for debugging, and turn them back down when you're done.
 
 
-.. code-block:: none
-
-   RewriteLog logs/rewrite.log
-   RewriteLogLevel 5
-
-
-.. _and-later:
-
+Enabling Rewrite Logging
+------------------------
 
 .. index:: LogLevel
 .. index:: pair: directives; LogLevel
 .. index:: pair: logging; httpd 2.4
-.. index:: trace level
 .. index:: pair: mod_rewrite; trace level
 
-2.4 and later
+The basic form is simple:
 
-In the 2.4 version of the server, many changes were made to the way that
-logging works. One of these changes was the addition of per-module log
-configurations. This rendered the ``RewriteLog`` directive superfluous.
-So, from 2.4 on, rewrite logging is enabled using the ``LogLevel``
-directive, specifying a ``trace`` log level for :module:`mod_rewrite`.
+.. code-block:: apache
+
+   LogLevel warn rewrite:trace3
+
+This sets the general log level to ``warn`` (so you're not flooded with
+info-level messages from every module) and then cranks :module:`mod_rewrite`
+up to ``trace3``. Rewrite log entries show up in your error log, tagged
+so they're easy to find.
+
+To view just the rewrite entries in real time, filter the error log:
+
+.. code-block:: bash
+
+   tail -f /var/log/httpd/error_log | fgrep '[rewrite:'
 
 
-.. code-block:: none
+.. _perdir-loglevel:
 
-   LogLevel info rewrite:trace6
+.. index:: pair: LogLevel; per-directory
+.. index:: pair: debugging; per-directory
+.. index:: pair: LogLevel; Directory block
+.. index:: pair: LogLevel; Location block
 
+Per-Directory Logging
+---------------------
 
-Rewrite log entries will now show up in the main error log file, as
-specified by the ``ErrorLog`` directive.
+Here's something I wish I'd known years earlier: since httpd 2.3.6, you
+can set ``LogLevel`` inside a ``<Directory>``, ``<Location>``, or
+``<VirtualHost>`` block. This means you can turn on rewrite tracing for
+*one specific path* without flooding the log with trace output from every
+request to the entire server.
+
+.. code-block:: apache
+
+   # Only debug rewrites under /api/
+   <Location "/api/">
+       LogLevel warn rewrite:trace4
+   </Location>
+
+Or scope it to a single virtual host:
+
+.. code-block:: apache
+
+   <VirtualHost *:443>
+       ServerName staging.example.com
+       LogLevel warn rewrite:trace3
+       # ... your rewrite rules ...
+   </VirtualHost>
+
+This is enormously useful on a busy server where a global ``trace3``
+would produce an unreadable flood of log entries. Narrow the scope to the
+path or vhost you're actually debugging, fix the problem, and remove the
+directive. I cannot stress enough how much easier this makes life.
+
+.. note::
+
+   Per-directory log level changes only affect messages generated *after*
+   the request has been parsed and associated with a directory. Very early
+   request-processing messages (connection-level events) are still
+   controlled by the server-level ``LogLevel``.
+
 
 .. _whats-in-the-rewrite-log---an-example:
 
@@ -104,7 +168,8 @@ specified by the ``ErrorLog`` directive.
 .. index:: ErrorLog
 .. index:: pair: directives; ErrorLog
 
-What's in the Rewrite log? - An example
+What's in the Rewrite Log? — An Example
+----------------------------------------
 
 The best way to talk about what's in the rewrite log is to show you some
 examples of the kinds of things that :module:`mod_rewrite` logs.
@@ -112,109 +177,66 @@ examples of the kinds of things that :module:`mod_rewrite` logs.
 Consider a simple rewrite scenario such as follows:
 
 
-.. code-block:: none
+.. code-block:: apache
 
    RewriteEngine On
    RewriteCond %{REQUEST_URI} !index.php
    RewriteRule . /index.php [PT,L]
-   
-   LogLevel info rewrite:trace6
-   
-   # Or, in 2.2
-   # RewriteLog Level 5
-   # RewriteLog /var/log/httpd/rewrite.log
+
+   LogLevel warn rewrite:trace6
 
 
 This ruleset says "If it's not already :file:`index.php`, rewrite it to
-:file:`index.php`.
+:file:`index.php`."
 
-Now, we'll make a request for the URL http://localhost/example and see
+Now, I'll make a request for the URL http://localhost/example and see
 what gets logged:
 
 
 .. code-block:: none
 
-   [Thu Sep 10 20:22:13.363463 2026] [rewrite:trace2] [pid 11879]
-   mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite
-   engine with requested uri /example
-   
-   [Thu Sep 10 20:22:13.363510 2026] [rewrite:trace3] [pid 11879]
-   mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] applying
-   pattern '.' to uri '/example'
-   
-   [Thu Sep 10 20:22:13.363525 2026] [rewrite:trace4] [pid 11879]
-   mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] RewriteCond:
-   input='/example' pattern='!index.php' => matched
-   
-   [Thu Sep 10 20:22:13.363533 2026] [rewrite:trace2] [pid 11879]
-   mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] rewrite
-   '/example' -> 'index.php'
-   
-   [Thu Sep 10 20:22:13.363542 2026] [rewrite:trace2] [pid 11879]
-   mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] local path
-   result: index.php
-   
-   [Thu Sep 10 20:22:13.575877 2026] [rewrite:trace2] [pid 11881]
-   mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite
-   engine with requested uri /favicon.ico
-   
-   [Thu Sep 10 20:22:13.575920 2026] [rewrite:trace3] [pid 11881]
-   mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] applying
-   pattern '.' to uri '/favicon.ico'
-   
-   [Thu Sep 10 20:22:13.575935 2026] [rewrite:trace4] [pid 11881]
-   mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] RewriteCond:
-   input='/favicon.ico' pattern='!index.php' => matched
-   
-   [Thu Sep 10 20:22:13.575943 2026] [rewrite:trace2] [pid 11881]
-   mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] rewrite
-   '/favicon.ico' -> 'index.php'
-   
-   [Thu Sep 10 20:22:13.575955 2026] [rewrite:trace2] [pid 11881]
-   mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] local path
-   result: index.php
+   [Thu Sep 10 20:22:13.363463 2026] [rewrite:trace2] [pid 11879] mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite engine with requested uri /example
+
+   [Thu Sep 10 20:22:13.363510 2026] [rewrite:trace3] [pid 11879] mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] applying pattern '.' to uri '/example'
+
+   [Thu Sep 10 20:22:13.363525 2026] [rewrite:trace4] [pid 11879] mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] RewriteCond: input='/example' pattern='!index.php' => matched
+
+   [Thu Sep 10 20:22:13.363533 2026] [rewrite:trace2] [pid 11879] mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] rewrite '/example' -> 'index.php'
+
+   [Thu Sep 10 20:22:13.363542 2026] [rewrite:trace2] [pid 11879] mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] local path result: index.php
+
+   [Thu Sep 10 20:22:13.575877 2026] [rewrite:trace2] [pid 11881] mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite engine with requested uri /favicon.ico
+
+   [Thu Sep 10 20:22:13.575920 2026] [rewrite:trace3] [pid 11881] mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] applying pattern '.' to uri '/favicon.ico'
+
+   [Thu Sep 10 20:22:13.575935 2026] [rewrite:trace4] [pid 11881] mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] RewriteCond: input='/favicon.ico' pattern='!index.php' => matched
+
+   [Thu Sep 10 20:22:13.575943 2026] [rewrite:trace2] [pid 11881] mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] rewrite '/favicon.ico' -> 'index.php'
+
+   [Thu Sep 10 20:22:13.575955 2026] [rewrite:trace2] [pid 11881] mod_rewrite.c(468): [client 127.0.0.1:56624] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] local path result: index.php
 
 
-This is an entry from a 2.4 server, and contains a few elements that
-will be missing from rewrite log entries for 2.2 and
-earlier. [#1]_
-
-Note that I've inserted linebreaks between each log entry for
-legibility. And speaking of legibility, let's consider one single log
-entry to see what the various components mean before we go any further.
-
-Let's look at the first log entry.
-
-:
+Let's look at the first log entry in detail:
 
 
 .. code-block:: none
 
-   [Thu Sep 10 20:22:13.363463 2026] [rewrite:trace2] [pid 11879]
-   mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - -
-   [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite
-   engine with requested uri /example
+   [Thu Sep 10 20:22:13.363463 2026] [rewrite:trace2] [pid 11879] mod_rewrite.c(468): [client 127.0.0.1:56623] 127.0.0.1 - - [localhost/sid#7f985f445348][rid#7f985f949040/initial] init rewrite engine with requested uri /example
 
 
-That's a lot to process all at once, so we'll break it down one field at
+That's a lot to process all at once, so I'll break it down one field at
 a time.
+
+
+.. index:: pair: rewrite logging; log entry format
+.. index:: pair: rewrite logging; process id
 
 ``[Thu Sep 10 20:22:13.363463 2026]``
    The date and time when the event occurred.
 ``[rewrite:trace2]``
-   The name of the module logging, and the loglevel at which it is
-   logging. This is 2.4-specific
-``[pid 1879]``
+   The name of the module logging, and the trace level at which it is
+   logging.
+``[pid 11879]``
    The process id of the httpd process handling this request. This will
    be the same across a given request. Note that in this example there
    are two separate requests being handled, as you'll see in a moment.
@@ -238,7 +260,7 @@ a time.
    Ahah! Finally! The actual log message from :module:`mod_rewrite`!
 
 Now that you know what all of the various fields are in the log entry,
-let's just look at the ones we actually care about. Here's the log file
+let's just look at the ones I actually care about. Here's the log file
 again, with a lot of the superfluous information removed:
 
 
@@ -249,7 +271,7 @@ again, with a lot of the superfluous information removed:
    RewriteCond: input='/example' pattern='!index.php' => matched
    rewrite '/example' -> 'index.php'
    local path result: index.php
-   
+
    init rewrite engine with requested uri /favicon.ico
    applying pattern '.' to uri '/favicon.ico'
    RewriteCond: input='/favicon.ico' pattern='!index.php' => matched
@@ -295,7 +317,8 @@ logged. A final log entry tells us what the local path result ends up
 being after this process, which is :file:`index.php`.
 
 This kind of detailed log trail tells you very specifically what's going
-on, and what happened at each step. [#2]_
+on, and what happened at each step.
+
 
 .. _rewriterules-in-.htaccess-files---an-example:
 
@@ -304,39 +327,39 @@ on, and what happened at each step. [#2]_
 .. index:: pair: per-directory context; logging
 .. index:: pair: .htaccess; perdir prefix stripping
 
-RewriteRules in .htaccess files - An example
+RewriteRules in .htaccess Files — An Example
+---------------------------------------------
 
-We've previously discussed using :module:`mod_rewrite` in .htaccess files, but
+.. index:: pair: .htaccess; rewrite log example
+.. index:: perdir prefix stripping
+
+I've previously discussed using :module:`mod_rewrite` in :file:`.htaccess` files, but
 it's time to see what this actually looks like in practice. Let's
-replace the configuration file entry above with a .htaccess file
-instead, placed in the root document directory of our website. So, I'm
+replace the configuration file entry above with a :file:`.htaccess` file
+instead, placed in the root document directory of the website. So, I'm
 going to comment out several lines in the server configuration:
 
 
-.. code-block:: none
+.. code-block:: apache
 
    # RewriteEngine On
    # RewriteCond %{REQUEST_URI} !index.php
    # RewriteRule . /index.php [PT,L]
-   
-   LogLevel info rewrite:trace6
-   
-   # Or, in 2.2
-   # RewriteLog Level 5
-   # RewriteLog /var/log/httpd/rewrite.log
+
+   LogLevel warn rewrite:trace6
 
 
-And instead, I'm going to place the following .htaccess file:
+And instead, I'm going to place the following :file:`.htaccess` file:
 
 
-.. code-block:: none
+.. code-block:: apache
 
    RewriteEngine On
-   RewriteCond %{REQUEST_URI} !index.php                                     
+   RewriteCond %{REQUEST_URI} !index.php
    RewriteRule . /index.php [PT,L]
 
 
-Now, see what the log file looks like:
+Now, see what the log file looks like.
 
 For the sake of brevity, let's look at just the actual log messages, and
 ignore all of the extra information:
@@ -356,15 +379,15 @@ ignore all of the extra information:
    [perdir /var/www/html/] pass through /var/www/html/index.php
 
 
-The first thing you'll notice, of course, is that this is much longer
-than what we had before. Running rewrite rules in .htaccess files
+The first thing you'll notice is that this is much longer
+than what I had before. Running rewrite rules in :file:`.htaccess` files
 generally takes several more steps than when the rules are in the server
-configuration file, which is one of several reasons that using .htaccess
+configuration file, which is one of several reasons that using :file:`.htaccess`
 files is so much less efficient (i.e., slower) than using the server
 configuration file.
 
 Whenever possible, you should use the server configuration file rather
-than .htaccess files. (There are other reasons for this, too.)
+than :file:`.htaccess` files. (There are other reasons for this, too.)
 
 Next, you'll notice that each log entry contains the preface:
 
@@ -374,9 +397,9 @@ Next, you'll notice that each log entry contains the preface:
    [perdir /var/www/html]
 
 
-``perdir`` refers to rewrite directives that occur in per directory
-context - i.e., .htaccess files or ``<Directory>`` blocks. They are
-treated special in a few different ways, as we'll see.
+``perdir`` refers to rewrite directives that occur in per-directory
+context — i.e., :file:`.htaccess` files or ``<Directory>`` blocks. They are
+treated specially in a few different ways, as we'll see.
 
 The first of these is shown in the first log entry:
 
@@ -386,11 +409,11 @@ The first of these is shown in the first log entry:
    strip per-dir prefix: /var/www/html/example -> example
 
 
-What that means is that in perdir context, the directory path is removed
+What that means is that in per-directory context, the directory path is removed
 from any string before they are considered in the pattern match. Thus,
-rather than considering the string ``/example``, as we did the first time
-through, now we're looking at the string ``example``. While this may seem
-trivial at this point, as we proceed to more complex examples, that
+rather than considering the string ``/example``, as I did the first time
+through, now we're looking at the string ``example``. This distinction
+matters more than it looks like it should — as we proceed to more complex examples, that
 leading slash will be the difference between a pattern matching and not
 matching, so you need to be aware of this every time you use :file:`.htaccess`
 files.
@@ -403,9 +426,9 @@ time.
 What happens next is a surprise to most first-time users of :module:`mod_rewrite`.
 The requested URI ``example`` is redirected to the URI :file:`/index.php`, and
 the whole process starts over again with that new URL. This is because,
-in perdir context, once a rewrite has been executed, that target URL
+in per-directory context, once a rewrite has been executed, that target URL
 must get passed back to the URL mapping process to determine what that
-URL maps to ... which may include invoking a .htaccess file.
+URL maps to ... which may include invoking a :file:`.htaccess` file.
 
 In this case, this causes the ruleset to be executed all over again,
 with the rewritten URL :file:`/index.php`.
@@ -416,6 +439,60 @@ and run through the paces. This time around, however, the ``RewriteCond``
 does not match, and so the request is passed through unchanged.
 
 
-.. [#1] Future editions of this book will contain full examples from a 2.2 server, for those still running that version.
+.. _debugging-rewritemap:
 
-.. [#2] Future editions of this book will contain an appendix in which several log traces are explained in exhaustive detail. I can hardly wait.
+.. index:: pair: RewriteMap; debugging
+.. index:: pair: RewriteMap; logging
+.. index:: pair: rewrite logging; map lookups
+
+Debugging RewriteMap Lookups
+----------------------------
+
+If you're using a ``RewriteMap`` (see :ref:`Chapter_rewritemap`) and the
+lookup isn't returning what you expect, ``trace5`` is where you want to
+be. At that level, :module:`mod_rewrite` logs every map lookup — the map name,
+the key that was looked up, and the result (or the fact that the lookup
+failed).
+
+.. code-block:: apache
+
+   LogLevel warn rewrite:trace5
+
+You'll see log entries like:
+
+.. code-block:: none
+
+   map lookup OK: map=examplemap key=foo -> val=bar
+   map lookup FAILED: map=examplemap key=baz
+
+This is invaluable when you're debugging ``txt`` or ``dbm`` maps where a
+typo in the map file (an extra space, a missing entry) can silently cause
+a lookup to fail and your rule to not match. At ``trace6``, you'll also
+see cache-related entries — whether the map result came from the internal
+cache or required a fresh lookup. This is mostly useful if you suspect
+the map file has been updated but the cached values are stale.
+
+
+.. _dont-leave-it-on:
+
+.. index:: pair: rewrite logging; performance
+.. index:: pair: mod_rewrite; performance impact of logging
+
+Don't Leave It On
+-----------------
+
+I want to re-emphasize: don't
+leave trace-level rewrite logging enabled on a production server. Every
+trace-level log entry requires :module:`mod_rewrite` to format a string, acquire
+a lock on the log file, write the entry, and release the lock — for
+*every single request* that touches a rewrite rule.
+
+On a server handling thousands of requests per second, ``rewrite:trace6``
+can measurably increase response times and generate gigabytes of log data
+in short order. I've seen it fill a disk partition in under an hour on a
+busy server. 
+
+The workflow is: turn it on, reproduce the problem, read the log, turn
+it off. If you're using per-directory logging (see :ref:`perdir-loglevel`
+above), the blast radius is already limited — but even so, clean up after
+yourself.

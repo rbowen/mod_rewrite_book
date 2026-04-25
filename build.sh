@@ -31,13 +31,27 @@ elif [ -n "$EPUB_FILE" ]; then
 fi
 
 echo "=== Building PDF (via LaTeX) ==="
+echo "  --- Standard (letter-size) PDF ---"
 uv run --with sphinx -- sphinx-build -b latex -d _build/doctrees . _build/latex
 if command -v latexmk &> /dev/null; then
     make -C _build/latex all-pdf
 else
     echo "  ⚠ LaTeX not installed — skipping PDF compilation."
     echo "  Install with: brew install mactex-no-gui"
-    echo "  LaTeX source is still available at _build/latex/"
+fi
+
+echo "  --- KDP print-ready (6×9) PDF ---"
+KDP_PRINT=1 uv run --with sphinx -- sphinx-build -b latex -d _build/doctrees_kdp . _build/latex_kdp
+if command -v latexmk &> /dev/null; then
+    make -C _build/latex_kdp all-pdf
+    KDP_PDF="_build/latex_kdp/mod_rewrite_and_friends.pdf"
+    PAGES=$(pdfinfo "$KDP_PDF" 2>/dev/null | awk '/^Pages:/ {print $2}')
+    if [ -n "$PAGES" ]; then
+        SPINE=$(echo "$PAGES * 0.002252" | bc)
+        echo "  KDP page count: $PAGES → spine width: ${SPINE}in"
+    fi
+else
+    echo "  ⚠ LaTeX not installed — skipping KDP PDF compilation."
 fi
 
 echo ""
@@ -48,6 +62,12 @@ if command -v latexmk &> /dev/null; then
     echo "  PDF:   _build/latex/mod_rewrite_and_friends.pdf"
 else
     echo "  PDF:   (skipped — install LaTeX to enable)"
+fi
+if [ -f "_build/latex_kdp/mod_rewrite_and_friends.pdf" ]; then
+    echo "  KDP PDF: _build/latex_kdp/mod_rewrite_and_friends.pdf"
+    [ -n "$PAGES" ] && echo "           $PAGES pages, spine width: ${SPINE}in"
+else
+    echo "  KDP PDF: (skipped — install LaTeX to enable)"
 fi
 if command -v ebook-convert &> /dev/null; then
     echo "  Kindle: _build/mod_rewrite_and_friends.azw3"

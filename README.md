@@ -1,6 +1,6 @@
 # mod_rewrite And Friends
 
-A guide to Apache `mod_rewrite` and related URL mapping modules, by [Rich Bowen](https://github.com/rbowen).
+A Guide to URL Manipulation and Mapping with the Apache HTTP Server, by [Rich Bowen](https://github.com/rbowen).
 
 This book covers `mod_rewrite` in depth — regular expressions, `RewriteRule`, `RewriteCond`, `RewriteMap`, flags, logging, proxying, virtual hosts, access control, and more — along with the many other Apache httpd modules that can often do the job better.
 
@@ -127,17 +127,6 @@ This cleans the output directory and builds HTML, ePub, and PDF in one go.
     ├── appendix.rst        — Revision History / TODO
     └── glossary.rst
 ```
-
-## Format History
-
-This book has been through a few format migrations:
-
-- **2013** — Started in LaTeX
-- **2013** — Converted to reStructuredText / Sphinx
-- **2017** — Converted to AsciiDoc
-- **2018** — Brief detour through Markdown / GitBook
-- **2018** — Back to AsciiDoc
-- **2026** — Back to reStructuredText / Sphinx (full circle)
 
 ## License
 

@@ -7,9 +7,9 @@ Proxies and mod_rewrite
 
 .. epigraph::
 
-   | [Quote needed]
+   | "His voice," thought Will, "I never noticed. It's the same color as his hair."
 
-   -- [Author], *[Work]*
+   -- Ray Bradbury, *Something Wicked This Way Comes*
 
 
 This chapter explores the intersection of :module:`mod_rewrite` and

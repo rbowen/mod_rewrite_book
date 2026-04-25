@@ -32,8 +32,6 @@ are separated with commas:
    [B,C,NC,PT,L]
 
 
-TODO Rewrite Flags should be a separate chapter 
-
 There are a *lot* of flags. Here they are:
 
 .. _b---escape-backreferences:
@@ -310,7 +308,7 @@ Consider this example:
    RewriteRule ^/index\.html - [CO=frontdoor:yes:.example.com:1440:/]
 
 
-In the example give, the rule doesn't rewrite the request. The '-'
+In the example given, the rule doesn't rewrite the request. The '-'
 rewrite target tells :module:`mod_rewrite` to pass the request through unchanged.
 Instead, it sets a cookie called 'frontdoor' to a value of 'yes'. The
 cookie is valid for any host in the .example.com domain. It will be set
@@ -404,7 +402,7 @@ The form
    [E=!VAR]
 
 
-allows to unset a previously set environment variable named VAR.
+allows you to unset a previously set environment variable named VAR.
 
 Environment variables can then be used in a variety of contexts,
 including CGI programs, other RewriteRule directives, or CustomLog
@@ -445,7 +443,7 @@ END
 
 
 Although the flags are presented here in alphabetical order, it makes
-more sense to go read the section about the L flag first (ref\{lflag})
+more sense to go read the section about the L flag first (:ref:`l---last`)
 and then come back here.
 
 Using the ``[END]`` flag terminates not only the current round of rewrite
@@ -552,8 +550,8 @@ extension:
 
 The regular expression above - ``^(/source/.+\.php)s$`` - will match any
 request that starts with :file:`/source/` followed by 1 or n characters
-followed by ``.phps`` literally. The backreference ``$1`` referrers to the
-captured match within parenthesis of the regular expression.
+followed by ``.phps`` literally. The backreference ``$1`` refers to the
+captured match within parentheses of the regular expression.
 
 .. _l---last:
 
@@ -622,7 +620,7 @@ N - next
 
 The ``[N]`` flag causes the ruleset to start over again from the top,
 using the result of the ruleset so far as a starting point. Use with
-extreme caution, as it may result in loop.
+extreme caution, as it may result in a loop.
 
 The ``[N]`` flag could be used, for example, if you wished to replace a
 certain string or letter repeatedly in a request. The example shown here
@@ -789,7 +787,7 @@ those directives, whenever you can.
 
 Note: :module:`mod_proxy` must be enabled in order to use this flag.
 
-See Chapter ref\{chapter_proxy} for a more thorough treatment of
+See Chapter :ref:`Chapter_proxy` for a more thorough treatment of
 proxying.
 
 .. _pt---passthrough:
@@ -932,7 +930,7 @@ R - redirect
 ------------
 
 
-Use of the ``[R]`` flag causes a HTTP redirect to be issued to the
+Use of the ``[R]`` flag causes an HTTP redirect to be issued to the
 browser. If a fully-qualified URL is specified (that is, including
 <http://servername/>) then a redirect will be issued to that location.
 Otherwise, the current protocol, servername, and port number will be
@@ -1021,7 +1019,7 @@ else-clause:
 
 It is probably easier to accomplish this kind of configuration using the
 ``<If>``, ``<ElseIf>``, and ``<Else>`` directives instead. (2.4 and later -
-See ref\{if}.)
+See :ref:`if-elsif-and-else`.)
 
 .. _t---type:
 
@@ -1059,7 +1057,7 @@ MIME type by virtue of their file names:
    RewriteRule IMG - [T=image/jpg]
 
 
-Please note that this is a trivial example, and could be better done
+Note that this particular example could be better done
 using ``<FilesMatch>`` instead. Always consider the alternate solutions to
 a problem before resorting to rewrite, which will invariably be a less
 efficient solution than the alternatives.

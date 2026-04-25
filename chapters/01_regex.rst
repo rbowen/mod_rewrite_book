@@ -154,7 +154,7 @@ that pattern. It does not match "tragic", on the other hand, because there are t
 between the a and the c. That is, the ``.`` by itself, matches a single character only.
 
 The ``.`` character is very frequently used in connection with
-``**`` to mean "match everything". You'll see the ``(.**)``
+``*`` to mean "match everything". You'll see the ``(.*)``
 pattern appearing often throughout this book, and throughout examples
 that you see online. And while it's often what you want, it's just as
 often used incorrectly. Remember that while ``(.*)`` matches any
@@ -164,7 +164,7 @@ string has a start (even an empty string) and so ``^`` matches it.
 It's faster, too, because while ``(.*)`` has to match all the way out to
 the end of the string, ``^`` only has to note that the string has a
 beginning, and then it is done. Note also that the pattern ``(.*)``
-has parenthesis and therefore captures the matched string into the
+has parentheses and therefore captures the matched string into the
 variable ``$1``. If you're not planning to use ``$1`` in a later
 substitution, then this, in addition to being a waste of computation
 cycles, is a waste of memory.
@@ -277,16 +277,16 @@ included in this basic vocabulary. Consider the examples in the ``anchor example
      - This matches any string that starts with a slash
    * - ``.jpg$``
      - This pattern matches any string that ends with .jpg.
-   * - ``/$``
+   * - ``^/$``
      - Matches a string that starts with, and ends with, a slash. That is, it will only match a string that is a single slash, and nothing else.
    * - ``^$``
-     - Matched an empty string - that is, a string that has nothing between its start and its end.
+     - Matches an empty string - that is, a string that has nothing between its start and its end.
 
 
 Remember, as you craft your regular expressions, that they are, by
 default, a substring match. Which is to say, a pattern of ``cow``
 matches cow, scow, coward, and pericowperitis, because they all
-contain "cow" somewhere in them. Using the anchor characters allow you
+contain "cow" somewhere in them. Using the anchor characters allows you
 to be more specific as to what you wanted to match. The ``\b``
 metacharacter, introduced above, can also be useful in some contexts,
 but perhaps less so when you're dealing with URLs.
@@ -427,7 +427,7 @@ Greedy Matching
 .. index:: Greedy matching
 
 
-In the case of all of the repetition characters above, matching is greedy. That is, the regular 
+In the case of all of the repetition characters above, matching is greedy. That is, the regular
 expression matches as much as it possibly can. That is, if you apply the regular expression 
 ``a+`` to the string ``aaaa``, matches the entire string, and not be satisfied by just the first 
 a. This is particularly important when you are using the ``.*`` syntax, which can 
@@ -506,7 +506,7 @@ Additionally, the ``?`` character turns off the "greedy" nature of the ``+``
 and ``*`` characters. Thus, putting a ``?`` after a ``+`` or a 
 ``*`` will make it match as little as it possibly can. See :ref:`Greedy`.
 
-Further examples of the greedy vs. non-greed behavior will follow once we have learned 
+Further examples of the greedy vs. non-greedy behavior will follow once we have learned 
 about backreferences.
 
 
@@ -567,7 +567,7 @@ would be ambiguous. It might mean ``$1``, followed by a literal zero (0), or it 
 Rather than providing additional syntax to disambiguate this term, the designer of 
 :module:`mod_rewrite` instead chose to only provide backreferences through ``$9``.
 
-The exact way in which you can exploit this feature will be more obvious later, once we 
+The exact way in which you can exploit this feature will become clearer once I
 start looking at the RewriteRule directive in :ref:`Chapter_rewriterule`
 
 Consider these two patterns, applied to the string "canadian".
@@ -582,10 +582,8 @@ Consider these two patterns, applied to the string "canadian".
 The first pattern will return with a value of "anadia" in ``$1``, since it will match as much as it possibly can between the first c and the last n it sees. The second, on the other hand, will return 
 with ``$1`` set to "a", since it is non-greedy, and so stops at the first n it sees. 
 
-TODO Recommend the correct regex tool
-
-It is instructive to acquire a tool such as Regex Coach, or Rebug, mentioned in the :ref:`Regex_Tools` section below, and feed them these patterns and strings, to watch them match the different parts 
-of the string. **Mastering Regular Expressions** also has a very complete treatment of 
+It is instructive to use a tool such as `regex101 <https://regex101.com/>`_ or ``pcre2test``, described in the :ref:`Regex_Tools` section below, and feed them these patterns and strings, to watch them match the different parts
+of the string. **Mastering Regular Expressions** also has a very complete treatment of
 backreferences, greedy matching, and what actually happens during the matching phase.
 
 
@@ -650,9 +648,9 @@ Negation
 --------
 
 
-.. index
+.. index::
    Negation
-.. index
+.. index::
    !
 
 Finally, if you wish to negate an entire regular expression match, prefix it with !. This is not 
@@ -673,9 +671,9 @@ Regex examples
 --------------
 
 
-.. index
+.. index::
    Examples
-.. index
+.. index::
    Regex examples
 
 A few examples may be instructive in your understanding of how regular expressions 
@@ -687,7 +685,7 @@ Email address
 ~~~~~~~~~~~~~
 
 
-.. index
+.. index::
    Email address
 
 We'll start with a common favorite. You want to craft a regular expression that matches 
@@ -713,8 +711,8 @@ We want to require that the "something" before the @ sign is not zero length, an
 contains certain types of characters. For example, it should be alpha-numeric, but may also 
 contain certain other special characters, like dot, underscore, or dash.
 
-Fortunately, PCRE provides us with a convenient way to say "alpha-numeric 
-characters,", using a named character class. There are quite a number of these, such as 
+Fortunately, PCRE provides us with a convenient way to say "alpha-numeric
+characters", using a named character class. There are quite a number of these, such as
 ``[:alpha:]`` to match letters, ``[:digit:]`` to match numbers 0 through 9, and ``[:alnum:]`` to match 
 alpha-numeric characters.
 
@@ -727,7 +725,7 @@ So we can say the above description as:
 
 ::
 
-    ^[:alnum:]._-]@([:alnum:]+\.)+[:alpha:]+$
+    ^[[[:alnum:]]._-]+@([[:alnum:]]+\.)+[[:alpha:]]+$
 
 This is far more specific, and will match most valid email addresses.
 However, it will also exclude a few edge-cases, as well as allowing some
@@ -748,7 +746,7 @@ Phone number
 ~~~~~~~~~~~~
 
 
-.. index
+.. index::
    Phone number
 
 Next we'll consider the problem of matching a phone number. This is much harder than it 
@@ -770,14 +768,14 @@ not be separated by dashes (-), dots (.) or spaces.
 It is still far from foolproof, because users will come up with ways to submit data in 
 unexpected format.
 
-Let's go though the rule one piece at a time:
+Let's go through the rule one piece at a time:
 
 ``\(?`` - This sub-pattern represents an optional opening parenthesis. The backslash is 
 necessary because parentheses already have special meaning in regular
 expressions. We want to remove 
 that special meaning, and have a literal opening parenthesis. The question mark makes this 
 character optional. That is, the person entering the data may or may not enclose the first three 
-numbers with parenthesis, and we want to ensure that either one is acceptable.
+numbers with parentheses, and we want to ensure that either one is acceptable.
 
 ``\d{3}`` - ``\d`` means a digit. (Remember: d for digit.) This can also be written as ``[:digit:]``, but the ``\d`` notation tends to be more 
 common, for the simple reason that it's less to type. The ``{3}`` following the ``\d`` indicates that 
@@ -845,7 +843,7 @@ As you probably remember from earlier, you use the ``?`` character to make a mat
 optional. Thus, we have: ``^/?$``
 
 This matches a string that starts with, and ends with, an optional slash. Or, stated 
-differently, it matches either something that starts ends with a slash, or something that starts 
+differently, it matches either something that starts and ends with a slash, or something that starts 
 and ends with nothing.
 
 Next, we introduce the additional complexity of the file name. That is, we want to match 
@@ -1076,4 +1074,4 @@ if you're using regex in other implementations (like :module:`mod_rewrite`, for
 example), since the syntax is largely the same across implementations.
 
 
-.. [#1] technically, it's any data, but in the context of Apache httpd, we're primarily  interested in text as it appears in URLs
+.. [#1] Technically, it's any data, but in the context of Apache httpd, we're primarily  interested in text as it appears in URLs

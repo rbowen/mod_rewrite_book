@@ -1,5 +1,6 @@
 # Sphinx build output
 _build/
+build.log
 
 # Python bytecode
 __pycache__/
@@ -11,3 +12,4 @@ Thumbs.db
 
 # Sync script
 sync-files.sh
+

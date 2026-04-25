@@ -27,8 +27,8 @@ copyright = '2013–2026, Rich Bowen. Licensed under the Apache License, Version
 author = 'Rich Bowen'
 
 # The full version, including alpha/beta/rc tags
-release = '3.7.0'
-version = '3.7'
+release = '3.8.0'
+version = '3.8'
 
 # -- General configuration ---------------------------------------------------
 
@@ -47,6 +47,7 @@ exclude_patterns = [
     'Thumbs.db',
     '.DS_Store',
     'README.md',
+    'CHANGES.rst',
 ]
 
 # The suffix of source filenames
@@ -57,7 +58,7 @@ source_suffix = '.rst'
 html_theme = 'alabaster'
 
 html_theme_options = {
-    'description': 'A guide to Apache mod_rewrite and related modules',
+    'description': 'A Guide to URL Manipulation and Mapping with the Apache HTTP Server',
     'github_user': 'rbowen',
     'github_repo': 'mod_rewrite_book',
     'fixed_sidebar': True,
@@ -74,14 +75,37 @@ latex_documents = [
      'Rich Bowen', 'manual'),
 ]
 
-latex_elements = {
-    'papersize': 'letterpaper',
-    'pointsize': '11pt',
-    'preamble': r'''
+# -- KDP print-ready vs standard PDF -----------------------------------------
+# Set KDP_PRINT=1 environment variable to build 6x9 trade paperback PDF.
+# Default (unset) builds standard letter-size PDF for web/screen use.
+
+_kdp_print = os.environ.get('KDP_PRINT', '') == '1'
+
+if _kdp_print:
+    latex_elements = {
+        'papersize': '',  # handled by geometry package
+        'pointsize': '11pt',
+        'preamble': r'''
+\geometry{paperwidth=6in, paperheight=9in,
+          inner=0.75in, outer=0.5in,
+          top=0.75in, bottom=0.75in}
+\setlength{\headheight}{14pt}
 \usepackage{makeidx}
 \makeindex
 ''',
-}
+        'fncychap': r'\usepackage[Bjarne]{fncychap}',
+        'extraclassoptions': 'openany',
+    }
+else:
+    latex_elements = {
+        'papersize': 'letterpaper',
+        'pointsize': '11pt',
+        'preamble': r'''
+\setlength{\headheight}{14pt}
+\usepackage{makeidx}
+\makeindex
+''',
+    }
 
 # -- Options for EPUB output -------------------------------------------------
 

@@ -7,9 +7,9 @@ Virtual hosts and mod_rewrite
 
 .. epigraph::
 
-   | [Quote needed]
+   | When you've only got two ducks, they're always in a row.
 
-   -- [Author], *[Work]*
+   -- Rich Bowen
 
 
 This chapter covers using :module:`mod_rewrite` for dynamic virtual host
@@ -308,7 +308,7 @@ a combined log and writes per-vhost log files:
    split-logfile < /var/log/httpd/access_log
 
 This creates files named ``alice.example.com-access_log``,
-``bob.example.com-access_log``, and so on. It's simple, requires no
+``bob.example.com-access_log``, and so on. It requires no
 per-vhost configuration, and handles the dynamic nature of mass hosting
 cleanly.
 

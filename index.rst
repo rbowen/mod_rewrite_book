@@ -33,13 +33,5 @@ mod_rewrite And Friends
    :maxdepth: 3
    :caption: Back Matter
 
-   chapters/appendix
    chapters/glossary
    chapters/epigraphs
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`

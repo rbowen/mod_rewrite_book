@@ -39,7 +39,7 @@ The arguments have the following meaning:
 TestString
    Any string or variable to be tested for a match.
 CondPattern
-   A regular expression or other other expression to be compared against
+   A regular expression or other expression to be compared against
    the TestString.
 Flag
    One or more flags which modify the behavior of the condition.
@@ -57,6 +57,7 @@ These definitions will be expanded in the sections below.
 .. index:: pair: RewriteCond; RewriteMap expansions
 
 TestString
+----------
 
 TestString is a string which can contain the following expanded
 constructs in addition to plain text:
@@ -89,7 +90,7 @@ Server-Variables
 **HTTP headers:**
 
 .. hlist::
-   :columns: 3
+   :columns: 2
 
    * ``HTTP_USER_AGENT``
    * ``HTTP_REFERER``
@@ -108,7 +109,7 @@ Server-Variables
 **Connection & request:**
 
 .. hlist::
-   :columns: 3
+   :columns: 2
 
    * ``REMOTE_ADDR``
    * ``REMOTE_HOST``
@@ -124,7 +125,7 @@ Server-Variables
 **Server internals:**
 
 .. hlist::
-   :columns: 3
+   :columns: 2
 
    * ``DOCUMENT_ROOT``
    * ``SERVER_ADMIN``
@@ -137,7 +138,7 @@ Server-Variables
 **Date and time:**
 
 .. hlist::
-   :columns: 4
+   :columns: 2
 
    * ``TIME_YEAR``
    * ``TIME_MON``
@@ -158,7 +159,7 @@ Server-Variables
 **Specials:**
 
 .. hlist::
-   :columns: 3
+   :columns: 2
 
    * ``API_VERSION``
    * ``THE_REQUEST``
@@ -197,7 +198,7 @@ THE_REQUEST
    (decoded), unlike most other variables below.
 REQUEST_URI
    The path component of the requested URI, such as "/index.html". This
-   notably excludes the query string which is available as as its own
+   notably excludes the query string which is available as its own
    variable named QUERY_STRING.
 REQUEST_FILENAME
    The full local filesystem path to the file or script matching the
@@ -263,8 +264,8 @@ always be used to obtain the value of a header sent in the HTTP request.
 Example: ``%{HTTP:Proxy-Connection}`` is the value of the HTTP header
 Proxy-Connection:.
 
-If a HTTP header is used in a condition this header is added to the Vary
-header of the response in case the condition evaluates to to true for
+If an HTTP header is used in a condition this header is added to the Vary
+header of the response in case the condition evaluates to true for
 the request. It is not added if the condition evaluates to false for the
 request. Adding the HTTP header to the Vary header of the response is
 needed for proper caching.
@@ -312,6 +313,7 @@ this is the same as LA-U above.
 .. index:: pair: RewriteCond; -U (subrequest URL)
 
 CondPattern
+-----------
 
 CondPattern is the condition pattern, a regular expression which is
 applied to the current instance of the TestString. TestString is first
@@ -330,64 +332,166 @@ You can perform lexicographical string comparisons:
    Treats the CondPattern as a plain string and compares it
    lexicographically to TestString. True if TestString lexicographically
    precedes CondPattern.
+
+   .. code-block:: apache
+
+      # Only apply the rule if the requested host sorts before "m"
+      # (i.e. hostnames starting with a-l)
+      RewriteCond %{HTTP_HOST} <m
+      RewriteRule ^ /first-half-of-alphabet [L]
+
 '>CondPattern' (lexicographically follows)
    Treats the CondPattern as a plain string and compares it
    lexicographically to TestString. True if TestString lexicographically
    follows CondPattern.
+
+   .. code-block:: apache
+
+      # Redirect if the requested URI sorts after /wiki/
+      RewriteCond %{REQUEST_URI} >/wiki/
+      RewriteRule ^ /later-section [L]
+
 '=CondPattern' (lexicographically equal)
    Treats the CondPattern as a plain string and compares it
    lexicographically to TestString. True if TestString is
    lexicographically equal to CondPattern (the two strings are exactly
    equal, character for character). If CondPattern is "" (two quotation
    marks) this compares TestString to the empty string.
+
+   .. code-block:: apache
+
+      # Match only the exact hostname "www.example.com"
+      RewriteCond %{HTTP_HOST} =www.example.com
+      RewriteRule ^ /main-site/$0 [L]
+
+      # Check whether the query string is empty
+      RewriteCond %{QUERY_STRING} =""
+      RewriteRule ^/search$ /search?q=default [L]
+
 '<=CondPattern' (lexicographically less than or equal to)
    Treats the CondPattern as a plain string and compares it
    lexicographically to TestString. True if TestString lexicographically
    precedes CondPattern, or is equal to CondPattern (the two strings are
    equal, character for character).
+
+   .. code-block:: apache
+
+      # Match API versions up through "v3" (v1, v2, v3 but not v4)
+      RewriteCond %{HTTP:X-API-Version} <=v3
+      RewriteRule ^ /legacy-api%{REQUEST_URI} [L]
+
 '>=CondPattern' (lexicographically greater than or equal to)
    Treats the CondPattern as a plain string and compares it
    lexicographically to TestString. True if TestString lexicographically
    follows CondPattern, or is equal to CondPattern (the two strings are
    equal, character for character).
 
+   .. code-block:: apache
+
+      # Match API versions v3 and above
+      RewriteCond %{HTTP:X-API-Version} >=v3
+      RewriteRule ^ /modern-api%{REQUEST_URI} [L]
+
+.. note::
+
+   These comparisons are *lexicographic* (byte-by-byte string ordering),
+   not numeric. That means ``"9" > "10"`` is true, because ``"9"``
+   sorts after ``"1"``. If you need numeric comparisons, use the
+   integer operators (``-eq``, ``-gt``, etc.) described next.
+
 You can perform integer comparisons:
 
 '-eq' (is numerically equal to)
    The TestString is treated as an integer, and is numerically compared
    to the CondPattern. True if the two are numerically equal.
+
+   .. code-block:: apache
+
+      # Only apply to requests on port 8080
+      RewriteCond %{SERVER_PORT} -eq 8080
+      RewriteRule ^ /dev-portal%{REQUEST_URI} [L]
+
 '-ge' (is numerically greater than or equal to)
    The TestString is treated as an integer, and is numerically compared
    to the CondPattern. True if the TestString is numerically greater than
    or equal to the CondPattern.
+
+   .. code-block:: apache
+
+      # Redirect if the Content-Length is 10MB or more
+      RewriteCond %{HTTP:Content-Length} -ge 10485760
+      RewriteRule ^ /upload-too-large [R=413,L]
+
 '-gt' (is numerically greater than)
    The TestString is treated as an integer, and is numerically compared
    to the CondPattern. True if the TestString is numerically greater than
    the CondPattern.
+
+   .. code-block:: apache
+
+      # Route to the new server if the requested port is above 9000
+      RewriteCond %{SERVER_PORT} -gt 9000
+      RewriteRule ^ http://newserver.example.com%{REQUEST_URI} [R,L]
+
 '-le' (is numerically less than or equal to)
    The TestString is treated as an integer, and is numerically compared
    to the CondPattern. True if the TestString is numerically less than or
    equal to the CondPattern. Avoid confusion with the -l by using the -L
    or -h variant.
+
+   .. code-block:: apache
+
+      # Serve a lightweight page if the client says it can only accept
+      # small responses
+      RewriteCond %{HTTP:Max-Response-Size} -le 1024
+      RewriteRule ^/report$ /report-summary [L]
+
 '-lt' (is numerically less than)
    The TestString is treated as an integer, and is numerically compared
    to the CondPattern. True if the TestString is numerically less than
    the CondPattern. Avoid confusion with the -l by using the -L or -h
    variant.
 
+   .. code-block:: apache
+
+      # If the hour is before 06:00, show the overnight maintenance page
+      RewriteCond %{TIME_HOUR} -lt 06
+      RewriteRule ^ /overnight.html [L]
+
 You can perform various file attribute tests:
 
 '-d' (is directory)
    Treats the TestString as a pathname and tests whether or not it
    exists, and is a directory.
+
+   .. code-block:: apache
+
+      # If the request maps to an existing directory, let it through
+      RewriteCond %{REQUEST_FILENAME} -d
+      RewriteRule ^ - [L]
+
 '-f' (is regular file)
    Treats the TestString as a pathname and tests whether or not it
    exists, and is a regular file.
+
+   .. code-block:: apache
+
+      # If the file doesn't exist, route to the front controller
+      RewriteCond %{REQUEST_FILENAME} !-f
+      RewriteRule ^ /index.php [L]
+
 '-F' (is existing file, via subrequest)
    Checks whether or not TestString is a valid file, accessible via all
    the server's currently-configured access controls for that path. This
    uses an internal subrequest to do the check, so use it with care - it
    can impact your server's performance!
+
+   .. code-block:: apache
+
+      # Only rewrite if the target is actually accessible
+      RewriteCond /var/www/html%{REQUEST_URI} -F
+      RewriteRule ^/mirror/(.*)$ /$1 [L]
+
 '-H' (is symbolic link, bash convention)
    See -l.
 '-l' (is symbolic link)
@@ -395,20 +499,47 @@ You can perform various file attribute tests:
    exists, and is a symbolic link. May also use the bash convention of -L
    or -h if there's a possibility of confusion such as when using the -lt
    or -le tests.
+
+   .. code-block:: apache
+
+      # If the request points to a symlink, redirect to the real path
+      RewriteCond %{REQUEST_FILENAME} -l
+      RewriteRule ^(.*)$ /real$1 [R,L]
+
 '-L' (is symbolic link, bash convention)
    See -l.
 '-s' (is regular file, with size)
    Treats the TestString as a pathname and tests whether or not it
    exists, and is a regular file with size greater than zero.
+
+   .. code-block:: apache
+
+      # Serve cached content only if the cache file is non-empty
+      RewriteCond /var/cache/html%{REQUEST_URI} -s
+      RewriteRule ^(.*)$ /var/cache/html$1 [L]
+
 '-U' (is existing URL, via subrequest)
    Checks whether or not TestString is a valid URL, accessible via all
    the server's currently-configured access controls for that path. This
    uses an internal subrequest to do the check, so use it with care - it
    can impact your server's performance!
+
+   .. code-block:: apache
+
+      # Fall back to a mirror if the local URL would 404
+      RewriteCond %{REQUEST_URI} !-U
+      RewriteRule ^(.*)$ http://mirror.example.com$1 [R,L]
+
 '-x' (has executable permissions)
    Treats the TestString as a pathname and tests whether or not it
    exists, and has executable permissions. These permissions are
    determined according to the underlying OS.
+
+   .. code-block:: apache
+
+      # If the requested file is executable, run it as CGI
+      RewriteCond %{REQUEST_FILENAME} -x
+      RewriteRule ^/scripts/(.*)$ /cgi-bin/$1 [L]
 
 Note:
 
@@ -466,7 +597,7 @@ Without this flag you would have to write the condition/rule pair three
 times.
 
 'novary|NV' (no vary)
-   If a HTTP header is used in the condition, this flag prevents this
+   If an HTTP header is used in the condition, this flag prevents this
    header from being added to the Vary header of the response.
 
 Using this flag might break proper caching of the response if the

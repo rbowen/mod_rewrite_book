@@ -88,19 +88,19 @@ Glossary
       ``image/png``. httpd uses MIME types (via :module:`mod_mime`) to
       determine how to serve files.
 
-   :module:`mod_alias`
+   mod_alias
       The module providing ``Alias``, ``AliasMatch``, ``Redirect``,
       ``RedirectMatch``, ``ScriptAlias``, and ``ScriptAliasMatch``
       directives. Simpler and faster than :module:`mod_rewrite` for static
       URL mapping.
 
-   :module:`mod_proxy`
+   mod_proxy
       The core proxy module. By itself it provides the framework
       (``ProxyPass``, ``ProxyPassReverse``); pair it with a protocol
       module like :module:`mod_proxy_http` or :module:`mod_proxy_fcgi` for actual
       proxying. See Chapter 9.
 
-   :module:`mod_rewrite`
+   mod_rewrite
       The rule-based URL rewriting engine. Uses PCRE regular expressions
       to match and transform request URLs. The subject of most of this
       book.

@@ -188,23 +188,37 @@ them, so that's a pretty serious undertaking. -rcb
 Chapter 9: Proxies and mod_rewrite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   [Quote needed]
+   | "His voice," thought Will, "I never noticed. It's the same color as his hair."
+
+   -- Ray Bradbury, *Something Wicked This Way Comes*
 
 *Notes:*
 
-Using rewrite rules to make dynamic proxying decisions — routing
-requests to backends based on conditions.
+A proxy *is* the voice that speaks for the backend — and if it's doing
+its job well, you never notice it's not the real thing. Bradbury's
+synesthesia captures that perfectly: the voice and the appearance blur
+together into something you accept without question.
+
+If you haven't read *Something Wicked*, you should. It's best if you
+read it as a kid, and then again as an adult, but we can't have
+everything. Did I mention how much I love Bradbury? -rcb
 
 
 Chapter 10: Virtual hosts and mod_rewrite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   [Quote needed]
+   | When you've only got two ducks, they're always in a row.
+
+   -- Rich Bowen
 
 *Notes:*
 
-Dynamic virtual hosting — mapping hostnames to directories on the fly,
-without per-host configuration.
+If you've only got one virtual host, you don't need virtual hosts. The
+complexity of mass virtual hosting only matters once you have enough
+ducks to worry about their arrangement.
+
+Also, I'm a Jeep driver. You've seen those Jeeps with way too many ducks
+on their dashboards, right? Guess how many I have. -rcb
 
 
 Chapter 11: Access control with mod_rewrite

@@ -21,8 +21,8 @@ Introduction to mod_rewrite
 sometimes you just need a screwdriver, but when you need the power tool,
 it's good to know where to find it.
 
-:module:`mod_rewrite` provides sophisticated URL via regular expressions, and the
-ability to do a variety of transformations,including, but not limited
+:module:`mod_rewrite` provides sophisticated URL manipulation via regular expressions, and the
+ability to do a variety of transformations, including, but not limited
 to, modification of the request URL. You can additionally return a
 variety of status codes, set cookies and environment variables, proxy
 requests to another server, or send redirects to the client.
@@ -97,7 +97,7 @@ Now, point your browser at that location:
 You'll see one of two things. Either you'll see the words
 Hello, :module:`mod_rewrite` in your browser, or you'll see the ominous words
 Internal Server Error. In the former case, everything is fine -
-:module:`mod_rewrite` is loaded and your :file:`.htacces` file worked just fine. If you
+:module:`mod_rewrite` is loaded and your :file:`.htaccess` file worked just fine. If you
 got an Internal Server Error, that was httpd complaining that it didn't
 know what to do with the ``RewriteEngine`` directive, because :module:`mod_rewrite`
 wasn't loaded.
@@ -120,7 +120,7 @@ it's time to contact your server administrator and ask if they'll load
 :module:`mod_rewrite` for you.
 
 However, this is fairly unlikely, since :module:`mod_rewrite` is a fairly standard
-part of any Apache http server's bag of tricks.
+part of any Apache HTTP Server's bag of tricks.
 
 .. _rewriteengine:
 
@@ -258,7 +258,7 @@ First, there are two directives that you cannot use in .htaccess files.
 These directives are ``RewriteMap`` and (prior to httpd 2.4) ``RewriteLog``.
 These must be defined in the main server configuration. The reasons for
 this will be discussed in greater length when we get to the sections
-about those directives RewriteMap and RewriteLogging, respectively.).
+about those directives RewriteMap and RewriteLogging, respectively).
 
 Second, and more importantly, the syntax of ``RewriteRule`` directives
 changes in .htaccess context in a way that you'll need to be aware of
@@ -279,7 +279,7 @@ please be patient for now.
 Consider a situation where you want to apply a rewrite to content in the
 ``/images/puppies/`` subdirectory of your website. You have four options:
 You can put the ``RewriteRule`` in the main server configuration file; You
-can place it in a .htacess file in the root of your website; You can
+can place it in a .htaccess file in the root of your website; You can
 place it in a .htaccess file in the ``images`` directory; Or you can place
 it in a .htaccess file in the :file:`images/puppies` directory.
 

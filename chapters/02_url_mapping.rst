@@ -17,15 +17,15 @@ URL Mapping
 .. index:: URL Mapping
 
 
-In this chapter, we'll discuss the various ways that the Apache http
-server (httpd) handles URL Mapping.
+In this chapter, we'll discuss the various ways that the Apache HTTP
+Server (httpd) handles URL Mapping.
 
 .. _introduction-to-url-mapping:
 
 
 .. index:: pair: URL mapping; introduction
 
-When the Apache http server receives a request, it is processed in a
+When the Apache HTTP Server receives a request, it is processed in a
 variety of ways to see what resource it represents. This process is
 called URL Mapping.
 
@@ -70,7 +70,7 @@ DocumentRoot
 
 The DocumentRoot directive specifies the filesystem directory from which
 static content will be served. It's helpful to think of this as the
-default behavior of the Apache http server when no other content source
+default behavior of the Apache HTTP Server when no other content source
 is found.
 
 Consider a configuration of the following:
@@ -212,7 +212,7 @@ Options directive:
 
 
 See the documentation of the Options
-<http://httpd.apache.org/docs/current/mod/core.html#options> for further
+<https://httpd.apache.org/docs/current/mod/core.html#options> for further
 discussion of that directive.
 
 If the Indexes option is on, then a directory listing will be displayed,
@@ -227,10 +227,10 @@ Typically, a directory will look like the example shown below.
 
 For further discussion of the autoindex functionality, consult the
 :module:`mod_autoindex` documentation at
-<http://httpd.apache.org/docs/current/mod/:module:`mod_autoindex`.html>.
+<https://httpd.apache.org/docs/current/mod/mod_autoindex.html>.
 
-_Future versions of this book will include more detailed information
-about directory listings._
+*Future versions of this book will include more detailed information
+about directory listings.*
 
 .. _alias:
 
@@ -282,7 +282,7 @@ will be assumed to be a CGI program, and httpd will attempt to execute
 it and sent the output to the client.
 
 CGI programming is outside of the scope of this book. You may read more
-about it at http://httpd.apache.org/docs/current/howto/cgi.html
+about it at https://httpd.apache.org/docs/current/howto/cgi.html
 
 .. _aliasmatch:
 
@@ -442,7 +442,7 @@ the <Directory> sections and .htaccess files are read, and after the
 several consequences. Most importantly, <Location> directives should not
 be used to control access to filesystem locations. Since several
 different URLs may map to the same filesystem location, such access
-controls may by circumvented.
+controls may be circumvented.
 
 The enclosed directives will be applied to the request if the path
 component of the URL meets any of the following criteria:
@@ -511,7 +511,6 @@ configuration errors when you're following examples.
 
      <LocationMatch "/(extra|special)/data">
        #...
-     +
      </LocationMatch>
 
 
@@ -541,7 +540,7 @@ Virtual Hosts
 
 
 Rather than running a separate physical server, or separate instance of
-httpd, for each website, it is common practice run sites via virtual
+httpd, for each website, it is common practice to run sites via virtual
 hosts. Virtual hosting refers to running more than one web site on the
 same web server.
 

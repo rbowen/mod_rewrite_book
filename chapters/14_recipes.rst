@@ -98,7 +98,7 @@ If you need :module:`mod_rewrite` for this (perhaps because you're in a
 
 The ``RewriteCond %{HTTPS} off`` ensures this only fires for plaintext
 connections, preventing a redirect loop. See
-:ref:`Chapter 3 <Chapter_rewritecond>` for details on ``RewriteCond``.
+:ref:`Chapter 7 <Chapter_rewritecond>` for details on ``RewriteCond``.
 
 Starting with httpd 2.4, you can also use an ``<If>`` expression inside
 the port-80 virtual host:
@@ -435,7 +435,7 @@ Then reference the DBM map:
 
 DBM lookups are O(1) hash-table lookups regardless of map size, while
 a text file is scanned linearly. For 10,000+ redirects, the difference
-is significant. See :ref:`Chapter 6 <Chapter_rewritemap>` for full
+is significant. See :ref:`Chapter 8 <Chapter_rewritemap>` for full
 details on ``RewriteMap`` types.
 
 
@@ -724,7 +724,7 @@ is not set correctly, so the :file:`.htaccess` rules are silently ignored.
    RewriteRule ^products/([a-zA-Z0-9_-]+)$ /products.php?cat=$1 [L]
 
 The ``$1`` backreference captures whatever matched inside the
-parentheses. See :ref:`Chapter 2 <Chapter_regex>` for regex details.
+parentheses. See :ref:`Chapter 1 <Chapter_regex>` for regex details.
 
 **Multi-segment paths** — ``/products/shoes/running`` to
 ``/products.php?cat=shoes&sub=running``:
@@ -1324,7 +1324,7 @@ string. To match or capture query string parameters, use
 
 Here ``%1`` is a backreference to the first capture group in the
 ``RewriteCond`` pattern (not ``$1``, which refers to the ``RewriteRule``
-pattern). See :ref:`Chapter 3 <Chapter_regex>` for the full
+pattern). See :ref:`Chapter 1 <Chapter_regex>` for the full
 backreference syntax.
 
 **The** ``[QSA]`` **flag** (Query String Append): by default, if the
@@ -2213,7 +2213,7 @@ automatically. For DBM maps, a graceful restart is needed:
    httxt2dbm -i redirect-map.txt -o redirect-map.db
    apachectl graceful
 
-See :ref:`Chapter 9 <Chapter_rewritemap>` for a detailed treatment of
+See :ref:`Chapter 8 <Chapter_rewritemap>` for a detailed treatment of
 all map types and their performance characteristics.
 
 
@@ -2549,7 +2549,7 @@ to Apache24?" show users struggling with the external program map type.
 ``RewriteMap`` defines a named mapping function that can be called from
 ``RewriteRule`` and ``RewriteCond`` substitutions. It must be defined in
 server config (not :file:`.htaccess`), but the maps it creates can be used
-anywhere. See :ref:`Chapter 9 <Chapter_rewritemap>` for the full treatment.
+anywhere. See :ref:`Chapter 8 <Chapter_rewritemap>` for the full treatment.
 
 **Text file map (``txt``)** --- simple key/value pairs:
 
@@ -2726,5 +2726,5 @@ dramatically simpler and performs better. Use the ``RewriteMap`` approach
 only when the ranges must be loaded from an external source or change
 without restarting httpd.
 
-See :ref:`Chapter 9 <Chapter_rewritemap>` for more on external program
+See :ref:`Chapter 8 <Chapter_rewritemap>` for more on external program
 maps and their buffering requirements.
