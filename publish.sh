@@ -61,6 +61,8 @@ ssh "$REMOTE" "mkdir -p $DOCROOT/book $DOCROOT/download"
 
 echo "=== Uploading landing page ==="
 rsync -az "$BUILDDIR/site_index.html" "$REMOTE:$DOCROOT/index.html"
+rsync -az "$BUILDDIR/Netscape_icon.svg" "$REMOTE:$DOCROOT/Netscape_icon.svg"
+rsync -az "$BUILDDIR/kdp_cover_front.png" "$REMOTE:$DOCROOT/kdp_cover_front.png"
 
 # --- Upload HTML book --------------------------------------------------------
 

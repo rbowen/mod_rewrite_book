@@ -48,6 +48,7 @@ exclude_patterns = [
     '.DS_Store',
     'README.md',
     'CHANGES.rst',
+    'TODO.md',
 ]
 
 # The suffix of source filenames
