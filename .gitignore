@@ -13,3 +13,9 @@ Thumbs.db
 # Sync script
 sync-files.sh
 
+# Research
+ml_research/
+
+# Generated files
+*.pdf
+*.epub
