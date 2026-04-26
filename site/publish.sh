@@ -21,7 +21,8 @@ fi
 
 REMOTE="rbowen@fagin.rcbowen.com"
 DOCROOT="/var/www/vhosts/mod-rewrite.org"
-BUILDDIR="$(cd "$(dirname "$0")" && pwd)"
+SITEDIR="$(cd "$(dirname "$0")" && pwd)"
+BUILDDIR="$(cd "$SITEDIR/.." && pwd)"
 
 # --- Preflight checks -------------------------------------------------------
 
@@ -60,9 +61,9 @@ ssh "$REMOTE" "mkdir -p $DOCROOT/book $DOCROOT/download"
 # --- Upload landing page -----------------------------------------------------
 
 echo "=== Uploading landing page ==="
-rsync -az "$BUILDDIR/site_index.html" "$REMOTE:$DOCROOT/index.html"
-rsync -az "$BUILDDIR/Netscape_icon.svg" "$REMOTE:$DOCROOT/Netscape_icon.svg"
-rsync -az "$BUILDDIR/kdp_cover_front.png" "$REMOTE:$DOCROOT/kdp_cover_front.png"
+rsync -az "$SITEDIR/site_index.html" "$REMOTE:$DOCROOT/index.html"
+rsync -az "$SITEDIR/Netscape_icon.svg" "$REMOTE:$DOCROOT/Netscape_icon.svg"
+rsync -az "$SITEDIR/kdp_cover_front.png" "$REMOTE:$DOCROOT/kdp_cover_front.png"
 
 # --- Upload HTML book --------------------------------------------------------
 
