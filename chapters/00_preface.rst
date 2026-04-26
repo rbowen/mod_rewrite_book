@@ -123,3 +123,11 @@ Finally, to Maria, who makes everything beautiful. And so that was all right, Be
 
 -- Rich Bowen, April 2026
 
+.. rubric:: Trademarks
+
+Apache, Apache HTTP Server, and the Apache oak leaf logo are trademarks
+of The Apache Software Foundation. All other trademarks are the
+property of their respective owners. Use of these trademarks does not
+imply endorsement by The Apache Software Foundation. This book is not
+affiliated with or endorsed by The Apache Software Foundation.
+
