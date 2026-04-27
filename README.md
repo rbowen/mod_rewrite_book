@@ -6,7 +6,12 @@ This book covers `mod_rewrite` in depth — regular expressions, `RewriteRule`, 
 
 ## Status
 
-This is a **work in progress** (v3.7.0). See the appendix for revision history and the TODO list.
+**Version 3.8.0** — Published on Amazon (April 2026):
+
+- [Kindle edition](https://www.amazon.com/dp/B00BSV4LO6)
+- [Paperback edition](https://www.amazon.com/dp/B0GYKT6ZJ6)
+- [Read online](https://mod-rewrite.org/book/)
+- [Website](https://mod-rewrite.org/)
 
 Found a bug, typo, or have a suggestion? [File an issue](https://github.com/rbowen/mod_rewrite_book/issues).
 
